@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 angularjs-cordova-gulp-browserify-boilerplate
 =====================================
 [![Build Status](https://travis-ci.org/StrikeForceZero/angularjs-cordova-gulp-browserify-boilerplate.svg)](https://travis-ci.org/StrikeForceZero/angularjs-cordova-gulp-browserify-boilerplate) [![devDependency Status](https://david-dm.org/StrikeForceZero/angularjs-cordova-gulp-browserify-boilerplate/dev-status.svg)](https://david-dm.org/StrikeForceZero/angularjs-cordova-gulp-browserify-boilerplate#info=devDependencies)
@@ -196,8 +195,3 @@ An example test is provided for the following types of AngularJS modules:
 - `unit/constants_spec.js`
 
 All unit tests are run with `gulp unit`. When running unit tests, code coverage is simultaneously calculated and output as an HTML file to the `/coverage` directory.
-=======
-# NBB
-NBB
->>>>>>> ffffc5a3a76c7a1d1d91b1669b19313ff9980d97
-"# NBBCordova" 
