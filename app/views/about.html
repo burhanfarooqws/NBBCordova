@@ -1,0 +1,23 @@
+<div>
+    <h1>About</h1>
+    <p>ui-route loaded</p>
+
+
+
+    <span>{{ about.deviceuuid }}</span>
+    <h4 class="heading -small">Device Info</h4>
+    <table ng-if="about.deviceReady">
+        <thead><tr><td>Property</td><td>Value</td></tr></thead>
+        <tr ng-repeat="(key, value) in about.deviceInfo"><td>{{key}}:</td><td>{{value}}</td></tr>
+    </table>
+
+    <span>{{ about.registrationId }}</span>
+    <textarea>{{ about.registrationId }}</textarea>
+
+
+
+</div>
+<img src="images/angular.png" height="100" />
+<img src="images/cordova.png" height="100" />
+<img src="images/gulp.png" height="100" />
+<img src="images/browserify.png" height="100" />

@@ -1,0 +1,193 @@
+<!doctype html>
+<html class="no-js" id="extr-page">
+  <head>
+      <!-- needs to be commented out for mobile apps, as they are all relative based
+           will need to add in a task that toggles this based on platform -->
+      <!--<base href="/">-->
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title ng-bind="pageTitle"></title>
+      <meta name="description" content="">
+      <meta name="viewport" content="width=device-width">
+
+      <link rel="stylesheet" href="css/main.css">
+  </head>
+  <body>
+
+      <div ui-view></div>
+      <script src="cordova.js"></script>
+      <script src="js/main.js"></script>
+      <script src="js/lib/libs/jquery-2.1.1.min.js"></script>
+      <!--================================================== -->
+      <!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
+      <script src="js/lib/plugin/pace/pace.min.js"></script>
+      <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
+      <script src="js/lib/libs/jquery-2.1.1.min.js"></script>
+      <script>
+          if (!window.jQuery) {
+              document.write('<script src="js/lib/libs/jquery-2.1.1.min.js"><\/script>');
+          }
+      </script>
+      <script src="js/lib/libs/jquery-ui-1.10.3.min.js"></script>
+      <script>
+          if (!window.jQuery.ui) {
+              document.write('<script src="js/lib/libs/jquery-ui-1.10.3.min.js"><\/script>');
+          }
+      </script>
+      <!-- IMPORTANT: APP CONFIG -->
+      <script src="js/lib/app.config.js"></script>
+      <!-- JS TOUCH : include this plugin for mobile drag / drop touch events
+          <script src="js/lib/plugin/jquery-touch/jquery.ui.touch-punch.min.js"></script> -->
+      <!-- BOOTSTRAP JS -->
+      <script src="js/lib/bootstrap/bootstrap.min.js"></script>
+      <!-- JQUERY VALIDATE -->
+      <script src="js/lib/plugin/jquery-validate/jquery.validate.min.js"></script>
+      <!-- JQUERY MASKED INPUT -->
+      <script src="js/lib/plugin/masked-input/jquery.maskedinput.min.js"></script>
+
+      <script src="js/lib/plugin/bootstrap-wizard/jquery.bootstrap.wizard.min.js"></script>
+      <script src="js/lib/plugin/fuelux/wizard/wizard.min.js"></script>
+
+      <!--[if IE 8]>
+
+      <h1>Your browser is out of date, please update your browser by going to www.microsoft.com/download</h1>
+
+      <![endif]-->
+      <!-- MAIN APP JS FILE -->
+      <script src="js/lib/app.min.js"></script>
+      <script type="text/javascript">
+          runAllForms();
+
+          // Model i agree button
+          $("#i-agree").click(function() {
+              $this = $("#terms");
+              if ($this.checked) {
+                  $('#myModal').modal('toggle');
+              } else {
+                  $this.prop('checked', true);
+                  $('#myModal').modal('toggle');
+              }
+          });
+
+          // Validation
+          $(function() {
+              // Validation
+              $("#smart-form-register").validate({
+
+                  // Rules for form validation
+                  rules: {
+                      username: {
+                          required: true
+                      },
+                      email: {
+                          required: true,
+                          email: true
+                      },
+                      password: {
+                          required: true,
+                          minlength: 3,
+                          maxlength: 20
+                      },
+                      passwordConfirm: {
+                          required: true,
+                          minlength: 3,
+                          maxlength: 20,
+                          equalTo: '#password'
+                      },
+                      firstname: {
+                          required: true
+                      },
+                      lastname: {
+                          required: true
+                      },
+                      gender: {
+                          required: true
+                      },
+                      terms: {
+                          required: true
+                      }
+                  },
+
+                  // Messages for form validation
+                  messages: {
+                      login: {
+                          required: 'Please enter your login'
+                      },
+                      email: {
+                          required: 'Please enter your email address',
+                          email: 'Please enter a VALID email address'
+                      },
+                      password: {
+                          required: 'Please enter your password'
+                      },
+                      passwordConfirm: {
+                          required: 'Please enter your password one more time',
+                          equalTo: 'Please enter the same password as above'
+                      },
+                      firstname: {
+                          required: 'Please select your first name'
+                      },
+                      lastname: {
+                          required: 'Please select your last name'
+                      },
+                      gender: {
+                          required: 'Please select your gender'
+                      },
+                      terms: {
+                          required: 'You must agree with Terms and Conditions'
+                      }
+                  },
+
+                  // Ajax form submition
+                  submitHandler: function(form) {
+                      $(form).ajaxSubmit({
+                          success: function() {
+                              $("#smart-form-register").addClass('submited');
+                          }
+                      });
+                  },
+
+                  // Do not change code below
+                  errorPlacement: function(error, element) {
+                      error.insertAfter(element.parent());
+                  }
+              });
+
+          });
+
+          $('#bootstrap-wizard-1').bootstrapWizard({
+              'tabClass': 'form-wizard',
+              'onNext': function(tab, navigation, index) {
+                  var $valid = $("#wizard-1").valid();
+                  if (!$valid) {
+                      $validator.focusInvalid();
+                      return false;
+                  } else {
+                      $('#bootstrap-wizard-1').find('.form-wizard').children('li').eq(index - 1).addClass(
+                          'complete');
+                      $('#bootstrap-wizard-1').find('.form-wizard').children('li').eq(index - 1).find('.step')
+                          .html('<i class="fa fa-check"></i>');
+                  }
+              }
+          });
+
+
+          // fuelux wizard
+          var wizard = $('.wizard').wizard();
+
+          wizard.on('finished', function(e, data) {
+              //$("#fuelux-wizard").submit();
+              //console.log("submitted!");
+              $.smallBox({
+                  title: "Congratulations! Your form was submitted",
+                  content: "<i class='fa fa-clock-o'></i> <i>1 seconds ago...</i>",
+                  color: "#5F895F",
+                  iconSmall: "fa fa-check bounce animated",
+                  timeout: 4000
+              });
+
+          });
+
+      </script>
+  </body>
+</html>
