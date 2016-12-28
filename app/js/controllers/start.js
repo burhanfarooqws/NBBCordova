@@ -35,9 +35,7 @@ function StartCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice, D
             window.alert(vm.deviceuuid);
             vm.deviceReady = true;
 
-            var newGuid = vm.getGUID();
-            //newGuid = "12";
-            //vm.deviceuuid = "DA83-13CB-0582-5A78-88C9EFA7EB00";
+
             DeviceService.findDevice(vm.deviceuuid).then(function (data) {
                 //debugger;
                 vm.devicefound = data;

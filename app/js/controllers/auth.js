@@ -63,25 +63,6 @@ function AuthCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice, De
 
     };
 
-    vm.generatePart = function () {
-        var guidPartNumber = (Math.random() * 0x10000) | 0;
-        return (guidPartNumber + 0x10000).toString(16).substring(1).toUpperCase();
-    };
-
-    vm.getGUID = function () {
-        return vm.generatePart()
-            + '-'
-            + vm.generatePart()
-            + '-'
-            + vm.generatePart()
-            + '-'
-            + vm.generatePart()
-            + '-'
-            + vm.generatePart()
-            + vm.generatePart()
-            + vm.generatePart();
-    };
-
     $scope.$on('$locationChangeStart', function(event, next, current){
         // Here you can take the control and call your own functions:
         //alert('Sorry ! Back Button is disabled');

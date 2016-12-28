@@ -32,8 +32,15 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
     };
 
     vm.showspinner = false;
+    vm.tncchecked = false;
 
     $scope.registerDeviceWithUser = function() {
+
+        debugger;
+        if(!vm.tncchecked){
+            window.alert("please accept terms & condition.");
+            return;
+        }
         vm.showspinner = true;
         var rsa = new RSAKey();
         var k = Convert(vm.PubKeyB64);
@@ -73,6 +80,9 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
             $scope.$apply();
         }, function (error, status) {
 
+            if(status == 400){
+                window.alert(error);
+            }
             debugger;
             window.alert("unable to register device");
             console.log('rejected');
