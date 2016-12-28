@@ -1,23 +1,88 @@
-<div>
-    <h1>About</h1>
-    <p>ui-route loaded</p>
+<!DOCTYPE html>
+<html lang="en-us" id="extr-page">
 
+<head>
+    <meta charset="utf-8">
+    <!--<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">-->
+    <title> National Bank of Bahrain </title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!-- Basic Styles -->
+    <link rel="stylesheet" type="text/css" media="screen" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="css/font-awesome.min.css">
+    <!-- VeriChannel Styles : Caution! DO NOT change the order -->
+    <link rel="stylesheet" type="text/css" media="screen" href="css/verichannel-production-plugins.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="css/verichannel-production.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="css/verichannel-skins.min.css">
+    <!-- VeriChannel RTL Support  -->
+    <link rel="stylesheet" type="text/css" media="screen" href="css/verichannel-rtl.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="css/nbb.css">
+    <!-- Demo purpose only: goes with demo.js, you can delete this css when designing your own WebApp -->
+    <link rel="stylesheet" type="text/css" media="screen" href="css/demo.min.css">
+    <!-- FAVICONS -->
+    <link rel="shortcut icon" href="images/favicon/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="images/favicon/favicon.ico" type="image/x-icon">
+    <!-- GOOGLE FONT -->
+    <!-- <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700"> -->
+    <!-- Specifying a Webpage Icon for Web Clip
+			 Ref: https://developer.apple.com/library/ios/documentation/AppleApplications/Reference/SafariWebContent/ConfiguringWebApplications/ConfiguringWebApplications.html -->
+    <link rel="apple-touch-icon" href="images/splash/sptouch-icon-iphone.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="images/splash/touch-icon-ipad.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="images/splash/touch-icon-iphone-retina.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="images/splash/touch-icon-ipad-retina.png">
+    <!-- iOS web-app metas : hides Safari UI Components and Changes Status Bar Appearance -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <!-- Startup image for web apps -->
+    <link rel="apple-touch-startup-image" href="images/splash/ipad-landscape.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
+    <link rel="apple-touch-startup-image" href="images/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
+    <link rel="apple-touch-startup-image" href="images/splash/iphone.png" media="screen and (max-device-width: 320px)">
+</head>
 
-
-    <span>{{ about.deviceuuid }}</span>
-    <h4 class="heading -small">Device Info</h4>
-    <table ng-if="about.deviceReady">
-        <thead><tr><td>Property</td><td>Value</td></tr></thead>
-        <tr ng-repeat="(key, value) in about.deviceInfo"><td>{{key}}:</td><td>{{value}}</td></tr>
-    </table>
-
-    <span>{{ about.registrationId }}</span>
-    <textarea>{{ about.registrationId }}</textarea>
-
-
-
+<body id="login">
+<header id="header">
+    <div id="logo-group">
+        <span id="logo"><img src="images/logo.png" alt="National Bank of Bahrain"> </span>
+    </div>
+</header>
+<div id="main" role="main">
+    <!-- MAIN CONTENT -->
+    <div id="content" class="container">
+        <div class="row" ng-init="init()">
+            <div class="col-xs-11 col-sm-11 col-md-4 col-lg-4 col-centered">
+                <div class="well no-padding">
+                    <form id="smart-form-register" class="smart-form client-form wizard" name="registration" ng-if="auth.stpasswordauthenticate" ng-submit="generateSoftTokenWithSTPassword()">
+                        <header class="text-center">
+                            <h1>Software Token Registration</h1>
+                        </header>
+                        <fieldset>
+                            <section>
+                                <label class="input"> <i class="icon-append fa fa-lock"></i>
+                                    <input type="password" name="stpassword" placeholder="Soft Token Password *" id="stpassword" ng-model="auth.stpassword" required>
+                                    <b class="tooltip tooltip-bottom-right">Enter your soft token password - Mandatory</b> </label>
+                            </section>
+                        </fieldset>
+                        <footer class="text-center">
+                            <span us-spinner="{radius:30, width:8, length: 16}" spinner-on="register.showspinner"></span>
+                            <button id="submit" class="btn btn-primary col-centered" type="submit">
+                                Submit
+                            </button>
+                        </footer>
+                        <div class="message">
+                            <i class="fa fa-check"></i>
+                            <p>
+                                Congratulations! You ave been successfully registered.<br>
+                                Welcome to NBB Mobile Banking.
+                            </p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<img src="images/angular.png" height="100" />
-<img src="images/cordova.png" height="100" />
-<img src="images/gulp.png" height="100" />
-<img src="images/browserify.png" height="100" />
+
+</body>
+
+</html>

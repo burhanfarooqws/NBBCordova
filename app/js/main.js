@@ -12,7 +12,7 @@ import './services';
 import './directives';
 
 import 'ng-cordova';
-//import angularSpinner from 'angularSpinner';
+import angularSpinner from 'angular-spinner';
 
 // create and bootstrap application
 const requires = [
@@ -22,7 +22,8 @@ const requires = [
     'app.controllers',
     'app.services',
     'app.directives',
-    'ngCordova'
+    'ngCordova',
+    'angularSpinner'
 ];
 
 // mount on window for testing

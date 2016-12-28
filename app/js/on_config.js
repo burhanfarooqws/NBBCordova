@@ -8,17 +8,22 @@ function OnConfig($stateProvider, $locationProvider, $urlRouterProvider, $compil
   .state('Home', {
     url: '/',
     controller: 'DeviceCtrl as device',
-    templateUrl: 'start.html',
+      template: '<div></div>',
     title: 'National Bank of Bahrain'
+  }).state('start', {
+      url: '/start',
+      controller: 'StartCtrl as start',
+      templateUrl: 'start.html',
+      title: 'National Bank of Bahrain'
   }).state('register', {
       url: '/register',
-      controller: 'DeviceCtrl as device',
+      controller: 'RegisterCtrl as register',
       templateUrl: 'software-token.html',
       title: 'National Bank of Bahrain'
   }).state('auth', {
       url: '/auth',
-      controller: 'DeviceCtrl as device',
-      templateUrl: 'software-token.html',
+      controller: 'AuthCtrl as auth',
+      templateUrl: 'auth.html',
       title: 'National Bank of Bahrain'
   }).state('gen', {
       url: '/gen',
@@ -27,7 +32,7 @@ function OnConfig($stateProvider, $locationProvider, $urlRouterProvider, $compil
       title: 'National Bank of Bahrain'
   }).state('about', {
       url: '/about',
-      controller: 'ExampleCtrl as about',
+      //controller: 'ExampleCtrl as about',
       templateUrl: 'about.html',
       title: 'about'
   });

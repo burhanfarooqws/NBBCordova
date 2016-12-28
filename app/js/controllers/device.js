@@ -16,110 +16,36 @@ function DeviceCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice, 
     vm.IsFingerPrintSupport = false;
     vm.IsAuthenticatedWithFingerPrint = false;
     vm.Isdevicefound = true;
-    vm.PubKeyB64 = "n3/kUYfBDZyks/16oZAvBD4lAVboluOiW2HW26n5GDPCaE48ErTyF1DsLx2jm9Y3clApuc0lsUgU96nu1rWdTtvDN6OnNDrJQP20Wd9rG+Z/luurReJT+H+HUD9nwDGKEeiz2EYXNgyylOCH89XNYk6U5V5GsSxXvRkadlnfjj0=";
-    vm.PubKeyExp = "AQAB";
-    vm.deviceregister = {
-        "AccountNumber": "1111",
-        "AtmCardNumber": "1111",
-        "AtmPin": "1111",
-        "UserId": "sburhan",
-        "DeviceId": "12",
-        "OTP": "710786",
-        "Password": "2wsx'WSX",
-        "STPassword": "2wsx'WSX",
-        "UseFingerPrint": true,
-        "EncryptedPassword": null
-        };
-    vm.generatesofttoken = {
-        "AutoPassword": "12true12",
-        "DeviceId": "12",
-        "IsAuthenticatedWithFingerPrint": false,
-        "IsFingerPrint": false,
-        "Password": "2wsx'WSX"
-    };
-    vm.generatedsofttoken = "00000"
 
-    vm.generateSoftToken = function() {
-        var generatesofttoken = {
-            "AutoPassword": vm.deviceuuid+"true"+vm.deviceuuid,
-            "DeviceId": vm.deviceuuid,
-            "IsAuthenticatedWithFingerPrint": vm.IsAuthenticatedWithFingerPrint,
-            "IsFingerPrint": vm.IsFingerPrintSupport,
-            "Password": "2wsx'WSX"
-        };
-        $rootScope.generateSoftToken = generatesofttoken;
-    };
+    $scope.$on('$locationChangeStart', function(event, next, current){
+        // Here you can take the control and call your own functions:
+        //alert('Sorry ! Back Button is disabled');
+        // Prevent the browser default action (Going back):
+        event.preventDefault();
+    });
 
-    $scope.registerDeviceWithUser = function() {
-        var rsa = new RSAKey();
-        var k = Convert(vm.PubKeyB64);
-        var m = Convert(vm.PubKeyExp);
-        rsa.setPublic(k, '10001');
-        var res = rsa.encrypt(vm.deviceregister.Password);
-        vm.deviceregister.EncryptedPassword = hex2b64(res);
-        var newGuid = vm.getGUID();
-
-        var deviceregister = {
-            "AccountNumber": vm.deviceregister.AccountNumber,
-            "AtmCardNumber": vm.deviceregister.AtmCardNumber,
-            "AtmPin": vm.deviceregister.AtmPin,
-            "UserId": vm.deviceregister.UserId,
-            "DeviceId": vm.deviceuuid,
-            "OTP": vm.deviceregister.OTP,
-            "Password": vm.deviceregister.EncryptedPassword,
-            "STPassword": vm.deviceregister.STPassword,
-            "UseFingerPrint": vm.IsFingerPrintSupport
-        };
-
-        debugger;
-        //usSpinnerService.spin('spinner-1');
-        DeviceService.registerDevice(deviceregister).then(function(data) {
-            debugger;
-            if(data != null && data.AuthenticationSuccess){
-                window.alert("register device successful");
-                //angularSpinner.stop('spinner-1');
-
-            }
-            else{
-                window.alert("unable to register device");
-            }
-            $scope.$apply();
-        }, function (error, status) {
-            //vm.Isdevicefound = false;
-            debugger;
-            window.alert("unable to register device");
-            console.log('rejected');
-            $scope.$apply();
-        });
-
-    };
-
-    vm.generatePart = function () {
-        var guidPartNumber = (Math.random() * 0x10000) | 0;
-        return (guidPartNumber + 0x10000).toString(16).substring(1).toUpperCase();
-    };
-
-    vm.getGUID = function () {
-        return vm.generatePart()
-            + '-'
-            + vm.generatePart()
-            + '-'
-            + vm.generatePart()
-            + '-'
-            + vm.generatePart()
-            + '-'
-            + vm.generatePart()
-            + vm.generatePart()
-            + vm.generatePart();
-    };
+    $scope.$on('$viewContentLoaded', function(){
+        //window.alert(vm.deviceReadyStatus);
+    });
 
     let loadDeviceInfo = () => {
         //if(vm.deviceReady == true) return;
-
+        debugger;
         vm.deviceReady = true;
         vm.deviceReadyStatus = 'Device Ready';
+        window.alert(vm.deviceReadyStatus);
 
-        try {
+        debugger;
+        angular.isDefined($cordovaDevice.getDevice()); //unfortunately if the plugin is not installed calling this will cause fatal error
+        vm.deviceInfo = $cordovaDevice.getDevice();
+        vm.deviceuuid = $cordovaDevice.getUUID();
+        //vm.deviceuuid = "2050a4079abc702b";
+        window.alert(vm.deviceuuid);
+
+        $state.go('start');
+        $scope.$apply();
+
+        /*try {
             //debugger;
             angular.isDefined($cordovaDevice.getDevice()); //unfortunately if the plugin is not installed calling this will cause fatal error
             vm.deviceInfo = $cordovaDevice.getDevice();
@@ -207,7 +133,7 @@ function DeviceCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice, 
         catch (e) {
             window.alert(e);
             vm.deviceReadyStatus += ' - Plugin not installed, please run "cordova plugin add cordova-plugin-device"';
-        }
+        }*/
     };
 
     CordovaService.ready.then( () => loadDeviceInfo() );

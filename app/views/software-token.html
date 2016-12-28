@@ -59,33 +59,38 @@
                             <fieldset>
                                 <section>
                                     <label class="input"> <i class="icon-append fa fa-user"></i>
-                                        <input type="text" name="userid" placeholder="User ID *" ng-model="device.deviceregister.UserId" required>
+                                        <input type="text" name="userid" placeholder="User ID *" ng-model="register.deviceregister.UserId" required>
                                         <b class="tooltip tooltip-bottom-right">Enter your User ID to login internet banking - Mandatory</b> </label>
                                 </section>
                                 <section>
                                     <label class="input"> <i class="icon-append fa fa-lock"></i>
-                                        <input type="password" name="password" placeholder="Password *" id="password" ng-model="device.deviceregister.Password" required>
+                                        <input type="password" name="password" placeholder="Password *" id="password" ng-model="register.deviceregister.Password" required>
                                         <b class="tooltip tooltip-bottom-right">Enter your password to login internet banking - Mandatory</b> </label>
                                 </section>
                                 <section>
                                     <label class="input"> <i class="icon-append fa fa-briefcase"></i>
-                                        <input type="text" name="acctnumber" placeholder="Account Number *" ng-model="device.deviceregister.AccountNumber" required>
+                                        <input type="text" name="acctnumber" placeholder="Account Number *" ng-model="register.deviceregister.AccountNumber" required>
                                         <b class="tooltip tooltip-bottom-right">Enter your account number - Mandatory</b> </label>
                                 </section>
                                 <section>
                                     <label class="input"> <i class="icon-append fa fa-credit-card"></i>
-                                        <input type="text" name="atmcardnumber" placeholder="ATM Card Number *" ng-model="device.deviceregister.AtmCardNumber" required>
+                                        <input type="text" name="atmcardnumber" placeholder="ATM Card Number *" ng-model="register.deviceregister.AtmCardNumber" required>
                                         <b class="tooltip tooltip-bottom-right">Enter your ATM card number - Mandatory</b> </label>
                                 </section>
                                 <section>
                                     <label class="input"> <i class="icon-append fa fa-lock"></i>
-                                        <input type="password" name="atmpin" placeholder="ATM PIN *" id="atmpin" ng-model="device.deviceregister.AtmPin" required>
+                                        <input type="password" name="atmpin" placeholder="ATM PIN *" id="atmpin" ng-model="register.deviceregister.AtmPin" required>
                                         <b class="tooltip tooltip-bottom-right">Enter your ATM card PIN number - Mandatory</b> </label>
                                 </section>
                                 <section>
                                     <label class="input"> <i class="icon-append fa fa-mobile"></i>
-                                        <input type="text" name="otp" placeholder="OTP *" id="otp" ng-model="device.deviceregister.OTP" required>
+                                        <input type="text" name="otp" placeholder="OTP *" id="otp" ng-model="register.deviceregister.OTP" required>
                                         <b class="tooltip tooltip-bottom-right">Enter OTP PIN received on registered mobile number - Mandatory</b> </label>
+                                </section>
+                                <section>
+                                    <label class="input"> <i class="icon-append fa fa-lock"></i>
+                                        <input type="password" name="stpassword" placeholder="Soft Token Password *" id="stpassword" ng-model="register.deviceregister.STPassword" required>
+                                        <b class="tooltip tooltip-bottom-right">Enter your soft token password - Mandatory</b> </label>
                                 </section>
                                 <section class="text-center">
                                     <button id="resendotp" class="btn btn-primary" onclick="return false;" >
@@ -103,6 +108,7 @@
                                 </section>
                             </fieldset>
                             <footer class="text-center">
+                                <span us-spinner="{radius:30, width:8, length: 16}" spinner-on="register.showspinner"></span>
                                 <button id="register" class="btn btn-primary col-centered" type="submit">
                                     Register
                                 </button>
