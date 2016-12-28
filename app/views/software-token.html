@@ -52,50 +52,50 @@
             <div class="row">
                 <div class="col-xs-11 col-sm-11 col-md-4 col-lg-4 col-centered">
                     <div class="well no-padding">
-                        <form action="#/gen" id="smart-form-register" class="smart-form client-form wizard">
+                        <form id="smart-form-register" class="smart-form client-form wizard" name="registration" ng-submit="registerDeviceWithUser()">
                             <header class="text-center">
                                 <h1>Software Token Registration</h1>
                             </header>
                             <fieldset>
                                 <section>
                                     <label class="input"> <i class="icon-append fa fa-user"></i>
-                                        <input type="text" name="atmcardnumber" placeholder="User ID *">
+                                        <input type="text" name="userid" placeholder="User ID *" ng-model="device.deviceregister.UserId" required>
                                         <b class="tooltip tooltip-bottom-right">Enter your User ID to login internet banking - Mandatory</b> </label>
                                 </section>
                                 <section>
                                     <label class="input"> <i class="icon-append fa fa-lock"></i>
-                                        <input type="password" name="atmpin" placeholder="Password *" id="atmpin">
+                                        <input type="password" name="password" placeholder="Password *" id="password" ng-model="device.deviceregister.Password" required>
                                         <b class="tooltip tooltip-bottom-right">Enter your password to login internet banking - Mandatory</b> </label>
                                 </section>
                                 <section>
                                     <label class="input"> <i class="icon-append fa fa-briefcase"></i>
-                                        <input type="text" name="acctnumber" placeholder="Account Number *">
+                                        <input type="text" name="acctnumber" placeholder="Account Number *" ng-model="device.deviceregister.AccountNumber" required>
                                         <b class="tooltip tooltip-bottom-right">Enter your account number - Mandatory</b> </label>
                                 </section>
                                 <section>
                                     <label class="input"> <i class="icon-append fa fa-credit-card"></i>
-                                        <input type="text" name="atmcardnumber" placeholder="ATM Card Number *">
+                                        <input type="text" name="atmcardnumber" placeholder="ATM Card Number *" ng-model="device.deviceregister.AtmCardNumber" required>
                                         <b class="tooltip tooltip-bottom-right">Enter your ATM card number - Mandatory</b> </label>
                                 </section>
                                 <section>
                                     <label class="input"> <i class="icon-append fa fa-lock"></i>
-                                        <input type="password" name="atmpin" placeholder="ATM PIN *" id="atmpin">
+                                        <input type="password" name="atmpin" placeholder="ATM PIN *" id="atmpin" ng-model="device.deviceregister.AtmPin" required>
                                         <b class="tooltip tooltip-bottom-right">Enter your ATM card PIN number - Mandatory</b> </label>
                                 </section>
                                 <section>
                                     <label class="input"> <i class="icon-append fa fa-mobile"></i>
-                                        <input type="text" name="otp" placeholder="OTP *" id="otp">
+                                        <input type="text" name="otp" placeholder="OTP *" id="otp" ng-model="device.deviceregister.OTP" required>
                                         <b class="tooltip tooltip-bottom-right">Enter OTP PIN received on registered mobile number - Mandatory</b> </label>
                                 </section>
                                 <section class="text-center">
-                                    <button type="" class="btn btn-primary">
+                                    <button id="resendotp" class="btn btn-primary" onclick="return false;" >
                                         <i class="fa fa-fw fa-refresh"></i>&nbsp;Resend OTP
                                     </button>
                                 </section>
                                 <section>
                                     <label class="checkbox">
                                         <input type="checkbox" name="terms" id="terms">
-                                        <i></i>I agree with the <a href="#" data-toggle="modal" data-target="#myModal"> Terms and Conditions </a></label>
+                                        <i></i>I agree with the <a href="#" onclick="return false;" id="tnc" data-toggle="modal" data-target="#myModal"> Terms and Conditions </a></label>
                                     <br>
                                     <label class="mandatory">
                                         (*) Indicates mandatory fields
@@ -103,7 +103,7 @@
                                 </section>
                             </fieldset>
                             <footer class="text-center">
-                                <button type="submit" class="btn btn-primary col-centered">
+                                <button id="register" class="btn btn-primary col-centered" type="submit">
                                     Register
                                 </button>
                             </footer>
@@ -115,20 +115,8 @@
                                 </p>
                             </div>
                         </form>
-                        <a href="#/about">About</a>
+                        <!--<a href="#/about">About</a>-->
                     </div>
-                    <!-- <h5 class="text-center">- Or sign in using -</h5>
-                    <ul class="list-inline text-center">
-                        <li>
-                            <a href="javascript:void(0);" class="btn btn-primary btn-circle"><i class="fa fa-facebook"></i></a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0);" class="btn btn-info btn-circle"><i class="fa fa-twitter"></i></a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0);" class="btn btn-warning btn-circle"><i class="fa fa-linkedin"></i></a>
-                        </li>
-                    </ul> -->
                 </div>
             </div>
         </div>
@@ -270,177 +258,6 @@
         <!-- /.modal-dialog -->
     </div>
     <!-- /.modal -->
-    <!--================================================== -->
-    <!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
-    <script src="js/lib/plugin/pace/pace.min.js"></script>
-    <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
-    <script src="js/lib/libs/jquery-2.1.1.min.js"></script>
-    <script>
-    if (!window.jQuery) {
-        document.write('<script src="js/lib/libs/jquery-2.1.1.min.js"><\/script>');
-    }
-    </script>
-    <script src="js/lib/libs/jquery-ui-1.10.3.min.js"></script>
-    <script>
-    if (!window.jQuery.ui) {
-        document.write('<script src="js/lib/libs/jquery-ui-1.10.3.min.js"><\/script>');
-    }
-    </script>
-    <!-- IMPORTANT: APP CONFIG -->
-    <script src="js/lib/app.config.js"></script>
-    <!-- JS TOUCH : include this plugin for mobile drag / drop touch events 		
-		<script src="js/lib/plugin/jquery-touch/jquery.ui.touch-punch.min.js"></script> -->
-    <!-- BOOTSTRAP JS -->
-    <script src="js/lib/bootstrap/bootstrap.min.js"></script>
-    <!-- JQUERY VALIDATE -->
-    <script src="js/lib/plugin/jquery-validate/jquery.validate.min.js"></script>
-    <!-- JQUERY MASKED INPUT -->
-    <script src="js/lib/plugin/masked-input/jquery.maskedinput.min.js"></script>
-
-    <script src="js/lib/plugin/bootstrap-wizard/jquery.bootstrap.wizard.min.js"></script>
-    <script src="js/lib/plugin/fuelux/wizard/wizard.min.js"></script>
-
-    <!--[if IE 8]>
-			
-			<h1>Your browser is out of date, please update your browser by going to www.microsoft.com/download</h1>
-			
-		<![endif]-->
-    <!-- MAIN APP JS FILE -->
-    <script src="js/lib/app.min.js"></script>
-    <script type="text/javascript">
-    runAllForms();
-
-    // Model i agree button
-    $("#i-agree").click(function() {
-        $this = $("#terms");
-        if ($this.checked) {
-            $('#myModal').modal('toggle');
-        } else {
-            $this.prop('checked', true);
-            $('#myModal').modal('toggle');
-        }
-    });
-
-    // Validation
-    $(function() {
-        // Validation
-        $("#smart-form-register").validate({
-
-            // Rules for form validation
-            rules: {
-                username: {
-                    required: true
-                },
-                email: {
-                    required: true,
-                    email: true
-                },
-                password: {
-                    required: true,
-                    minlength: 3,
-                    maxlength: 20
-                },
-                passwordConfirm: {
-                    required: true,
-                    minlength: 3,
-                    maxlength: 20,
-                    equalTo: '#password'
-                },
-                firstname: {
-                    required: true
-                },
-                lastname: {
-                    required: true
-                },
-                gender: {
-                    required: true
-                },
-                terms: {
-                    required: true
-                }
-            },
-
-            // Messages for form validation
-            messages: {
-                login: {
-                    required: 'Please enter your login'
-                },
-                email: {
-                    required: 'Please enter your email address',
-                    email: 'Please enter a VALID email address'
-                },
-                password: {
-                    required: 'Please enter your password'
-                },
-                passwordConfirm: {
-                    required: 'Please enter your password one more time',
-                    equalTo: 'Please enter the same password as above'
-                },
-                firstname: {
-                    required: 'Please select your first name'
-                },
-                lastname: {
-                    required: 'Please select your last name'
-                },
-                gender: {
-                    required: 'Please select your gender'
-                },
-                terms: {
-                    required: 'You must agree with Terms and Conditions'
-                }
-            },
-
-            // Ajax form submition
-            submitHandler: function(form) {
-                $(form).ajaxSubmit({
-                    success: function() {
-                        $("#smart-form-register").addClass('submited');
-                    }
-                });
-            },
-
-            // Do not change code below
-            errorPlacement: function(error, element) {
-                error.insertAfter(element.parent());
-            }
-        });
-
-    });
-
-    $('#bootstrap-wizard-1').bootstrapWizard({
-        'tabClass': 'form-wizard',
-        'onNext': function(tab, navigation, index) {
-            var $valid = $("#wizard-1").valid();
-            if (!$valid) {
-                $validator.focusInvalid();
-                return false;
-            } else {
-                $('#bootstrap-wizard-1').find('.form-wizard').children('li').eq(index - 1).addClass(
-                    'complete');
-                $('#bootstrap-wizard-1').find('.form-wizard').children('li').eq(index - 1).find('.step')
-                    .html('<i class="fa fa-check"></i>');
-            }
-        }
-    });
-
-
-    // fuelux wizard
-    var wizard = $('.wizard').wizard();
-
-    wizard.on('finished', function(e, data) {
-        //$("#fuelux-wizard").submit();
-        //console.log("submitted!");
-        $.smallBox({
-            title: "Congratulations! Your form was submitted",
-            content: "<i class='fa fa-clock-o'></i> <i>1 seconds ago...</i>",
-            color: "#5F895F",
-            iconSmall: "fa fa-check bounce animated",
-            timeout: 4000
-        });
-
-    });
-
-    </script>
 </body>
 
 </html>

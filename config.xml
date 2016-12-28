@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.nbb.android" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>CordovaApp</name>
+    <name>NBB</name>
     <description>
         A sample Apache Cordova application created from a Boilerplate using AngularJS, Cordova, SASS, Gulp, and Browserify while also utilizing best practices.
     </description>

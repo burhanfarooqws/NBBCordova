@@ -7,11 +7,22 @@ function OnConfig($stateProvider, $locationProvider, $urlRouterProvider, $compil
   $stateProvider
   .state('Home', {
     url: '/',
-    //controller: 'ExampleCtrl as home',
-    templateUrl: 'software-token.html',
+    controller: 'DeviceCtrl as device',
+    templateUrl: 'start.html',
     title: 'National Bank of Bahrain'
+  }).state('register', {
+      url: '/register',
+      controller: 'DeviceCtrl as device',
+      templateUrl: 'software-token.html',
+      title: 'National Bank of Bahrain'
+  }).state('auth', {
+      url: '/auth',
+      controller: 'DeviceCtrl as device',
+      templateUrl: 'software-token.html',
+      title: 'National Bank of Bahrain'
   }).state('gen', {
       url: '/gen',
+      controller: 'SoftTokenCtrl as softtoken',
       templateUrl: 'software-token-gen.html',
       title: 'National Bank of Bahrain'
   }).state('about', {
@@ -24,6 +35,8 @@ function OnConfig($stateProvider, $locationProvider, $urlRouterProvider, $compil
   $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|tel):/);
 
   $urlRouterProvider.otherwise('/');
+
+  //usSpinnerConfigProvider.setDefaults({color: 'blue'});
 
 }
 
