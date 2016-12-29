@@ -67,7 +67,7 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
         DeviceService.registerDevice(deviceregister).then(function(data) {
             debugger;
             if(data != null && data.AuthenticationSuccess){
-                window.alert("register device successful");
+                window.alert("register user successful");
 
                 vm.showspinner = false;
                 $scope.$apply();
@@ -104,7 +104,7 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
         angular.isDefined($cordovaDevice.getDevice()); //unfortunately if the plugin is not installed calling this will cause fatal error
         vm.deviceInfo = $cordovaDevice.getDevice();
         vm.deviceuuid = $cordovaDevice.getUUID();
-        window.alert(vm.deviceuuid);
+        //window.alert(vm.deviceuuid);
         //vm.showspinner = true;
 
         var client_id = "Your client ID";
@@ -119,7 +119,7 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
             }
         }, function (message) {
             vm.IsFingerPrintSupport = false;
-            window.alert("Cannot detect fingerprint device : " + message);
+            //window.alert("Cannot detect fingerprint device : " + message);
         });
 
         $scope.$apply();

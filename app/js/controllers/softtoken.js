@@ -1,4 +1,4 @@
-function SoftTokenCtrl($state, $scope, $rootScope, $cordovaDevice, DeviceService) {
+function SoftTokenCtrl($state, $scope, $rootScope, $cordovaDevice, DeviceService, $window) {
     'ngInject';
 
     // ViewModel
@@ -43,7 +43,8 @@ function SoftTokenCtrl($state, $scope, $rootScope, $cordovaDevice, DeviceService
     };
 
     vm.deleteDevice = function(){
-        var _deleteDevice = window.confirm('Are you sure you want to delete?');
+        var _deleteDevice = $window.confirm('Are you sure you want to delete?');
+        debugger;
         if (_deleteDevice) {
             angular.isDefined($cordovaDevice.getDevice()); //unfortunately if the plugin is not installed calling this will cause fatal error
             var deviceid = $cordovaDevice.getUUID();

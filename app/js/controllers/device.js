@@ -32,13 +32,13 @@ function DeviceCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice, 
         debugger;
         vm.deviceReady = true;
         vm.deviceReadyStatus = 'Device Ready';
-        window.alert(vm.deviceReadyStatus);
+        //window.alert(vm.deviceReadyStatus);
 
         debugger;
         angular.isDefined($cordovaDevice.getDevice()); //unfortunately if the plugin is not installed calling this will cause fatal error
         vm.deviceInfo = $cordovaDevice.getDevice();
         vm.deviceuuid = $cordovaDevice.getUUID();
-        window.alert(vm.deviceuuid);
+        //window.alert(vm.deviceuuid);
 
         $state.go('start');
         $scope.$apply();
