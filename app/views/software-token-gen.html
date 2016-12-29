@@ -52,7 +52,7 @@
             <div class="row" ng-init="init()">
                 <div class="col-xs-11 col-sm-11 col-md-4 col-lg-4 col-centered">
                     <div class="well no-padding" ng-if="softtoken.show">
-                        <form action="" id="smart-form-register" class="smart-form client-form wizard">
+                        <form action="" id="smart-form-register" class="smart-form client-form wizard" ng-submit="softtoken.deleteDevice()">
                             <header class="text-center">
                                 <h1>Generate Software Token</h1>
                             </header>

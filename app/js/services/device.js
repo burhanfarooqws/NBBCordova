@@ -33,6 +33,25 @@ function DeviceService($http, $q) {
     };
 
     //debugger;
+    service.deleteDevice = function(deviceid) {
+        //debugger;
+        return new Promise((resolve, reject) => {
+            $http({
+                method: 'POST',
+                data: {DeviceId: deviceid},
+                url: 'http://192.168.148.103:8089/SharedAspectsService/mobileservice/devicedelete',
+                headers: { 'Content-Type': 'application/json' }
+            }).success((data) => {
+                //debugger;
+                resolve(data);
+            }).error((err, status) => {
+                //debugger;
+                reject(err, status);
+            });
+        });
+    };
+
+    //debugger;
     service.registerDevice = function(data) {
         //debugger;
         return new Promise((resolve, reject) => {

@@ -5,7 +5,7 @@ function OnConfig($stateProvider, $locationProvider, $urlRouterProvider, $compil
   $locationProvider.html5Mode(false);
 
   $stateProvider
-  .state('Home', {
+  .state('home', {
     url: '/',
     controller: 'DeviceCtrl as device',
       template: '<div></div>',

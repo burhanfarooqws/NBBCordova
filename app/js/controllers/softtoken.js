@@ -42,6 +42,30 @@ function SoftTokenCtrl($state, $scope, $rootScope, $cordovaDevice, DeviceService
 
     };
 
+    vm.deleteDevice = function(){
+        var _deleteDevice = window.confirm('Are you sure you want to delete?');
+        if (_deleteDevice) {
+            angular.isDefined($cordovaDevice.getDevice()); //unfortunately if the plugin is not installed calling this will cause fatal error
+            var deviceid = $cordovaDevice.getUUID();
+            DeviceService.deleteDevice(deviceid).then(function(data) {
+                debugger;
+                if(data != null && data.IsExisting && data.IsDeleted){
+                    window.alert("Device deleted");
+                    $state.go('home');
+                }
+                else{
+                    window.alert("Delete failed");
+                }
+                $scope.$apply();
+            }, function (error, status) {
+                //vm.Isdevicefound = false;
+                debugger;
+                window.alert("Device not found");
+                console.log('rejected');
+                $scope.$apply();
+            });
+        }
+    };
 
 }
 
