@@ -30,14 +30,17 @@ function SoftTokenCtrl($state, $scope, $rootScope, $cordovaDevice, DeviceService
             }
             else{
                 window.alert("unable to generate softtoken");
+                $state.go('auth');
+                //$scope.$apply();
             }
             $scope.$apply();
         }, function (error, status) {
             //vm.Isdevicefound = false;
             debugger;
             window.alert("unable to generate softtoken");
+            $state.go('auth');
             console.log('rejected');
-            $scope.$apply();
+            //$scope.$apply();
         });
 
     };
