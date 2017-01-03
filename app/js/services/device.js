@@ -2,6 +2,8 @@ function DeviceService($http, $q) {
     'ngInject';
 
     const service = {};
+    //const hostURL = 'http://localhost:3039/SharedAspectsService';
+    const hostURL = 'http://nbb.veripark.com';
 
     service.get = function() {
         return new Promise((resolve, reject) => {
@@ -20,7 +22,7 @@ function DeviceService($http, $q) {
             $http({
                 method: 'POST',
                 data: {DeviceId: deviceid},
-                url: 'http://192.168.148.103:8089/SharedAspectsService/mobileservice/deviceexistance',
+                url: hostURL + '/mobileservice/deviceexistance',
                 headers: { 'Content-Type': 'application/json' }
             }).success((data) => {
                 //debugger;
@@ -39,7 +41,7 @@ function DeviceService($http, $q) {
             $http({
                 method: 'POST',
                 data: {DeviceId: deviceid},
-                url: 'http://192.168.148.103:8089/SharedAspectsService/mobileservice/devicedelete',
+                url: hostURL + '/mobileservice/devicedelete',
                 headers: { 'Content-Type': 'application/json' }
             }).success((data) => {
                 //debugger;
@@ -58,7 +60,7 @@ function DeviceService($http, $q) {
             $http({
                 method: 'POST',
                 data: data,
-                url: 'http://192.168.148.103:8089/SharedAspectsService/mobileservice/softtokenregistration',
+                url: hostURL + '/mobileservice/softtokenregistration',
                 headers: { 'Content-Type': 'application/json' }
             }).success((data) => {
                 //debugger;
@@ -77,7 +79,7 @@ function DeviceService($http, $q) {
             $http({
                 method: 'POST',
                 data: data,
-                url: 'http://192.168.148.103:8089/SharedAspectsService/mobileservice/generatesofttoken',
+                url: hostURL + '/mobileservice/generatesofttoken',
                 headers: { 'Content-Type': 'application/json' }
             }).success((data) => {
                 //debugger;
