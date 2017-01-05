@@ -21,10 +21,10 @@ function SoftTokenCtrl($state, $scope, $rootScope, $cordovaDevice, DeviceService
         //window.alert("soft token "+ generatesofttoken);
         DeviceService.generateSoftToken(generatesofttoken).then(function(data) {
             debugger;
-            if(data != null && data.OTP){
+            if(data != null && data.data.OTP){
                 window.alert("generated softtoken successful");
                 //angularSpinner.stop('spinner-1');
-                vm.generatedsofttoken = data.OTP;
+                vm.generatedsofttoken = data.data.OTP;
                 vm.show = true;
                 $scope.$apply();
             }
@@ -53,7 +53,7 @@ function SoftTokenCtrl($state, $scope, $rootScope, $cordovaDevice, DeviceService
             var deviceid = $cordovaDevice.getUUID();
             DeviceService.deleteDevice(deviceid).then(function(data) {
                 debugger;
-                if(data != null && data.IsExisting && data.IsDeleted){
+                if(data != null && data.data.IsExisting && data.data.IsDeleted){
                     window.alert("Device deleted");
                     $state.go('home');
                 }

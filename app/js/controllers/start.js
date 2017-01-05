@@ -37,9 +37,9 @@ function StartCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice, D
 
 
             DeviceService.findDevice(vm.deviceuuid).then(function (data) {
-                //debugger;
-                vm.devicefound = data;
-                vm.Isdevicefound = data.IsExisting;
+                debugger;
+                vm.devicefound = data.data;
+                vm.Isdevicefound = data.data.IsExisting;
                 //console.log(data);
                 //alert(vm);
                 debugger;

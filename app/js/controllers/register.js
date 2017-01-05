@@ -19,15 +19,15 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
     vm.PubKeyB64 = "n3/kUYfBDZyks/16oZAvBD4lAVboluOiW2HW26n5GDPCaE48ErTyF1DsLx2jm9Y3clApuc0lsUgU96nu1rWdTtvDN6OnNDrJQP20Wd9rG+Z/luurReJT+H+HUD9nwDGKEeiz2EYXNgyylOCH89XNYk6U5V5GsSxXvRkadlnfjj0=";
     vm.PubKeyExp = "AQAB";
     vm.deviceregister = {
-        "AccountNumber": "1111",
-        "AtmCardNumber": "1111",
-        "AtmPin": "1111",
-        "UserId": "sburhan",
-        "DeviceId": "12",
-        "OTP": "710786",
-        "Password": "2wsx'WSX",
-        "STPassword": "2wsx'WSX",
-        "UseFingerPrint": true,
+        "AccountNumber": null,
+        "AtmCardNumber": null,
+        "AtmPin": null,
+        "UserId": null,
+        "DeviceId": null,
+        "OTP": null,
+        "Password": null,
+        "STPassword": null,
+        "UseFingerPrint": null,
         "EncryptedPassword": null
     };
 
@@ -64,21 +64,24 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
 
         debugger;
         //usSpinnerService.spin('spinner-1');
-        DeviceService.registerDevice(deviceregister).then(function(data) {
+        DeviceService.registerDevice(deviceregister).then(
+            function(data) {
             debugger;
-            if(data != null && data.AuthenticationSuccess){
+            if(data != null && data.data.AuthenticationSuccess){
                 window.alert("register user successful");
 
                 vm.showspinner = false;
-                $scope.$apply();
                 $state.go('auth');
+                $scope.$apply();
+
             }
             else{
                 window.alert("unable to register device");
             }
             vm.showspinner = false;
             $scope.$apply();
-        }, function (error, status) {
+        }, function (error) {
+                debugger;
 
             if(status == 400){
                 window.alert(error);
