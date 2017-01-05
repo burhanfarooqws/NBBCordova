@@ -3,7 +3,7 @@ function DeviceService($http, $q) {
 
     const service = {};
     //const hostURL = 'http://localhost:3039/SharedAspectsService';
-    const hostURL = 'http://nbb.veripark.com';
+    const hostURL = 'http://77.69.146.146/MB';
 
     service.get = function() {
         return new Promise((resolve, reject) => {
