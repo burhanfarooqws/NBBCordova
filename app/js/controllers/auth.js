@@ -142,7 +142,10 @@ function AuthCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice, De
 
         }
         catch (e) {
-            window.alert(e);
+            vm.IsFingerPrintSupport = false;
+            vm.IsAuthenticatedWithFingerPrint = false;
+            vm.generateSoftToken(false);
+            //window.alert(e);
             vm.deviceReadyStatus += ' - Plugin not installed, please run "cordova plugin add cordova-plugin-device"';
         }
     };
