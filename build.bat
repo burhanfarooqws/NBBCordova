@@ -1,0 +1,1 @@
+gulp prod & cordova build android

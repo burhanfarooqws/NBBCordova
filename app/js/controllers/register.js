@@ -1,4 +1,4 @@
-function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice, DeviceService) {
+function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice, DeviceService, $cordovaTouchID) {
     'ngInject';
 
     // ViewModel
@@ -109,21 +109,35 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
         vm.deviceuuid = $cordovaDevice.getUUID();
         //window.alert(vm.deviceuuid);
         //vm.showspinner = true;
+        var platform = $cordovaDevice.getPlatform();
+        vm.IsFingerPrintSupport = false;
 
-        var client_id = "Your client ID";
-        var client_secret = "A very secret client secret (once per device)";
-
-        FingerprintAuth.isAvailable(function (result) {
-            if (result.isAvailable) {
+        if (platform == "iOS") {
+            $cordovaTouchID.checkSupport().then(function() {
+                // success, TouchID supported
                 vm.IsFingerPrintSupport = true;
-            }
-            else {
+            }, function (error) {
+                alert(error); // TouchID not supported
+            });
+        }
+
+        if (platform == "Android") {
+            var client_id = "Your client ID";
+            var client_secret = "A very secret client secret (once per device)";
+
+            FingerprintAuth.isAvailable(function (result) {
+                if (result.isAvailable) {
+                    vm.IsFingerPrintSupport = true;
+                }
+                else {
+                    vm.IsFingerPrintSupport = false;
+                }
+            }, function (message) {
                 vm.IsFingerPrintSupport = false;
-            }
-        }, function (message) {
-            vm.IsFingerPrintSupport = false;
-            //window.alert("Cannot detect fingerprint device : " + message);
-        });
+                //window.alert("Cannot detect fingerprint device : " + message);
+            });
+        }
+
 
         $scope.$apply();
     });
