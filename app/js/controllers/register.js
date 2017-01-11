@@ -28,14 +28,76 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
         "Password": null,
         "STPassword": null,
         "UseFingerPrint": null,
+        "SendOTP": null,
         "EncryptedPassword": null
     };
-
     vm.showspinner = false;
     vm.tncchecked = false;
+    vm.sendOTPText = 'Send OTP';
+
+    $scope.sendOTP = function(){
+        debugger;
+        //$scope.mainform.userid.$validate();
+        //alert("send OTP");
+        //vm.deviceregister.SendOTP = true;
+        vm.sendOTPText = 'Resend OTP';
+        vm.showspinner = true;
+        var rsa = new RSAKey();
+        var k = Convert(vm.PubKeyB64);
+        var m = Convert(vm.PubKeyExp);
+        rsa.setPublic(k, '10001');
+        var res = rsa.encrypt(vm.deviceregister.Password);
+        vm.deviceregister.EncryptedPassword = hex2b64(res);
+
+        var deviceregister = {
+            "AccountNumber": vm.deviceregister.AccountNumber,
+            "AtmCardNumber": vm.deviceregister.AtmCardNumber,
+            "AtmPin": vm.deviceregister.AtmPin,
+            "UserId": vm.deviceregister.UserId,
+            "DeviceId": vm.deviceuuid,
+            "OTP": null,
+            "Password": vm.deviceregister.EncryptedPassword,
+            "STPassword": vm.deviceregister.STPassword,
+            "SendOTP": true,
+            "UseFingerPrint": vm.IsFingerPrintSupport
+        };
+
+        debugger;
+        //usSpinnerService.spin('spinner-1');
+        DeviceService.registerDevice(deviceregister).then(
+            function(data) {
+                debugger;
+                if(data != null && data.data.AuthenticationSuccess){
+                    window.alert("OTP Send");
+
+                    vm.showspinner = false;
+                    //$state.go('auth');
+                    //vm.deviceregister.SendOTP = true;
+                    $scope.$apply();
+
+                }
+                else{
+                    window.alert("unable to send OTP");
+                    //vm.deviceregister.SendOTP = false;
+                }
+                vm.showspinner = false;
+                $scope.$apply();
+            }, function (error) {
+                debugger;
+
+                if(status == 400){
+                    window.alert(error);
+                }
+                debugger;
+                //vm.deviceregister.SendOTP = false;
+                window.alert("error sending OTP");
+                console.log('rejected');
+                vm.showspinner = false;
+                $scope.$apply();
+            });
+    };
 
     $scope.registerDeviceWithUser = function() {
-
         debugger;
         if(!vm.tncchecked){
             window.alert("please accept terms & condition.");
@@ -49,7 +111,6 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
         var res = rsa.encrypt(vm.deviceregister.Password);
         vm.deviceregister.EncryptedPassword = hex2b64(res);
 
-
         var deviceregister = {
             "AccountNumber": vm.deviceregister.AccountNumber,
             "AtmCardNumber": vm.deviceregister.AtmCardNumber,
@@ -59,6 +120,7 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
             "OTP": vm.deviceregister.OTP,
             "Password": vm.deviceregister.EncryptedPassword,
             "STPassword": vm.deviceregister.STPassword,
+            "SendOTP": null,
             "UseFingerPrint": vm.IsFingerPrintSupport
         };
 
@@ -94,7 +156,6 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
         });
 
     };
-
 
     $scope.$on('$locationChangeStart', function(event, next, current){
         // Here you can take the control and call your own functions:
@@ -141,7 +202,6 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
 
         $scope.$apply();
     });
-
 
 }
 

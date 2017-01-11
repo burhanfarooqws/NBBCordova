@@ -2,8 +2,8 @@ function DeviceService($http, $q) {
     'ngInject';
 
     const service = {};
-    const hostURL = 'http://192.168.5.38:8089/SharedAspectsService';
-    //const hostURL = 'http://77.69.146.146/MB';
+    //const hostURL = 'http://192.168.148.103:8009/SharedAspectsService';
+    const hostURL = 'http://77.69.146.146/MB';
 
     //debugger;
     service.findDevice = function(deviceid) {
@@ -53,6 +53,30 @@ function DeviceService($http, $q) {
 
     //debugger;
     service.registerDevice = function(data) {
+        var deferred = $q.defer();
+        debugger;
+        return $http({
+            method: 'POST',
+            data: data,
+            url: hostURL + '/mobileservice/softtokenregistration',
+            headers: { 'Content-Type': 'application/json' }
+        }).then(function (response) {
+            // promise is fulfilled
+            debugger;
+            deferred.resolve(response);
+            // promise is returned
+            return deferred.promise;
+        }, function (response) {
+            // the following line rejects the promise
+            debugger;
+            deferred.reject(response);
+            // promise is returned
+            return deferred.promise;
+        });
+    };
+
+    //debugger;
+    service.sendOTPDevice = function(data) {
         var deferred = $q.defer();
         debugger;
         return $http({

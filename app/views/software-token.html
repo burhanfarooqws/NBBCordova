@@ -52,14 +52,14 @@
             <div class="row">
                 <div class="col-xs-11 col-sm-11 col-md-4 col-lg-4 col-centered">
                     <div class="well no-padding">
-                        <form id="smart-form-register" class="smart-form client-form wizard" name="registration" ng-submit="registerDeviceWithUser()">
+                        <form class="smart-form client-form wizard" name="mainform" id="mainform">
                             <header class="text-center">
                                 <h1>Software Token Registration</h1>
                             </header>
                             <fieldset>
                                 <section>
                                     <label class="input"> <i class="icon-append fa fa-user"></i>
-                                        <input type="text" name="userid" placeholder="User ID *" ng-model="register.deviceregister.UserId" required>
+                                        <input type="text" name="userid" id="userid" placeholder="User ID *" ng-model="register.deviceregister.UserId" minlength="5" required>
                                         <b class="tooltip tooltip-bottom-right">Enter your User ID to login internet banking - Mandatory</b> </label>
                                 </section>
                                 <section>
@@ -90,12 +90,12 @@
                                 <div class="row">
                                     <section class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
                                         <label class="input"> <i class="icon-append fa fa-mobile"></i>
-                                            <input type="text" name="otp" placeholder="OTP *" id="otp" ng-model="register.deviceregister.OTP" required>
+                                            <input type="text" name="otp" placeholder="OTP *" id="otp" ng-model="register.deviceregister.OTP" ng-required="register.tncchecked">
                                             <b class="tooltip tooltip-bottom-right">Enter OTP PIN received on registered mobile number - Mandatory</b> </label>
                                     </section>
                                     <section class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
-                                        <button id="resendotp" class="btn btn-primary pull-right" ng-click="smart-form-register.$valid">
-                                            <i class="fa fa-fw fa-refresh"></i>&nbsp;Send OTP
+                                        <button id="resendotp" class="btn btn-primary pull-right" ng-click="mainform.$valid && sendOTP()">
+                                            <i class="fa fa-fw fa-refresh"></i>&nbsp;{{register.sendOTPText}}
                                         </button>
                                     </section>
                                 </div>
@@ -116,7 +116,7 @@
                             </fieldset>
                             <footer class="text-center">
                                 <span us-spinner="{radius:30, width:8, length: 16}" spinner-on="register.showspinner"></span>
-                                <button id="register" class="btn btn-primary col-centered" type="submit">
+                                <button id="register" class="btn btn-primary col-centered" ng-click="mainform.$valid && registerDeviceWithUser()">
                                     Register
                                 </button>
                             </footer>
@@ -272,5 +272,4 @@
     </div>
     <!-- /.modal -->
 </body>
-
 </html>
