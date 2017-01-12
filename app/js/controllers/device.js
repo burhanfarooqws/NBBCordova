@@ -1,4 +1,4 @@
-function DeviceCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice, DeviceService) {
+function DeviceCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice, DeviceService, $cordovaDialogs) {
     'ngInject';
 
     // ViewModel

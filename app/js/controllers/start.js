@@ -1,4 +1,4 @@
-function StartCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice, DeviceService) {
+function StartCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice, DeviceService, $cordovaDialogs) {
     'ngInject';
 
     // ViewModel
@@ -31,7 +31,7 @@ function StartCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice, D
             angular.isDefined($cordovaDevice.getDevice()); //unfortunately if the plugin is not installed calling this will cause fatal error
             vm.deviceInfo = $cordovaDevice.getDevice();
             vm.deviceuuid = $cordovaDevice.getUUID();
-            vm.deviceuuid = "6f0ff48e1d965eec";
+            //vm.deviceuuid = "6f0ff48e1d965eec";
             //window.alert(vm.deviceuuid);
             vm.deviceReady = true;
 
@@ -56,7 +56,8 @@ function StartCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice, D
 
         }
         catch (e) {
-            window.alert(e);
+            //window.alert(e);
+            $cordovaDialogs.alert(e, 'NBB');
             vm.deviceReadyStatus += ' - Plugin not installed, please run "cordova plugin add cordova-plugin-device"';
         }
     };

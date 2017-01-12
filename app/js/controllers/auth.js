@@ -1,4 +1,4 @@
-function AuthCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice, DeviceService, $cordovaTouchID) {
+function AuthCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice, DeviceService, $cordovaTouchID, $cordovaDialogs) {
     'ngInject';
 
     // ViewModel
@@ -86,7 +86,7 @@ function AuthCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice, De
                 $cordovaTouchID.checkSupport().then(function() {
                     // success, TouchID supported
                 }, function (error) {
-                    alert(error); // TouchID not supported
+                    //alert(error); // TouchID not supported
                 });
 
                 $cordovaTouchID.authenticate("NBB Mobile Authentication").then(function() {
@@ -154,7 +154,7 @@ function AuthCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice, De
                         username: "currentUser" + dt.toString(),
                         password: "currentUserPassword" + dt.toString()
                     }; // See config object for required parameters
-                    window.alert(platform);
+                    //window.alert(platform);
                     FingerprintAuth.isAvailable(function (result) {
                         //window.alert('isAvailable: '+result.isAvailable);
                         if (result.isAvailable) {
@@ -173,7 +173,7 @@ function AuthCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice, De
 
                                     } else if (result.withBackup) {
                                         vm.IsAuthenticatedWithFingerPrint = false;
-                                        window.alert("Authenticated with backup password");
+                                        //window.alert("Authenticated with backup password");
                                         vm.generateSoftToken(true);
                                         $state.go('gen');
                                         $scope.$apply();
@@ -191,7 +191,7 @@ function AuthCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice, De
                             }
                         }
                         else {
-                            window.alert("else");
+                            //window.alert("else");
                             //vm.deviceregister.UseFingerPrint = false;
                             vm.IsFingerPrintSupport = false;
                             vm.IsAuthenticatedWithFingerPrint = false;

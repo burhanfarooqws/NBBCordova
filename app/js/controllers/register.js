@@ -1,4 +1,4 @@
-function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice, DeviceService, $cordovaTouchID) {
+function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice, DeviceService, $cordovaTouchID, $cordovaDialogs) {
     'ngInject';
 
     // ViewModel
@@ -68,7 +68,7 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
             function(data) {
                 debugger;
                 if(data != null && data.data.AuthenticationSuccess){
-                    window.alert("OTP Send");
+                    $cordovaDialogs.alert("OTP Send", 'NBB');
 
                     vm.showspinner = false;
                     //$state.go('auth');
@@ -77,7 +77,7 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
 
                 }
                 else{
-                    window.alert("unable to send OTP");
+                    $cordovaDialogs.alert("unable to send OTP", 'NBB');
                     //vm.deviceregister.SendOTP = false;
                 }
                 vm.showspinner = false;
@@ -86,11 +86,11 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
                 debugger;
 
                 if(status == 400){
-                    window.alert(error);
+                    $cordovaDialogs.alert(error, 'NBB');
                 }
                 debugger;
                 //vm.deviceregister.SendOTP = false;
-                window.alert("error sending OTP");
+                $cordovaDialogs.alert("error sending OTP", 'NBB');
                 console.log('rejected');
                 vm.showspinner = false;
                 $scope.$apply();
@@ -100,7 +100,7 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
     $scope.registerDeviceWithUser = function() {
         debugger;
         if(!vm.tncchecked){
-            window.alert("please accept terms & condition.");
+            $cordovaDialogs.alert("please accept terms & condition.", 'NBB');
             return;
         }
         vm.showspinner = true;
@@ -130,7 +130,7 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
             function(data) {
             debugger;
             if(data != null && data.data.AuthenticationSuccess){
-                window.alert("register user successful");
+                $cordovaDialogs.alert("register user successful");
 
                 vm.showspinner = false;
                 $state.go('auth');
@@ -138,7 +138,7 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
 
             }
             else{
-                window.alert("unable to register device");
+                $cordovaDialogs.alert("unable to register device");
             }
             vm.showspinner = false;
             $scope.$apply();
@@ -146,10 +146,10 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
                 debugger;
 
             if(status == 400){
-                window.alert(error);
+                $cordovaDialogs.alert(error);
             }
             debugger;
-            window.alert("unable to register device");
+                $cordovaDialogs.alert("unable to register device");
             console.log('rejected');
             vm.showspinner = false;
             $scope.$apply();
@@ -178,7 +178,7 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
                 // success, TouchID supported
                 vm.IsFingerPrintSupport = true;
             }, function (error) {
-                alert(error); // TouchID not supported
+                //alert(error); // TouchID not supported
             });
         }
 

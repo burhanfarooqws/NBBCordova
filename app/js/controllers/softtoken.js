@@ -1,4 +1,4 @@
-function SoftTokenCtrl($state, $scope, $rootScope, $cordovaDevice, DeviceService, $window) {
+function SoftTokenCtrl($state, $scope, $rootScope, $cordovaDevice, DeviceService, $window, $cordovaDialogs) {
     'ngInject';
 
     // ViewModel
@@ -22,14 +22,14 @@ function SoftTokenCtrl($state, $scope, $rootScope, $cordovaDevice, DeviceService
         DeviceService.generateSoftToken(generatesofttoken).then(function(data) {
             debugger;
             if(data != null && data.data.OTP){
-                window.alert("generated softtoken successful");
+                $cordovaDialogs.alert("generated softtoken successful", "NBB");
                 //angularSpinner.stop('spinner-1');
                 vm.generatedsofttoken = data.data.OTP;
                 vm.show = true;
                 $scope.$apply();
             }
             else{
-                window.alert("unable to generate softtoken");
+                $cordovaDialogs.alert("unable to generate softtoken", "NBB");
                 $state.go('auth');
                 //$scope.$apply();
             }
@@ -37,7 +37,7 @@ function SoftTokenCtrl($state, $scope, $rootScope, $cordovaDevice, DeviceService
         }, function (error, status) {
             //vm.Isdevicefound = false;
             debugger;
-            window.alert("unable to generate softtoken");
+            $cordovaDialogs.alert("unable to generate softtoken", "NBB");
             $state.go('auth');
             console.log('rejected');
             //$scope.$apply();
@@ -54,14 +54,14 @@ function SoftTokenCtrl($state, $scope, $rootScope, $cordovaDevice, DeviceService
         DeviceService.generateSoftToken(generatesofttoken).then(function(data) {
             debugger;
             if(data != null && data.data.OTP){
-                window.alert("generated softtoken successful");
+                $cordovaDialogs.alert("generated soft token successful", "NBB");
                 //angularSpinner.stop('spinner-1');
                 vm.generatedsofttoken = data.data.OTP;
                 vm.show = true;
                 $scope.$apply();
             }
             else{
-                window.alert("unable to generate softtoken");
+                $cordovaDialogs.alert("you do not have any transaction which require soft token authentication", "NBB");
                 $state.go('auth');
                 //$scope.$apply();
             }
@@ -69,7 +69,7 @@ function SoftTokenCtrl($state, $scope, $rootScope, $cordovaDevice, DeviceService
         }, function (error, status) {
             //vm.Isdevicefound = false;
             debugger;
-            window.alert("unable to generate softtoken");
+            $cordovaDialogs.alert("error generating soft token", "NBB");
             $state.go('auth');
             console.log('rejected');
             //$scope.$apply();
@@ -77,29 +77,33 @@ function SoftTokenCtrl($state, $scope, $rootScope, $cordovaDevice, DeviceService
     }
 
     vm.deleteDevice = function(){
-        var _deleteDevice = $window.confirm('Are you sure you want to delete?');
-        debugger;
-        if (_deleteDevice) {
-            angular.isDefined($cordovaDevice.getDevice()); //unfortunately if the plugin is not installed calling this will cause fatal error
-            var deviceid = $cordovaDevice.getUUID();
-            DeviceService.deleteDevice(deviceid).then(function(data) {
+        $cordovaDialogs.confirm('Are you sure you want to delete?', 'NBB')
+            .then(function(buttonIndex) {
+            // no button = 0, 'OK' = 1, 'Cancel' = 2
                 debugger;
-                if(data != null && data.data.IsExisting && data.data.IsDeleted){
-                    window.alert("Device deleted");
-                    $state.go('home');
+                if (buttonIndex == 1) {
+                    angular.isDefined($cordovaDevice.getDevice()); //unfortunately if the plugin is not installed calling this will cause fatal error
+                    var deviceid = $cordovaDevice.getUUID();
+                    DeviceService.deleteDevice(deviceid).then(function(data) {
+                        debugger;
+                        if(data != null && data.data.IsExisting && data.data.IsDeleted){
+                            $cordovaDialogs.alert("Device deleted", "NBB");
+                            $state.go('home');
+                        }
+                        else{
+                            $cordovaDialogs.alert("Delete failed", "NBB");
+                        }
+                        $scope.$apply();
+                    }, function (error, status) {
+                        //vm.Isdevicefound = false;
+                        debugger;
+                        $cordovaDialogs.alert("Device not found", "NBB");
+                        console.log('rejected');
+                        $scope.$apply();
+                    });
                 }
-                else{
-                    window.alert("Delete failed");
-                }
-                $scope.$apply();
-            }, function (error, status) {
-                //vm.Isdevicefound = false;
-                debugger;
-                window.alert("Device not found");
-                console.log('rejected');
-                $scope.$apply();
-            });
-        }
+
+        });
     };
 
 }
