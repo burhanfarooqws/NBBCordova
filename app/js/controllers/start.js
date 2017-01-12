@@ -31,10 +31,9 @@ function StartCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice, D
             angular.isDefined($cordovaDevice.getDevice()); //unfortunately if the plugin is not installed calling this will cause fatal error
             vm.deviceInfo = $cordovaDevice.getDevice();
             vm.deviceuuid = $cordovaDevice.getUUID();
-            //vm.deviceuuid = "2050a4079abc702b";
+            vm.deviceuuid = "6f0ff48e1d965eec";
             //window.alert(vm.deviceuuid);
             vm.deviceReady = true;
-
 
             DeviceService.findDevice(vm.deviceuuid).then(function (data) {
                 debugger;

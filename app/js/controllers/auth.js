@@ -77,7 +77,7 @@ function AuthCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice, De
             angular.isDefined($cordovaDevice.getDevice()); //unfortunately if the plugin is not installed calling this will cause fatal error
             vm.deviceInfo = $cordovaDevice.getDevice();
             vm.deviceuuid = $cordovaDevice.getUUID();
-            //vm.deviceuuid = "2050a4079abc702b";
+            //vm.deviceuuid = "6f0ff48e1d965eec";
             //window.alert(vm.deviceuuid);
             vm.deviceReady = true;
             var platform = $cordovaDevice.getPlatform();
@@ -107,62 +107,114 @@ function AuthCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice, De
 
             //window.alert(FingerprintAuth);
             if (platform == "Android") {
-                var client_id = "Your client ID";
-                var client_secret = "A very secret client secret (once per device)";
 
-                FingerprintAuth.isAvailable(function (result) {
+                /*FingerprintAuth.isAvailable(isAvailableSuccess, isAvailableError);
+
+                function isAvailableSuccess(result) {
+                    //alert("FingerprintAuth available: " + JSON.stringify(result));
+                    //alert(result.isAvailable);
                     if (result.isAvailable) {
-                        //vm.deviceregister.UseFingerPrint = true;
-                        vm.IsFingerPrintSupport = true;
-                        if (result.hasEnrolledFingerprints) {
-                            FingerprintAuth.show({
-                                clientId: client_id,
-                                clientSecret: client_secret
-                            }, function (result) {
-                                if (result.withFingerprint) {
-                                    vm.IsAuthenticatedWithFingerPrint = true;
-                                    //window.alert("Successfully authenticated using a fingerprint");
-                                    vm.generateSoftToken(true);
-                                    $state.go('gen');
-                                    $scope.$apply();
+                        var encryptConfig = {
+                            clientId: "myAppName",
+                            username: "currentUser",
+                            password: "currentUserPassword"
+                        }; // See config object for required parameters
+                        FingerprintAuth.encrypt(encryptConfig, successCallback, errorCallback);
+                    }
+                }
 
-                                } else if (result.withPassword) {
+                function isAvailableError(message) {
+                    //alert("isAvailableError(): " + message);
+                }
+
+                function successCallback(result) {
+                    //alert("successCallback(): " + JSON.stringify(result));
+                    if (result.withFingerprint) {
+                        //alert("Successfully encrypted credentials.");
+                        //alert("Encrypted credentials: " + result.token);
+                    } else if (result.withBackup) {
+                        //alert("Authenticated with backup password");
+                    }
+                }
+
+                function errorCallback(error) {
+                    if (error === "Cancelled") {
+                        //alert("FingerprintAuth Dialog Cancelled!");
+                    } else {
+                        //alert("FingerprintAuth Error: " + error);
+                    }
+                }*/
+
+                try{
+                    var dt = new Date().getTime();
+                    //var client_id = "Your client ID" + dt.toString();
+                    //var client_secret = "A very secret client secret (once per device)" + dt.toString();
+                    var encryptConfig = {
+                        clientId: "myAppName" + dt.toString(),
+                        username: "currentUser" + dt.toString(),
+                        password: "currentUserPassword" + dt.toString()
+                    }; // See config object for required parameters
+                    window.alert(platform);
+                    FingerprintAuth.isAvailable(function (result) {
+                        //window.alert('isAvailable: '+result.isAvailable);
+                        if (result.isAvailable) {
+                            //vm.deviceregister.UseFingerPrint = true;
+                            vm.IsFingerPrintSupport = true;
+                            //window.alert('hasEnrolledFingerprints: '+result.hasEnrolledFingerprints);
+                            if (result.hasEnrolledFingerprints) {
+                                FingerprintAuth.encrypt(encryptConfig, function (result) {
+                                    //window.alert('FingerprintAuth.show: '+ result);
+                                    if (result.withFingerprint) {
+                                        vm.IsAuthenticatedWithFingerPrint = true;
+                                        //window.alert("Successfully authenticated using a fingerprint");
+                                        vm.generateSoftToken(true);
+                                        $state.go('gen');
+                                        $scope.$apply();
+
+                                    } else if (result.withBackup) {
+                                        vm.IsAuthenticatedWithFingerPrint = false;
+                                        window.alert("Authenticated with backup password");
+                                        vm.generateSoftToken(true);
+                                        $state.go('gen');
+                                        $scope.$apply();
+                                    }
+                                }, function (error) {
+                                    //window.alert(error);
                                     vm.IsAuthenticatedWithFingerPrint = false;
-                                    //window.alert("Authenticated with backup password");
-                                    vm.generateSoftToken(true);
-                                    $state.go('gen');
-                                    $scope.$apply();
-                                }
-                            }, function (error) {
+                                    vm.generateSoftToken(false);
+                                    console.log(error); // "Fingerprint authentication not available"
+                                });
+                            } else {
+                               // window.alert("Fingerprint auth available, but no fingerprint registered on the device");
                                 vm.IsAuthenticatedWithFingerPrint = false;
                                 vm.generateSoftToken(false);
-                                console.log(error); // "Fingerprint authentication not available"
-                            });
-                        } else {
-                            vm.IsAuthenticatedWithFingerPrint = false;
-                            vm.generateSoftToken(false);
-                            //window.alert("Fingerprint auth available, but no fingerprint registered on the device");
+                            }
                         }
-                    }
-                    else {
+                        else {
+                            window.alert("else");
+                            //vm.deviceregister.UseFingerPrint = false;
+                            vm.IsFingerPrintSupport = false;
+                            vm.IsAuthenticatedWithFingerPrint = false;
+                            //window.alert(result.isAvailable);
+                            //window.alert(result.hasEnrolledFingerprints);
+                            vm.generateSoftToken(false);
+                            //$state.go('gen');
+                            //$scope.$apply();
+                        }
+                    }, function (message) {
+                        //window.alert("Cannot detect fingerprint device : " + message);
                         //vm.deviceregister.UseFingerPrint = false;
                         vm.IsFingerPrintSupport = false;
                         vm.IsAuthenticatedWithFingerPrint = false;
-                        //window.alert(result.isAvailable);
-                        //window.alert(result.hasEnrolledFingerprints);
                         vm.generateSoftToken(false);
                         //$state.go('gen');
                         //$scope.$apply();
-                    }
-                }, function (message) {
-                    //vm.deviceregister.UseFingerPrint = false;
-                    vm.IsFingerPrintSupport = false;
-                    vm.IsAuthenticatedWithFingerPrint = false;
-                    vm.generateSoftToken(false);
-                    //$state.go('gen');
-                    //$scope.$apply();
-                    //window.alert("Cannot detect fingerprint device : " + message);
-                });
+
+                    });
+                }
+                catch(e){
+                    //window.alert(e);
+                }
             }
 
 
