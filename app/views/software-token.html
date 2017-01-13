@@ -90,7 +90,7 @@
                                 <div class="row">
                                     <section class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
                                         <label class="input"> <i class="icon-append fa fa-mobile"></i>
-                                            <input type="text" name="otp" placeholder="OTP *" id="otp" ng-model="register.deviceregister.OTP" ng-required="register.tncchecked">
+                                            <input type="text" name="otp" placeholder="OTP *" id="otp" minlength="6" maxlength="6" ng-model="register.deviceregister.OTP" required>
                                             <!--<b class="tooltip tooltip-bottom-right">Enter OTP PIN received on registered mobile number - Mandatory</b>--> </label>
                                     </section>
                                     <section class="col-xs-5 col-sm-5 col-md-5 col-lg-5">

@@ -59,7 +59,7 @@
                         <fieldset>
                             <section>
                                 <label class="input"> <i class="icon-append fa fa-lock"></i>
-                                    <input type="password" name="stpassword" placeholder="Soft Token Password *" id="stpassword" ng-model="auth.stpassword" required>
+                                    <input type="password" name="stpassword" placeholder="Soft Token Password *" id="stpassword" minlength="6" maxlength="6" pattern="[0-9]*" inputmode="numeric" ng-model="auth.stpassword" required>
                                     <!--<b class="tooltip tooltip-bottom-right">Enter your soft token password - Mandatory</b>--> </label>
                             </section>
                         </fieldset>

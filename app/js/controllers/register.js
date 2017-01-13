@@ -31,9 +31,35 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
         "SendOTP": null,
         "EncryptedPassword": null
     };
+    /*vm.deviceregister = {
+        "AccountNumber": "1111",
+        "AtmCardNumber": "1111",
+        "AtmPin": "1111",
+        "UserId": "sburhan",
+        "DeviceId": null,
+        "OTP": "988705",
+        "Password": "2wsx'WSX",
+        "STPassword": 123456,
+        "UseFingerPrint": null,
+        "SendOTP": null,
+        "EncryptedPassword": null
+    };*/
     vm.showspinner = false;
     vm.tncchecked = false;
     vm.sendOTPText = 'Send OTP';
+    vm.clientEncrypt = function (value) {
+        var key = CryptoJS.enc.Utf8.parse('8080808080808080');
+        var iv = CryptoJS.enc.Utf8.parse('8080808080808080');
+        var _encrypted = CryptoJS.AES.encrypt(CryptoJS.enc.Utf8.parse(value), key,
+            {
+                keySize: 128 / 8,
+                iv: iv,
+                mode: CryptoJS.mode.CBC,
+                padding: CryptoJS.pad.Pkcs7
+            });
+        debugger;
+        return _encrypted.toString();
+    };
 
     $scope.sendOTP = function(){
         debugger;
@@ -50,9 +76,9 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
         vm.deviceregister.EncryptedPassword = hex2b64(res);
 
         var deviceregister = {
-            "AccountNumber": vm.deviceregister.AccountNumber,
-            "AtmCardNumber": vm.deviceregister.AtmCardNumber,
-            "AtmPin": vm.deviceregister.AtmPin,
+            "AccountNumber": vm.clientEncrypt(vm.deviceregister.AccountNumber),
+            "AtmCardNumber": vm.clientEncrypt(vm.deviceregister.AtmCardNumber),
+            "AtmPin": vm.clientEncrypt(vm.deviceregister.AtmPin),
             "UserId": vm.deviceregister.UserId,
             "DeviceId": vm.deviceuuid,
             "OTP": null,
@@ -112,9 +138,9 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
         vm.deviceregister.EncryptedPassword = hex2b64(res);
 
         var deviceregister = {
-            "AccountNumber": vm.deviceregister.AccountNumber,
-            "AtmCardNumber": vm.deviceregister.AtmCardNumber,
-            "AtmPin": vm.deviceregister.AtmPin,
+            "AccountNumber": vm.clientEncrypt(vm.deviceregister.AccountNumber),
+            "AtmCardNumber": vm.clientEncrypt(vm.deviceregister.AtmCardNumber),
+            "AtmPin": vm.clientEncrypt(vm.deviceregister.AtmPin),
             "UserId": vm.deviceregister.UserId,
             "DeviceId": vm.deviceuuid,
             "OTP": vm.deviceregister.OTP,
@@ -130,7 +156,7 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
             function(data) {
             debugger;
             if(data != null && data.data.AuthenticationSuccess){
-                $cordovaDialogs.alert("register user successful");
+                $cordovaDialogs.alert("register user successful", 'NBB');
 
                 vm.showspinner = false;
                 $state.go('auth');
@@ -138,7 +164,7 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
 
             }
             else{
-                $cordovaDialogs.alert("unable to register device");
+                $cordovaDialogs.alert("unable to register device", 'NBB');
             }
             vm.showspinner = false;
             $scope.$apply();
@@ -146,10 +172,10 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
                 debugger;
 
             if(status == 400){
-                $cordovaDialogs.alert(error);
+                $cordovaDialogs.alert(error, 'NBB');
             }
             debugger;
-                $cordovaDialogs.alert("unable to register device");
+                $cordovaDialogs.alert("unable to register device", 'NBB');
             console.log('rejected');
             vm.showspinner = false;
             $scope.$apply();
@@ -168,6 +194,9 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
         angular.isDefined($cordovaDevice.getDevice()); //unfortunately if the plugin is not installed calling this will cause fatal error
         vm.deviceInfo = $cordovaDevice.getDevice();
         vm.deviceuuid = $cordovaDevice.getUUID();
+        if(vm.deviceuuid == null){
+            vm.deviceuuid = '0123456789';
+        }
         //window.alert(vm.deviceuuid);
         //vm.showspinner = true;
         var platform = $cordovaDevice.getPlatform();
@@ -202,6 +231,8 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
 
         $scope.$apply();
     });
+
+
 
 }
 
