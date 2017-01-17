@@ -14,7 +14,10 @@ function OnRun($rootScope, AppSettings, formlyConfig, formlyValidationMessages) 
     });
 
     formlyConfig.extras.errorExistsAndShouldBeVisibleExpression = 'fc.$touched || form.$submitted';
-    formlyValidationMessages.addStringMessage('required', 'This field is required');
+    formlyConfig.extras.ngModelAttrsManipulatorPreferBound = true;
+    /*formlyValidationMessages.addStringMessage('required', 'This field is required');
+    formlyValidationMessages.addStringMessage('maxlength', 'This field is required');
+    formlyValidationMessages.addStringMessage('minlength', 'This field is required');*/
 
     formlyConfig.setWrapper({
         name: 'inputWrapper',

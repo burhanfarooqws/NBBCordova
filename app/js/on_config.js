@@ -7,8 +7,8 @@ function OnConfig($stateProvider, $locationProvider, $urlRouterProvider, $compil
     $stateProvider
         .state('home', {
             url: '/',
-            controller: 'ValidationCtrl as validate',
-            templateUrl: 'validation.html',
+            controller: 'DeviceCtrl as device',
+            template: '<div></div>',
             title: 'National Bank of Bahrain'
         }).state('start', {
         url: '/start',
@@ -43,7 +43,7 @@ function OnConfig($stateProvider, $locationProvider, $urlRouterProvider, $compil
 
     formlyConfigProvider.setWrapper({
         name: 'validation',
-        types: ['input','customInput','customOTPInput'],
+        types: ['input', 'customInput', 'customOTPInput'],
         templateUrl: 'error-messages.html'
     });
     //usSpinnerConfigProvider.setDefaults({color: 'blue'});

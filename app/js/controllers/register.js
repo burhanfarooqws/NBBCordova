@@ -4,6 +4,239 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
     // ViewModel
     var vm = this;
 
+    vm.onSubmit = onSubmit;
+    vm.onSendOTP = onSendOTP;
+    vm.sendOTPText = 'Send OTP';
+    vm.registration = {
+        tncchecked: false
+    };
+
+    vm.registrationFields = [
+        /*{
+         key: 'ip',
+         type: 'input',
+         validators: {
+         ipAddress: {
+         expression: function(viewValue, modelValue) {
+         var value = modelValue || viewValue;
+         return /(\d{1,3}\.){3}\d{1,3}/.test(value);
+         },
+         message: '$viewValue + " is not a valid IP Address"'
+         }
+         },
+         templateOptions: {
+         label: 'IP Address',
+         required: true,
+         type: 'text',
+         placeholder: '127.0.0.1',
+         },
+         validation: {
+         messages: {
+         required: function(viewValue, modelValue, scope) {
+         return scope.to.label + ' is required'
+         }
+         }
+         }
+         },*/
+        /*{
+         key: 'firstName',
+         type: 'input',
+         templateOptions: {
+         required: true,
+         type: 'text',
+         placeholder: 'First Name *',
+         label: 'First Name'
+         }
+         },*/
+        {
+            key: 'user_id',
+            type: 'customInput',
+            templateOptions: {
+                type: 'text',
+                placeholder: 'User ID *',
+                required: true,
+                classicon: 'icon-append fa fa-user',
+                friendlyname: 'User Id'
+            },
+            validation: {
+                messages: {
+                    required: function(viewValue, modelValue, scope) {
+                        return scope.to.friendlyname +' is required'
+                    }
+                }
+            }
+        },
+        {
+            key: 'password',
+            type: 'customInput',
+            templateOptions: {
+                type: 'password',
+                placeholder: 'Password *',
+                required: true,
+                classicon: 'icon-append fa fa-lock',
+                friendlyname: 'Password'
+            },
+            validation: {
+                messages: {
+                    required: function(viewValue, modelValue, scope) {
+                        return scope.to.friendlyname +' is required'
+                    }
+                }
+            }
+        },
+        {
+            key: 'acctnumber',
+            type: 'customInput',
+            templateOptions: {
+                type: 'text',
+                placeholder: 'Account Number *',
+                required: true,
+                classicon: 'icon-append fa fa-briefcase',
+                friendlyname: 'Account Number'
+            },
+            validation: {
+                messages: {
+                    required: function(viewValue, modelValue, scope) {
+                        return scope.to.friendlyname +' is required'
+                    }
+                }
+            }
+        },
+        {
+            key: 'atmcardnumber',
+            type: 'customInput',
+            templateOptions: {
+                type: 'text',
+                placeholder: 'ATM Card Number *',
+                required: true,
+                classicon: 'icon-append fa fa-credit-card',
+                friendlyname: 'ATM Card Number'
+            },
+            validation: {
+                messages: {
+                    required: function(viewValue, modelValue, scope) {
+                        return scope.to.friendlyname +' is required'
+                    }
+                }
+            }
+        },
+        {
+            key: 'atmpin',
+            type: 'customInput',
+            templateOptions: {
+                type: 'text',
+                placeholder: 'ATM PIN *',
+                required: true,
+                classicon: 'icon-append fa fa-lock',
+                friendlyname: 'ATM PIN'
+            },
+            validation: {
+                messages: {
+                    required: function(viewValue, modelValue, scope) {
+                        return scope.to.friendlyname +' is required'
+                    }
+                }
+            }
+        },
+        {
+            key: 'stpassword',
+            type: 'customInput',
+            templateOptions: {
+                type: 'password',
+                placeholder: 'Soft Token Password *',
+                required: true,
+                maxlength: 6,
+                minlength: 6,
+                pattern:"[0-9]*",
+                inputmode:"numeric",
+                classicon: 'icon-append fa fa-lock',
+                friendlyname: 'Soft Token Password'
+            },
+            validation: {
+                messages: {
+                    required: function(viewValue, modelValue, scope) {
+                        return scope.to.friendlyname +' is required'
+                    },
+                    minlength: function(viewValue, modelValue, scope){
+                        return scope.to.friendlyname +' should be 6 digits'
+                    },
+                    maxlength: function(viewValue, modelValue, scope){
+                        return scope.to.friendlyname +' should be 6 digits'
+                    }
+                }
+            }
+        },
+        {
+            key: 'otp',
+            type: 'customOTPInput',
+            templateOptions: {
+                type: 'text',
+                placeholder: 'OTP *',
+                required: true,
+                maxlength: 6,
+                minlength: 6,
+                classicon: 'icon-append fa fa-mobile',
+                classsection: 'col-xs-7 col-sm-7 col-md-7 col-lg-7',
+                friendlyname: 'OTP'
+            },
+            validation: {
+                messages: {
+                    required: function(viewValue, modelValue, scope) {
+                        return scope.to.friendlyname +' is required'
+                    },
+                    minlength: function(viewValue, modelValue, scope){
+                        return scope.to.friendlyname +' should be 6 characters'
+                    },
+                    maxlength: function(viewValue, modelValue, scope){
+                        return scope.to.friendlyname +' should be 6 characters'
+                    }
+                }
+            },
+            expressionProperties: {
+                'templateOptions.required': 'model.tncchecked'
+            }
+        }
+    ];
+
+    vm.setDeviceRegistrationObject= function () {
+        vm.deviceregister.AccountNumber = vm.registration.acctnumber;
+        vm.deviceregister.AtmCardNumber = vm.registration.atmcardnumber;
+        vm.deviceregister.AtmPin = vm.registration.atmpin;
+        vm.deviceregister.UserId = vm.registration.user_id;
+        vm.deviceregister.OTP =  vm.registration.otp;
+        vm.deviceregister.Password = vm.registration.password;
+        vm.deviceregister.STPassword = vm.registration.stpassword;
+
+            /*vm.registration.user_id;
+            vm.registration.password;
+            vm.registration.acctnumber;
+            vm.registration.atmcardnumber;
+            vm.registration.atmpin;
+            vm.registration.stpassword;
+            vm.registration.otp;*/
+    }
+
+    function onSubmit() {
+        debugger;
+        vm.form.$submitted = true;
+        if (vm.form.$valid) {
+            vm.setDeviceRegistrationObject();
+            $scope.registerDeviceWithUser();
+            //alert('Form Submitted.');
+        }
+    }
+
+    function onSendOTP() {
+        debugger;
+        vm.registration.tncchecked = false;
+        vm.form.$submitted = true;
+        if (vm.form.$valid) {
+            vm.setDeviceRegistrationObject();
+            $scope.sendOTP();
+            //alert('Form Submitted.');
+        }
+    }
+
     vm.title = 'AngularJS, Cordova, Gulp, and Browserify! Written with keyboards and love!';
     vm.number = 1234;
     vm.deviceReady = false;
@@ -45,8 +278,8 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
         "EncryptedPassword": null
     };*/
     vm.showspinner = false;
-    vm.tncchecked = false;
-    vm.sendOTPText = 'Send OTP';
+    /*vm.tncchecked = false;
+    vm.sendOTPText = 'Send OTP';*/
     vm.clientEncrypt = function (value) {
         var key = CryptoJS.enc.Utf8.parse('8080808080808080');
         var iv = CryptoJS.enc.Utf8.parse('8080808080808080');
@@ -125,10 +358,10 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
 
     $scope.registerDeviceWithUser = function() {
         debugger;
-        if(!vm.tncchecked){
+        /*if(!vm.tncchecked){
             $cordovaDialogs.alert("please accept terms & condition.", 'NBB');
             return;
-        }
+        }*/
         vm.showspinner = true;
         var rsa = new RSAKey();
         var k = Convert(vm.PubKeyB64);
@@ -231,9 +464,6 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
 
         $scope.$apply();
     });
-
-
-
 }
 
 export default {

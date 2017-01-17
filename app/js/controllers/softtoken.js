@@ -33,7 +33,7 @@ function SoftTokenCtrl($state, $scope, $rootScope, $cordovaDevice, DeviceService
                 $scope.$apply();
             }
             else{
-                $cordovaDialogs.alert("you do not have any transaction which require soft token authentication", "NBB").then(function() {
+                $cordovaDialogs.alert("you do not have any transaction which requires a security code, \n please initiate a transaction before generating a security code", "NBB").then(function() {
                     $state.go('auth');
                     //$scope.$apply();
                 });
@@ -42,7 +42,7 @@ function SoftTokenCtrl($state, $scope, $rootScope, $cordovaDevice, DeviceService
         }, function (error, status) {
             //vm.Isdevicefound = false;
             debugger;
-            $cordovaDialogs.alert("error generating soft token", "NBB").then(function() {
+            $cordovaDialogs.alert("you do not have any transaction which requires a security code, \n please initiate a transaction before generating a security code", "NBB").then(function() {
                 $state.go('auth');
                 //$scope.$apply();
             });

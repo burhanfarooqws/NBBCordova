@@ -152,6 +152,10 @@ function ValidationCtrl(CordovaService) {
                 type: 'password',
                 placeholder: 'Soft Token Password *',
                 required: true,
+                maxlength: 6,
+                minlength: 6,
+                pattern:"[0-9]*",
+                inputmode:"numeric",
                 classicon: 'icon-append fa fa-lock',
                 friendlyname: 'Soft Token Password'
             },
@@ -159,6 +163,12 @@ function ValidationCtrl(CordovaService) {
                 messages: {
                     required: function(viewValue, modelValue, scope) {
                         return scope.to.friendlyname +' is required'
+                    },
+                    minlength: function(viewValue, modelValue, scope){
+                        return scope.to.friendlyname +' should be 6 digits'
+                    },
+                    maxlength: function(viewValue, modelValue, scope){
+                        return scope.to.friendlyname +' should be 6 digits'
                     }
                 }
             }
@@ -170,6 +180,8 @@ function ValidationCtrl(CordovaService) {
                 type: 'text',
                 placeholder: 'OTP *',
                 required: true,
+                maxlength: 6,
+                minlength: 6,
                 classicon: 'icon-append fa fa-mobile',
                 classsection: 'col-xs-7 col-sm-7 col-md-7 col-lg-7',
                 friendlyname: 'OTP'
@@ -178,6 +190,12 @@ function ValidationCtrl(CordovaService) {
                 messages: {
                     required: function(viewValue, modelValue, scope) {
                         return scope.to.friendlyname +' is required'
+                    },
+                    minlength: function(viewValue, modelValue, scope){
+                        return scope.to.friendlyname +' should be 6 characters'
+                    },
+                    maxlength: function(viewValue, modelValue, scope){
+                        return scope.to.friendlyname +' should be 6 characters'
                     }
                 }
             },

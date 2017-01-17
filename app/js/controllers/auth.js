@@ -25,9 +25,9 @@ function AuthCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice, De
         "IsFingerPrint": false,
         "Password": "2wsx'WSX"
     };
-    vm.generatedsofttoken = "00000";
+    vm.generatedsofttoken = null;
     vm.stpasswordauthenticate = false;
-    vm.stpassword = "2wsx'WSX"//null;
+    vm.stpassword = null;
 
     vm.generateSoftToken = function (IsFP) {
         debugger;
@@ -49,8 +49,11 @@ function AuthCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice, De
     };
 
     $scope.generateSoftTokenWithSTPassword = function () {
-        //vm.showspinner = true;
         debugger;
+        if(!vm.stpassword){
+            $cordovaDialogs.alert("please enter softtoken password.", 'NBB');
+            return;
+         }
         $rootScope.generateSoftToken = {
             "AutoPassword": null,
             "DeviceId": vm.deviceuuid,
@@ -58,9 +61,12 @@ function AuthCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice, De
             "IsFingerPrint": false,
             "Password": vm.stpassword
         };
-
         $state.go('gen');
+    };
 
+    $scope.redirectRegister = function () {
+        debugger;
+        $state.go('register');
     };
 
     $scope.$on('$locationChangeStart', function (event, next, current) {
