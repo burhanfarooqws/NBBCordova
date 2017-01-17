@@ -6,6 +6,7 @@ function ValidationCtrl(CordovaService) {
 
     vm.onSubmit = onSubmit;
     vm.onSendOTP = onSendOTP;
+    vm.sendOTPText = 'Send OTP';
     //vm.tncchecked = false;
 
     // The model object that we reference
@@ -116,12 +117,13 @@ function ValidationCtrl(CordovaService) {
         },
         {
             key: 'otp',
-            type: 'customInput',
+            type: 'customOTPInput',
             templateOptions: {
                 type: 'text',
                 placeholder: 'OTP *',
                 required: true,
-                classicon: 'icon-append fa fa-mobile'
+                classicon: 'icon-append fa fa-mobile',
+                classsection: 'col-xs-7 col-sm-7 col-md-7 col-lg-7'
             },
             expressionProperties: {
                 'templateOptions.required': 'model.tncchecked'

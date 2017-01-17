@@ -28,10 +28,21 @@ function OnRun($rootScope, AppSettings, formlyConfig, formlyValidationMessages) 
             template: "<section><label class='input'><i class='{{to.classicon}}'></i><formly-transclude></formly-transclude></label></section>",
         });
 
+    formlyConfig.setWrapper({
+        name: 'otpWrapper',
+        types: ['customOTPInput'],
+        template: "<section><label class='input width_60perc'><i class='{{to.classicon}}'></i><formly-transclude></formly-transclude></label></section>",
+    });
+
     formlyConfig.setType({
             name: 'customInput',
             extends: 'input'
         });
+
+    formlyConfig.setType({
+        name: 'customOTPInput',
+        extends: 'input'
+    });
 
     formlyConfig.setType({
             name: 'customPassword',
