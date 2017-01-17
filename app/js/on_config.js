@@ -1,4 +1,4 @@
-function OnConfig($stateProvider, $locationProvider, $urlRouterProvider, $compileProvider) {
+function OnConfig($stateProvider, $locationProvider, $urlRouterProvider, $compileProvider, formlyConfigProvider) {
     'ngInject';
 
     /* This needs to remain disabled for bundled apps, as the base is disabled in the index.html */
@@ -7,8 +7,8 @@ function OnConfig($stateProvider, $locationProvider, $urlRouterProvider, $compil
     $stateProvider
         .state('home', {
             url: '/',
-            controller: 'DeviceCtrl as device',
-            template: '<div></div>',
+            controller: 'ValidationCtrl as validate',
+            templateUrl: 'validation.html',
             title: 'National Bank of Bahrain'
         }).state('start', {
         url: '/start',
@@ -41,6 +41,11 @@ function OnConfig($stateProvider, $locationProvider, $urlRouterProvider, $compil
 
     $urlRouterProvider.otherwise('/');
 
+    formlyConfigProvider.setWrapper({
+        name: 'validation',
+        types: ['input','customInput'],
+        templateUrl: 'error-messages.html'
+    });
     //usSpinnerConfigProvider.setDefaults({color: 'blue'});
 
 }

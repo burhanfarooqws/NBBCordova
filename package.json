@@ -93,6 +93,11 @@
   },
   "license": "MIT",
   "dependencies": {
-    "angular-spinner": "^0.8.1"
+    "angular": "^1.6.1",
+    "angular-animate": "^1.6.1",
+    "angular-formly": "^8.4.0",
+    "angular-formly-templates-bootstrap": "^6.4.0",
+    "angular-spinner": "^0.8.1",
+    "api-check": "^7.5.5"
   }
 }

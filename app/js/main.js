@@ -5,6 +5,10 @@ import constants from './constants';
 import onConfig  from './on_config';
 import onRun     from './on_run';
 import 'angular-ui-router';
+import 'angular-messages'
+import 'angular-animate'
+import 'angular-formly';
+import 'angular-formly-templates-bootstrap';
 import './templates';
 import './filters';
 import './controllers';
@@ -13,6 +17,7 @@ import './directives';
 
 import 'ng-cordova';
 import angularSpinner from 'angular-spinner';
+//import 'angular-form-validate';
 
 // create and bootstrap application
 const requires = [
@@ -23,6 +28,10 @@ const requires = [
     'app.services',
     'app.directives',
     'ngCordova',
+    'formly',
+    'formlyBootstrap',
+    'ngMessages',
+    'ngAnimate',
     'angularSpinner'
 ];
 
