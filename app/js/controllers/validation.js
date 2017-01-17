@@ -62,7 +62,15 @@ function ValidationCtrl(CordovaService) {
                 type: 'text',
                 placeholder: 'User ID *',
                 required: true,
-                classicon: 'icon-append fa fa-user'
+                classicon: 'icon-append fa fa-user',
+                friendlyname: 'User Id'
+            },
+            validation: {
+                messages: {
+                    required: function(viewValue, modelValue, scope) {
+                        return scope.to.friendlyname +' is required'
+                    }
+                }
             }
         },
         {
@@ -72,7 +80,15 @@ function ValidationCtrl(CordovaService) {
                 type: 'password',
                 placeholder: 'Password *',
                 required: true,
-                classicon: 'icon-append fa fa-lock'
+                classicon: 'icon-append fa fa-lock',
+                friendlyname: 'Password'
+            },
+            validation: {
+                messages: {
+                    required: function(viewValue, modelValue, scope) {
+                        return scope.to.friendlyname +' is required'
+                    }
+                }
             }
         },
         {
@@ -82,7 +98,15 @@ function ValidationCtrl(CordovaService) {
                 type: 'text',
                 placeholder: 'Account Number *',
                 required: true,
-                classicon: 'icon-append fa fa-briefcase'
+                classicon: 'icon-append fa fa-briefcase',
+                friendlyname: 'Account Number'
+            },
+            validation: {
+                messages: {
+                    required: function(viewValue, modelValue, scope) {
+                        return scope.to.friendlyname +' is required'
+                    }
+                }
             }
         },
         {
@@ -92,7 +116,15 @@ function ValidationCtrl(CordovaService) {
                 type: 'text',
                 placeholder: 'ATM Card Number *',
                 required: true,
-                classicon: 'icon-append fa fa-credit-card'
+                classicon: 'icon-append fa fa-credit-card',
+                friendlyname: 'ATM Card Number'
+            },
+            validation: {
+                messages: {
+                    required: function(viewValue, modelValue, scope) {
+                        return scope.to.friendlyname +' is required'
+                    }
+                }
             }
         },
         {
@@ -102,7 +134,15 @@ function ValidationCtrl(CordovaService) {
                 type: 'text',
                 placeholder: 'ATM PIN *',
                 required: true,
-                classicon: 'icon-append fa fa-lock'
+                classicon: 'icon-append fa fa-lock',
+                friendlyname: 'ATM PIN'
+            },
+            validation: {
+                messages: {
+                    required: function(viewValue, modelValue, scope) {
+                        return scope.to.friendlyname +' is required'
+                    }
+                }
             }
         },
         {
@@ -112,7 +152,15 @@ function ValidationCtrl(CordovaService) {
                 type: 'password',
                 placeholder: 'Soft Token Password *',
                 required: true,
-                classicon: 'icon-append fa fa-lock'
+                classicon: 'icon-append fa fa-lock',
+                friendlyname: 'Soft Token Password'
+            },
+            validation: {
+                messages: {
+                    required: function(viewValue, modelValue, scope) {
+                        return scope.to.friendlyname +' is required'
+                    }
+                }
             }
         },
         {
@@ -123,7 +171,15 @@ function ValidationCtrl(CordovaService) {
                 placeholder: 'OTP *',
                 required: true,
                 classicon: 'icon-append fa fa-mobile',
-                classsection: 'col-xs-7 col-sm-7 col-md-7 col-lg-7'
+                classsection: 'col-xs-7 col-sm-7 col-md-7 col-lg-7',
+                friendlyname: 'OTP'
+            },
+            validation: {
+                messages: {
+                    required: function(viewValue, modelValue, scope) {
+                        return scope.to.friendlyname +' is required'
+                    }
+                }
             },
             expressionProperties: {
                 'templateOptions.required': 'model.tncchecked'

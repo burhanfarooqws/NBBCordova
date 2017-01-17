@@ -43,7 +43,7 @@ function OnConfig($stateProvider, $locationProvider, $urlRouterProvider, $compil
 
     formlyConfigProvider.setWrapper({
         name: 'validation',
-        types: ['input','customInput'],
+        types: ['input','customInput','customOTPInput'],
         templateUrl: 'error-messages.html'
     });
     //usSpinnerConfigProvider.setDefaults({color: 'blue'});

@@ -138,7 +138,7 @@
                         <fieldset>
                             <formly-form model="validate.rental" fields="validate.rentalFields" form="validate.form">
                                 <section class="">
-                                    <button id="resendotp" class="btn btn-primary pull-right" ng-click="mainform.$valid && sendOTP()">
+                                    <button id="resendotp" class="btn btn-primary pull-right" ng-click="validate.onSendOTP()">
                                         <i class="fa fa-fw fa-refresh"></i>&nbsp;{{validate.sendOTPText}}
                                     </button>
                                 </section>
