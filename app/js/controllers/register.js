@@ -12,42 +12,6 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
     };
 
     vm.registrationFields = [
-        /*{
-         key: 'ip',
-         type: 'input',
-         validators: {
-         ipAddress: {
-         expression: function(viewValue, modelValue) {
-         var value = modelValue || viewValue;
-         return /(\d{1,3}\.){3}\d{1,3}/.test(value);
-         },
-         message: '$viewValue + " is not a valid IP Address"'
-         }
-         },
-         templateOptions: {
-         label: 'IP Address',
-         required: true,
-         type: 'text',
-         placeholder: '127.0.0.1',
-         },
-         validation: {
-         messages: {
-         required: function(viewValue, modelValue, scope) {
-         return scope.to.label + ' is required'
-         }
-         }
-         }
-         },*/
-        /*{
-         key: 'firstName',
-         type: 'input',
-         templateOptions: {
-         required: true,
-         type: 'text',
-         placeholder: 'First Name *',
-         label: 'First Name'
-         }
-         },*/
         {
             key: 'user_id',
             type: 'customInput',
@@ -145,23 +109,35 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
                 type: 'password',
                 placeholder: 'Soft Token Password *',
                 required: true,
-                maxlength: 6,
-                minlength: 6,
-                pattern:"[0-9]*",
-                inputmode:"numeric",
+                pattern: "[0-9]*",
+                inputmode: "numeric",
                 classicon: 'icon-append fa fa-lock',
                 friendlyname: 'Soft Token Password'
             },
+            ngModelElAttrs: {
+                'inputmode': 'numeric',
+                'maxlength': '6',
+                'minlength': '6',
+            },
+            validators: {
+                ipAddress: {
+                    expression: function (viewValue, modelValue) {
+                        var value = modelValue || viewValue;
+                        return /^\d+$/.test(value);
+                    },
+                    message: '"only digits allowed"'
+                }
+            },
             validation: {
                 messages: {
-                    required: function(viewValue, modelValue, scope) {
-                        return scope.to.friendlyname +' is required'
+                    required: function (viewValue, modelValue, scope) {
+                        return scope.to.friendlyname + ' is required'
                     },
-                    minlength: function(viewValue, modelValue, scope){
-                        return scope.to.friendlyname +' should be 6 digits'
+                    minlength: function (viewValue, modelValue, scope) {
+                        return scope.to.friendlyname + ' should be 6 digits'
                     },
-                    maxlength: function(viewValue, modelValue, scope){
-                        return scope.to.friendlyname +' should be 6 digits'
+                    maxlength: function (viewValue, modelValue, scope) {
+                        return scope.to.friendlyname + ' should be 6 digits'
                     }
                 }
             }
@@ -173,11 +149,13 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
                 type: 'text',
                 placeholder: 'OTP *',
                 required: true,
-                maxlength: 6,
-                minlength: 6,
                 classicon: 'icon-append fa fa-mobile',
                 classsection: 'col-xs-7 col-sm-7 col-md-7 col-lg-7',
                 friendlyname: 'OTP'
+            },
+            ngModelElAttrs: {
+                'maxlength': '6',
+                'minlength': '6',
             },
             validation: {
                 messages: {
