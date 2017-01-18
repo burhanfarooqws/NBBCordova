@@ -50,10 +50,10 @@ function AuthCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice, De
 
     $scope.generateSoftTokenWithSTPassword = function () {
         debugger;
-        if(!vm.stpassword){
-            $cordovaDialogs.alert("please enter softtoken password.", 'NBB');
+        if (!vm.stpassword) {
+            $cordovaDialogs.alert("please enter soft token password, digits only", 'NBB');
             return;
-         }
+        }
         $rootScope.generateSoftToken = {
             "AutoPassword": null,
             "DeviceId": vm.deviceuuid,
@@ -67,6 +67,21 @@ function AuthCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice, De
     $scope.redirectRegister = function () {
         debugger;
         $state.go('register');
+    };
+
+    $scope.limitKeypress = function ($event, value, maxLength) {
+        if (value != undefined && value.toString().length >= maxLength) {
+            $event.preventDefault();
+        }
+    };
+
+    $scope.isNumber = function (evt) {
+        evt = (evt) ? evt : window.event;
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+            return false;
+        }
+        return true;
     };
 
     $scope.$on('$locationChangeStart', function (event, next, current) {

@@ -2,7 +2,7 @@ function DeviceService($http, $q) {
     'ngInject';
 
     const service = {};
-    //const hostURL = 'http://192.168.8.128:8009/SharedAspectsService';
+    //const hostURL = 'http://192.168.148.111:8009/SharedAspectsService';
     const hostURL = 'http://77.69.146.146/MB';
 
     //debugger;

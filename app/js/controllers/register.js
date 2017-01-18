@@ -70,16 +70,35 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
             key: 'atmcardnumber',
             type: 'customInput',
             templateOptions: {
-                type: 'text',
+                type: 'number',
                 placeholder: 'ATM Card Number *',
                 required: true,
+                pattern: "[0-9]*",
+                inputmode: "numeric",
                 classicon: 'icon-append fa fa-credit-card',
                 friendlyname: 'ATM Card Number'
+            },
+            validators: {
+                onlyDigits: {
+                    expression: function (viewValue, modelValue) {
+                        var value = modelValue || viewValue;
+                        return /^\d+$/.test(value);
+                    },
+                    message: '"only digits allowed"'
+                }
+            },
+            ngModelElAttrs: {
+                'inputmode': 'numeric',
+                'maxlength': '16',
+                'limit-directive': '16'
             },
             validation: {
                 messages: {
                     required: function(viewValue, modelValue, scope) {
                         return scope.to.friendlyname +' is required'
+                    },
+                    maxlength: function (viewValue, modelValue, scope) {
+                        return scope.to.friendlyname + ' should be 16 digits'
                     }
                 }
             }
@@ -88,16 +107,39 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
             key: 'atmpin',
             type: 'customInput',
             templateOptions: {
-                type: 'text',
+                type: 'number',
                 placeholder: 'ATM PIN *',
                 required: true,
+                pattern: "[0-9]*",
+                inputmode: "numeric",
                 classicon: 'icon-append fa fa-lock',
                 friendlyname: 'ATM PIN'
+            },
+            ngModelElAttrs: {
+                'inputmode': 'numeric',
+                'maxlength': '4',
+                'minlength': '4',
+                'limit-directive': '4',
+            },
+            validators: {
+                onlyDigits: {
+                    expression: function (viewValue, modelValue) {
+                        var value = modelValue || viewValue;
+                        return /^\d+$/.test(value);
+                    },
+                    message: '"only digits allowed"'
+                }
             },
             validation: {
                 messages: {
                     required: function(viewValue, modelValue, scope) {
                         return scope.to.friendlyname +' is required'
+                    },
+                    minlength: function (viewValue, modelValue, scope) {
+                        return scope.to.friendlyname + ' should be 4 digits'
+                    },
+                    maxlength: function (viewValue, modelValue, scope) {
+                        return scope.to.friendlyname + ' should be 4 digits'
                     }
                 }
             }
@@ -106,7 +148,7 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
             key: 'stpassword',
             type: 'customInput',
             templateOptions: {
-                type: 'password',
+                type: 'number',
                 placeholder: 'Soft Token Password *',
                 required: true,
                 pattern: "[0-9]*",
@@ -118,9 +160,11 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
                 'inputmode': 'numeric',
                 'maxlength': '6',
                 'minlength': '6',
+                'limit-directive': '6',
+                'style': '-webkit-text-security: circle'
             },
             validators: {
-                ipAddress: {
+                onlyDigits: {
                     expression: function (viewValue, modelValue) {
                         var value = modelValue || viewValue;
                         return /^\d+$/.test(value);
@@ -151,7 +195,8 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
                 required: true,
                 classicon: 'icon-append fa fa-mobile',
                 classsection: 'col-xs-7 col-sm-7 col-md-7 col-lg-7',
-                friendlyname: 'OTP'
+                friendlyname: 'OTP',
+                class: 'mask-text'
             },
             ngModelElAttrs: {
                 'maxlength': '6',
@@ -302,9 +347,9 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
         debugger;
         //usSpinnerService.spin('spinner-1');
         DeviceService.registerDevice(deviceregister).then(
-            function(data) {
+            function (data) {
                 debugger;
-                if(data != null && data.data.AuthenticationSuccess){
+                if (data != null && data.data.AuthenticationSuccess) {
                     $cordovaDialogs.alert("OTP Send", 'NBB');
 
                     vm.showspinner = false;
@@ -313,7 +358,7 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
                     $scope.$apply();
 
                 }
-                else{
+                else {
                     $cordovaDialogs.alert("unable to send OTP", 'NBB');
                     //vm.deviceregister.SendOTP = false;
                 }
@@ -321,13 +366,11 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
                 $scope.$apply();
             }, function (error) {
                 debugger;
-
-                if(status == 400){
-                    $cordovaDialogs.alert(error, 'NBB');
+                if (error.status == 400) {
+                    $cordovaDialogs.alert(error.data.Message, 'NBB');
+                } else {
+                    $cordovaDialogs.alert("error sending OTP", 'NBB');
                 }
-                debugger;
-                //vm.deviceregister.SendOTP = false;
-                $cordovaDialogs.alert("error sending OTP", 'NBB');
                 console.log('rejected');
                 vm.showspinner = false;
                 $scope.$apply();
@@ -364,33 +407,32 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
         debugger;
         //usSpinnerService.spin('spinner-1');
         DeviceService.registerDevice(deviceregister).then(
-            function(data) {
-            debugger;
-            if(data != null && data.data.AuthenticationSuccess){
-                $cordovaDialogs.alert("register user successful", 'NBB');
-
-                vm.showspinner = false;
-                $state.go('auth');
-                $scope.$apply();
-
-            }
-            else{
-                $cordovaDialogs.alert("unable to register device", 'NBB');
-            }
-            vm.showspinner = false;
-            $scope.$apply();
-        }, function (error) {
+            function (data) {
                 debugger;
+                if (data != null && data.data.AuthenticationSuccess) {
+                    $cordovaDialogs.alert("register user successful", 'NBB');
 
-            if(status == 400){
-                $cordovaDialogs.alert(error, 'NBB');
-            }
-            debugger;
-                $cordovaDialogs.alert("unable to register device", 'NBB');
-            console.log('rejected');
-            vm.showspinner = false;
-            $scope.$apply();
-        });
+                    vm.showspinner = false;
+                    $state.go('auth');
+                    $scope.$apply();
+
+                }
+                else {
+                    $cordovaDialogs.alert("unable to register device", 'NBB');
+                }
+                vm.showspinner = false;
+                $scope.$apply();
+            }, function (error) {
+                debugger;
+                if (error.status == 400) {
+                    $cordovaDialogs.alert(error.data.Message, 'NBB');
+                } else {
+                    $cordovaDialogs.alert("unable to register device", 'NBB');
+                }
+                console.log('rejected');
+                vm.showspinner = false;
+                $scope.$apply();
+            });
 
     };
 

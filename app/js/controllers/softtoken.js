@@ -23,33 +23,48 @@ function SoftTokenCtrl($state, $scope, $rootScope, $cordovaDevice, DeviceService
         //$rootScope.generateSoftToken = generatesofttoken;
         //usSpinnerService.spin('spinner-1');
         //window.alert("soft token "+ generatesofttoken);
-        DeviceService.generateSoftToken(generatesofttoken).then(function(data) {
+        DeviceService.generateSoftToken(generatesofttoken).then(function (data) {
             debugger;
-            if(data != null && data.data.OTP){
-                $cordovaDialogs.alert("generated soft token successful", "NBB");
+            if (data != null && data.data.OTP) {
+                //$cordovaDialogs.alert("generated soft token successful", "NBB");
                 //angularSpinner.stop('spinner-1');
                 vm.generatedsofttoken = data.data.OTP;
                 vm.show = true;
                 $scope.$apply();
             }
-            else{
-                $cordovaDialogs.alert("you do not have any transaction which requires a security code, \n please initiate a transaction before generating a security code", "NBB").then(function() {
+            else {
+                $cordovaDialogs.alert("you do not have any transaction which requires a security code, \n please initiate a transaction before generating a security code", "NBB").then(function () {
                     $state.go('auth');
-                    //$scope.$apply();
                 });
             }
             $scope.$apply();
-        }, function (error, status) {
-            //vm.Isdevicefound = false;
+        }, function (error) {
             debugger;
-            $cordovaDialogs.alert("you do not have any transaction which requires a security code, \n please initiate a transaction before generating a security code", "NBB").then(function() {
-                $state.go('auth');
-                //$scope.$apply();
-            });
+            if (error.status == 400) {
+                var friendlyMessage = null;
+                if (error.data.Message === 'DeviceNotExistException') {
+                    friendlyMessage = 'Device not registered';
+                }
+                if (error.data.Message === 'WrongPassword') {
+                    friendlyMessage = 'Invalid soft token password';
+                }
+                if (error.data.Message === 'NoOTPAvailable') {
+                    friendlyMessage = "you do not have any transaction which requires a security code, \n please initiate a transaction before generating a security code";
+                }
+                if (error.data.Message === 'ServerError') {
+                    friendlyMessage = "error sending OTP";
+                }
+                $cordovaDialogs.alert(friendlyMessage, 'NBB').then(function () {
+                    $state.go('auth');
+                });
+            } else {
+                $cordovaDialogs.alert("error sending OTP", 'NBB').then(function () {
+                    $state.go('auth');
+                });
+            }
             console.log('rejected');
-            //$scope.$apply();
         });
-    }
+    };
 
     vm.deleteDevice = function(){
         $cordovaDialogs.confirm('Are you sure you want to delete?', 'NBB')

@@ -38,6 +38,9 @@
     <link rel="apple-touch-startup-image" href="images/splash/ipad-landscape.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
     <link rel="apple-touch-startup-image" href="images/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
     <link rel="apple-touch-startup-image" href="images/splash/iphone.png" media="screen and (max-device-width: 320px)">
+    <style>
+
+    </style>
 </head>
 
 <body id="login">
@@ -59,7 +62,7 @@
                         <fieldset>
                             <section>
                                 <label class="input"> <i class="icon-append fa fa-lock"></i>
-                                    <input type="password" name="stpassword" placeholder="Soft Token Password *" id="stpassword" minlength="6" maxlength="6" pattern="[0-9]*" inputmode="numeric" ng-model="auth.stpassword" required>
+                                    <input type="number" name="stpassword" style="-webkit-text-security: circle" placeholder="Soft Token Password *" id="stpassword" limit-directive="6" minlength="6" maxlength="6" inputmode="numeric" pattern="\d*" ng-model="auth.stpassword" required>
                                     <!--<b class="tooltip tooltip-bottom-right">Enter your soft token password - Mandatory</b>--> </label>
                             </section>
                         </fieldset>
