@@ -29,6 +29,55 @@ function AuthCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice, De
     vm.stpasswordauthenticate = false;
     vm.stpassword = null;
 
+    vm.model = {
+
+    };
+
+    vm.modelFields = [
+        {
+            key: 'stpassword',
+            type: 'customInput',
+            templateOptions: {
+                type: 'number',
+                placeholder: 'Soft Token Password *',
+                required: true,
+                pattern: "[0-9]*",
+                inputmode: "numeric",
+                classicon: 'icon-append fa fa-lock',
+                friendlyname: 'Soft Token Password'
+            },
+            ngModelElAttrs: {
+                'inputmode': 'numeric',
+                'maxlength': '6',
+                'minlength': '6',
+                'limit-directive': '6',
+                'style': '-webkit-text-security: circle'
+            },
+            validators: {
+                onlyDigits: {
+                    expression: function (viewValue, modelValue) {
+                        var value = modelValue || viewValue;
+                        return /^\d+$/.test(value);
+                    },
+                    message: '"only digits allowed"'
+                }
+            },
+            validation: {
+                messages: {
+                    required: function (viewValue, modelValue, scope) {
+                        return scope.to.friendlyname + ' is required'
+                    },
+                    minlength: function (viewValue, modelValue, scope) {
+                        return scope.to.friendlyname + ' should be 6 digits'
+                    },
+                    maxlength: function (viewValue, modelValue, scope) {
+                        return scope.to.friendlyname + ' should be 6 digits'
+                    }
+                }
+            }
+        }
+    ];
+
     vm.generateSoftToken = function (IsFP) {
         debugger;
         var generatesofttoken = {};
@@ -50,18 +99,23 @@ function AuthCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice, De
 
     $scope.generateSoftTokenWithSTPassword = function () {
         debugger;
+        vm.stpassword = vm.model.stpassword;
+            vm.form.$submitted = true;
+        if (vm.form.$valid) {
+            $rootScope.generateSoftToken = {
+                "AutoPassword": null,
+                "DeviceId": vm.deviceuuid,
+                "IsAuthenticatedWithFingerPrint": false,
+                "IsFingerPrint": false,
+                "Password": vm.stpassword
+            };
+            $state.go('gen');
+        }
+        /*debugger;
         if (!vm.stpassword) {
             $cordovaDialogs.alert("please enter soft token password, digits only", 'NBB');
             return;
-        }
-        $rootScope.generateSoftToken = {
-            "AutoPassword": null,
-            "DeviceId": vm.deviceuuid,
-            "IsAuthenticatedWithFingerPrint": false,
-            "IsFingerPrint": false,
-            "Password": vm.stpassword
-        };
-        $state.go('gen');
+        }*/
     };
 
     $scope.redirectRegister = function () {
@@ -98,14 +152,14 @@ function AuthCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice, De
             angular.isDefined($cordovaDevice.getDevice()); //unfortunately if the plugin is not installed calling this will cause fatal error
             vm.deviceInfo = $cordovaDevice.getDevice();
             vm.deviceuuid = $cordovaDevice.getUUID();
+            var platform = $cordovaDevice.getPlatform();
             if(vm.deviceuuid == null){
-                vm.deviceuuid = '0123456789';
+                vm.deviceuuid = '126d40b744785968';
+                platform = "Android";
             }
             //vm.deviceuuid = "6f0ff48e1d965eec";
             //window.alert(vm.deviceuuid);
             vm.deviceReady = true;
-            var platform = $cordovaDevice.getPlatform();
-
             if (platform == "iOS") {
                 $cordovaTouchID.checkSupport().then(function() {
                     // success, TouchID supported

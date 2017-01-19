@@ -39,6 +39,110 @@
     <link rel="apple-touch-startup-image" href="images/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
     <link rel="apple-touch-startup-image" href="images/splash/iphone.png" media="screen and (max-device-width: 320px)">
     <style>
+        .smart-form .has-error .form-control {
+            border-color: #a94442;
+            -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+        }
+        .smart-form .has-error .form-control:focus {
+            border-color: #843534;
+            -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 6px #ce8483;
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 6px #ce8483;
+        }
+        .formly-field {
+            margin-bottom: 26px;
+        }
+
+        .error-messages {
+            position: relative;
+        }
+
+        .error-messages, .message {
+            opacity: 1;
+            transition: .3s linear all;
+        }
+
+        .smart-form .message {
+            font-size: .75em;
+            /* position: absolute; */
+            width: 100%;
+            color: #a94442;
+            margin-top: 0px;
+            display: inherit;
+        }
+        .formly-field {
+            margin-bottom: 0;
+        }
+        .smart-form .form-group, .smart-form section {
+            margin-bottom: 0;
+        }
+
+
+        .error-messages.ng-enter.ng-enter-active,
+        .message.ng-enter.ng-enter-active {
+            opacity: 1;
+            top: 0;
+        }
+
+        .error-messages.ng-enter,
+        .message.ng-enter {
+            opacity: 0;
+            top: -10px;
+        }
+
+        .error-messages.ng-leave,
+        .message.ng-leave {
+            opacity: 1;
+            top: 0;
+        }
+
+        .error-messages.ng-leave-active,
+        .message.ng-leave-active {
+            opacity: 0;
+            top: -10px;
+        }
+        .width_60perc {
+            width: 55% !important;
+        }
+        .width_60perc div[ng-message=required] {
+            position: absolute;
+        }
+        button#resendotp {
+            margin-top: -37px;
+        }
+        #extr-page #header {
+            position: fixed;
+            width: 100%;
+        }
+        #extr-page #main {
+            padding-top: 60px;
+        }
+        .mask-text {
+            -webkit-text-security: disc;
+            -moz-webkit-text-security: disc;
+            -moz-text-security: disc;
+        }
+        .stp_btns button#submit {
+            float: right;
+        }
+
+        .stp_btns .reregister_div {
+            float: left;
+        }
+        .stp_btns button#reregister {
+            float: left;
+            border-radius: 50px;
+            padding: 0;
+            width: 40px;
+            height: 40px;
+            position: relative;
+        }
+        .stp_btns .reregister_div i.hint {
+            font-size: 12px;
+            margin-left: 8px;
+            top: 19px;
+            position: relative;
+        }
 
     </style>
 </head>
@@ -55,25 +159,30 @@
         <div class="row" ng-init="init()">
             <div class="col-xs-11 col-sm-11 col-md-4 col-lg-4 col-centered">
                 <div class="well no-padding">
-                    <form id="smart-form-register" class="smart-form client-form wizard" name="registration" ng-if="auth.stpasswordauthenticate">
+                    <form class="smart-form client-form wizard" name="auth.form" novalidate ng-if="auth.stpasswordauthenticate">
                         <header class="text-center">
-                            <h1>Software Token Registration</h1>
+                            <h1>Software Token Password</h1>
                         </header>
                         <fieldset>
-                            <section>
+                            <!--<section>
                                 <label class="input"> <i class="icon-append fa fa-lock"></i>
                                     <input type="number" name="stpassword" style="-webkit-text-security: circle" placeholder="Soft Token Password *" id="stpassword" limit-directive="6" minlength="6" maxlength="6" inputmode="numeric" pattern="\d*" ng-model="auth.stpassword" required>
-                                    <!--<b class="tooltip tooltip-bottom-right">Enter your soft token password - Mandatory</b>--> </label>
-                            </section>
+                                    &lt;!&ndash;<b class="tooltip tooltip-bottom-right">Enter your soft token password - Mandatory</b>&ndash;&gt; </label>
+                            </section>-->
+                            <formly-form model="auth.model" fields="auth.modelFields" form="auth.form">
+                            </formly-form>
                         </fieldset>
-                        <footer class="text-center">
-                            <span us-spinner="{radius:30, width:8, length: 16}" spinner-on="register.showspinner"></span>
-                            <button id="submit" class="btn btn-primary col-centered" type="button" ng-click="generateSoftTokenWithSTPassword()">
+                        <footer class="text-center stp_btns">
+                            <span us-spinner="{radius:30, width:8, length: 16}" spinner-on="auth.showspinner"></span>
+                            <button id="submit" class="btn btn-primary" type="button" ng-click="generateSoftTokenWithSTPassword()">
                                 Submit
                             </button>
-                            <button id="submit" class="btn btn-primary col-centered" type="button" ng-click="redirectRegister()">
-                                Re-register
-                            </button>
+                            <div class="reregister_div">
+                                <button id="reregister" class="btn btn-primary" type="button" ng-click="redirectRegister()">
+                                    <i class="fa fa-fw fa-user-plus"></i>
+                                </button>
+                                <i class="hint">click to register again</i>
+                            </div>
                         </footer>
                     </form>
                 </div>
@@ -81,6 +190,14 @@
         </div>
     </div>
 </div>
+
+<!-- Put custom templates here -->
+<script type="text/ng-template" id="error-messages.html">
+    <formly-transclude></formly-transclude>
+    <div ng-messages="fc.$error" ng-if="form.$submitted || options.formControl.$touched" class="error-messages">
+        <div ng-message="{{ ::name }}" ng-repeat="(name, message) in ::options.validation.messages" class="message">{{ message(fc.$viewValue, fc.$modelValue, this)}}</div>
+    </div>
+</script>
 
 </body>
 

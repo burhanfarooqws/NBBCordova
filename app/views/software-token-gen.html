@@ -38,6 +38,42 @@
     <link rel="apple-touch-startup-image" href="images/splash/ipad-landscape.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
     <link rel="apple-touch-startup-image" href="images/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
     <link rel="apple-touch-startup-image" href="images/splash/iphone.png" media="screen and (max-device-width: 320px)">
+    <style>
+        #extr-page #header {
+            position: fixed;
+            width: 100%;
+        }
+        #extr-page #main {
+            padding-top: 60px;
+        }
+        button.btn.btn-primary.unsub_btn {
+            float: left;
+            color: #fff !important;
+
+            background: #a90329 !important; /* Old browsers */
+            background: -moz-linear-gradient(top,  #fb6969 0%, #a90329 100%) !important; /* FF3.6-15 */
+            background: -webkit-linear-gradient(top,  #fb6969 0%,#a90329 100%) !important; /* Chrome10-25,Safari5.1-6 */
+            background: linear-gradient(to bottom,  #fb6969 0%,#a90329 100%) !important; /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fb6969', endColorstr='#a90329',GradientType=0 ) !important; /* IE6-9 */
+
+            border-color: #a90329;
+
+            border-radius: 50px;
+            padding: 0;
+            width: 40px;
+            height: 40px;
+            position: relative;
+        }
+        .reregister_div {
+            float: left;
+        }
+        .reregister_div i.hint {
+            font-size: 12px;
+            margin-left: 8px;
+            top: 19px;
+            position: relative;
+        }
+    </style>
 </head>
 
 <body id="login">
@@ -59,18 +95,23 @@
                             <fieldset>
                                 <section>
                                     <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 col-centered text-center">
-                                        <button type="button" class="btn btn-primary btn-generate" ng-click="softtoken.regenerateSoftToken()">
-                                            <i class="fa fa-fw fa-refresh"></i>&nbsp;Generate Code
-                                        </button>
+
                                         <br><br>
                                         <label class="control-label"><h1><b>{{softtoken.generatedsofttoken}}</b></h1></label>
                                     </div>
                                 </section>
                             </fieldset>
                             <footer class="text-center">
-                                <button type="button" class="btn btn-primary col-centered" ng-click="softtoken.deleteDevice()">
-                                    Deregister softtoken
+
+                                <button type="button" class="btn btn-primary" ng-click="softtoken.regenerateSoftToken()">
+                                    <i class="fa fa-fw fa-refresh"></i>Generate Code
                                 </button>
+                                <div class="reregister_div">
+                                    <button type="button" class="btn btn-primary unsub_btn" ng-click="softtoken.deleteDevice()">
+                                        <i class="fa fa-user-times"></i>
+                                    </button>
+                                    <i class="hint">click to unsubscribe</i>
+                                </div>
                             </footer>
                         </form>
                     </div>

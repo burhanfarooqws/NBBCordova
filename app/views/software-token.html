@@ -122,6 +122,21 @@
             -moz-webkit-text-security: disc;
             -moz-text-security: disc;
         }
+        .spinner {
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            display: block;
+            top: 0;
+            left: 0;
+            background: rgba(0,0,0,.5);
+            z-index: 10000;
+        }
+        .spinner img {
+            top: 40%;
+            position: absolute;
+            left: 35%;
+        }
     </style>
 </head>
 
@@ -182,8 +197,7 @@
                                 </section>
                             </fieldset>
                             <footer class="text-center">
-                            <span us-spinner="{radius:30, width:8, length: 16}"
-                                  spinner-on="register.showspinner"></span>
+                                <spinner class="spinner" name="mySpinner" show="register.showspinner" img-src="images/loading.gif"></spinner>
                                 <button id="register" type="button" class="btn btn-primary col-centered" ng-disabled="!register.registration.tncchecked" ng-click="register.onSubmit()">
                                     Register
                                 </button>

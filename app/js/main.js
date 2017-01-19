@@ -16,7 +16,8 @@ import './services';
 import './directives';
 
 import 'ng-cordova';
-import angularSpinner from 'angular-spinner';
+import 'angular-spinners';
+//import angularSpinner from 'angular-spinner';
 //import 'angular-form-validate';
 
 // create and bootstrap application
@@ -32,7 +33,7 @@ const requires = [
     'formlyBootstrap',
     'ngMessages',
     'ngAnimate',
-    'angularSpinner'
+    'angularSpinners'
 ];
 
 // mount on window for testing

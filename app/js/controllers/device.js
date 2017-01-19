@@ -39,7 +39,7 @@ function DeviceCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice, 
         vm.deviceInfo = $cordovaDevice.getDevice();
         vm.deviceuuid = $cordovaDevice.getUUID();
         if(vm.deviceuuid == null){
-            vm.deviceuuid = '0123456789';
+            vm.deviceuuid = '126d40b744785968';
         }
         //window.alert(vm.deviceuuid);
 
