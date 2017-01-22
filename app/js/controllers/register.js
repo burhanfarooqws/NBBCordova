@@ -452,7 +452,7 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
             vm.deviceuuid = '126d40b744785968';
             platform = "Android";
         }*/
-        //window.alert(vm.deviceuuid);
+        window.alert(vm.deviceuuid);
         //vm.showspinner = true;
         vm.IsFingerPrintSupport = false;
         if (platform == "iOS") {

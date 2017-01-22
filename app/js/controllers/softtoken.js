@@ -17,6 +17,7 @@ function SoftTokenCtrl($state, $scope, $rootScope, $cordovaDevice, DeviceService
 
     $scope.init = function () {
         vm.deviceuuid = $cordovaDevice.getUUID();
+        window.alert(vm.deviceuuid);
         $scope.$apply();
         vm.showspinner = true;
         vm.regenerateSoftToken();
