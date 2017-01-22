@@ -140,8 +140,11 @@
         .stp_btns .reregister_div i.hint {
             font-size: 12px;
             margin-left: 8px;
-            top: 19px;
+            top: 14px;
             position: relative;
+            float: left;
+            text-align: left;
+            line-height: normal;
         }
 
     </style>
@@ -173,7 +176,7 @@
                             </formly-form>
                         </fieldset>
                         <footer class="text-center stp_btns">
-                            <span us-spinner="{radius:30, width:8, length: 16}" spinner-on="auth.showspinner"></span>
+                            <!--<spinner class="spinner" name="authSpinner" show="auth.showspinner" img-src="images/loading.gif"></spinner>-->
                             <button id="submit" class="btn btn-primary" type="button" ng-click="generateSoftTokenWithSTPassword()">
                                 Submit
                             </button>
@@ -181,7 +184,7 @@
                                 <button id="reregister" class="btn btn-primary" type="button" ng-click="redirectRegister()">
                                     <i class="fa fa-fw fa-user-plus"></i>
                                 </button>
-                                <i class="hint">click to register again</i>
+                                <i class="hint">click to <br>register again</i>
                             </div>
                         </footer>
                     </form>

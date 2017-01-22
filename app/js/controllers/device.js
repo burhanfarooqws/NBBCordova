@@ -42,6 +42,7 @@ function DeviceCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice, 
             vm.deviceuuid = '126d40b744785968';
         }
         //window.alert(vm.deviceuuid);
+        navigator.splashscreen.hide();
 
         $state.go('start');
         $scope.$apply();

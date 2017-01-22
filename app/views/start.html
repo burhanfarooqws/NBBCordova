@@ -38,6 +38,23 @@
     <link rel="apple-touch-startup-image" href="images/splash/ipad-landscape.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
     <link rel="apple-touch-startup-image" href="images/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
     <link rel="apple-touch-startup-image" href="images/splash/iphone.png" media="screen and (max-device-width: 320px)">
+    <style>
+        .spinner {
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            display: block;
+            top: 0;
+            left: 0;
+            background: rgba(0,0,0,.5);
+            z-index: 10000;
+        }
+        .spinner img {
+            top: 40%;
+            position: absolute;
+            left: 35%;
+        }
+    </style>
 </head>
 
 <body id="login">
@@ -51,7 +68,7 @@
     <div id="content" class="container">
         <div class="row" ng-init="init()">
             <div class="col-xs-11 col-sm-11 col-md-4 col-lg-4 col-centered">
-                <span us-spinner="{radius:30, width:8, length: 16}" spinner-on="start.deviceReady == false"></span>
+                <spinner class="spinner" name="stgenSpinner" show="start.showspinner" img-src="images/loading.gif"></spinner>
                 <div class="well no-padding" ng-if="start.Isdevicefound == false">
                     <form action="" id="smart-form-register" class="smart-form client-form wizard">
                         <header class="text-center">

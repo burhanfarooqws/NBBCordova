@@ -16,6 +16,7 @@ function StartCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice, D
     vm.IsFingerPrintSupport = false;
     vm.IsAuthenticatedWithFingerPrint = false;
     vm.Isdevicefound = true;
+    vm.showspinner = false;
 
     $scope.$on('$locationChangeStart', function(event, next, current){
         // Here you can take the control and call your own functions:
@@ -37,7 +38,7 @@ function StartCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice, D
             //vm.deviceuuid = "6f0ff48e1d965eec";
             //window.alert(vm.deviceuuid);
             vm.deviceReady = true;
-
+            vm.showspinner = true;
             DeviceService.findDevice(vm.deviceuuid).then(function (data) {
                 debugger;
                 vm.devicefound = data.data;
@@ -45,6 +46,7 @@ function StartCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice, D
                 //console.log(data);
                 //alert(vm);
                 debugger;
+                vm.showspinner = false;
                 $state.go('auth');
                 $scope.$apply();
                 debugger;
@@ -53,6 +55,7 @@ function StartCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice, D
                 vm.Isdevicefound = false;
                 debugger;
                 console.log('rejected');
+                vm.showspinner = false;
                 $state.go('register');
                 $scope.$apply();
             });
@@ -60,6 +63,7 @@ function StartCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice, D
         }
         catch (e) {
             //window.alert(e);
+            vm.showspinner = false;
             $cordovaDialogs.alert(e, 'NBB');
             vm.deviceReadyStatus += ' - Plugin not installed, please run "cordova plugin add cordova-plugin-device"';
         }

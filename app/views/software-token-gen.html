@@ -73,6 +73,43 @@
             top: 19px;
             position: relative;
         }
+        .reregister_div i.hint {
+            font-size: 12px;
+            margin-left: 8px;
+            top: 14px;
+            position: relative;
+            float: left;
+            text-align: left;
+            line-height: normal;
+        }
+        @media screen and (max-width: 380px) {
+            .smart-form footer .btn {
+                padding: 0 8px;
+            }
+        }
+        @media screen and (max-width: 320px){
+            .smart-form footer .btn {
+                padding: 0 8px;
+                font-size: 12px;
+            }
+        }.spinner {
+             width: 100%;
+             height: 100%;
+             position: fixed;
+             display: block;
+             top: 0;
+             left: 0;
+             background: rgba(0,0,0,.5);
+             z-index: 10000;
+         }
+        .spinner img {
+            top: 40%;
+            position: absolute;
+            left: 35%;
+        }
+
+
+
     </style>
 </head>
 
@@ -86,7 +123,7 @@
         <!-- MAIN CONTENT -->
         <div id="content" class="container">
             <div class="row" ng-init="init()">
-                <div class="col-xs-11 col-sm-11 col-md-4 col-lg-4 col-centered">
+                <div class="col-xs-11 col-sm-11 col-md-5 col-lg-5 col-centered">
                     <div class="well no-padding" ng-if="softtoken.show">
                         <form action="" id="smart-form-register" class="smart-form client-form wizard">
                             <header class="text-center">
@@ -102,7 +139,7 @@
                                 </section>
                             </fieldset>
                             <footer class="text-center">
-
+                                <spinner class="spinner" name="stgenSpinner" show="softtoken.showspinner" img-src="images/loading.gif"></spinner>
                                 <button type="button" class="btn btn-primary" ng-click="softtoken.regenerateSoftToken()">
                                     <i class="fa fa-fw fa-refresh"></i>Generate Code
                                 </button>
@@ -110,7 +147,7 @@
                                     <button type="button" class="btn btn-primary unsub_btn" ng-click="softtoken.deleteDevice()">
                                         <i class="fa fa-user-times"></i>
                                     </button>
-                                    <i class="hint">click to unsubscribe</i>
+                                    <i class="hint">click to <br>unsubscribe</i>
                                 </div>
                             </footer>
                         </form>

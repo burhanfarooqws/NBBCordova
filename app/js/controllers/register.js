@@ -410,12 +410,11 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
             function (data) {
                 debugger;
                 if (data != null && data.data.AuthenticationSuccess) {
-                    $cordovaDialogs.alert("register user successful", 'NBB');
-
-                    vm.showspinner = false;
-                    $state.go('auth');
-                    $scope.$apply();
-
+                    $cordovaDialogs.alert("register user successful", 'NBB').then(function () {
+                        vm.showspinner = false;
+                        $state.go('auth');
+                        $scope.$apply();
+                    });
                 }
                 else {
                     $cordovaDialogs.alert("unable to register device", 'NBB');

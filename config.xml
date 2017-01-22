@@ -8,8 +8,8 @@
         Brett Striker
     </author>
     <content src="index.html" />
-    <preference name="AutoHideSplashScreen" value="true" />
-    <preference name="SplashScreenDelay" value="5000" />
+    <preference name="AutoHideSplashScreen" value="false" />
+    <!--<preference name="SplashScreenDelay" value="5000"/>-->
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />

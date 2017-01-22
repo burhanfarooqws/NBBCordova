@@ -17,8 +17,6 @@ import './directives';
 
 import 'ng-cordova';
 import 'angular-spinners';
-//import angularSpinner from 'angular-spinner';
-//import 'angular-form-validate';
 
 // create and bootstrap application
 const requires = [
