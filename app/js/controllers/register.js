@@ -447,6 +447,7 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
         vm.deviceInfo = $cordovaDevice.getDevice();
         vm.deviceuuid = $cordovaDevice.getUUID();
         var platform = $cordovaDevice.getPlatform();
+        $scope.$apply();
         /*if(vm.deviceuuid == null){
             vm.deviceuuid = '126d40b744785968';
             platform = "Android";
