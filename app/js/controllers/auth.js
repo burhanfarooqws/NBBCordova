@@ -1,4 +1,4 @@
-function AuthCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice, DeviceService, $cordovaTouchID, $cordovaDialogs, $cordovaLocalNotification) {
+function AuthCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice, DeviceService, $cordovaTouchID, $cordovaDialogs) {
     'ngInject';
 
     // ViewModel
@@ -162,7 +162,8 @@ function AuthCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice, De
             vm.deviceInfo = $cordovaDevice.getDevice();
             vm.deviceuuid = $cordovaDevice.getUUID();
             var platform = $cordovaDevice.getPlatform();
-            $scope.$apply();
+            //window.alert(platform);
+            //$scope.$apply();
             /*if (vm.deviceuuid == null) {
                 vm.deviceuuid = '126d40b744785968';
                 platform = "Android";
@@ -170,6 +171,7 @@ function AuthCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice, De
             //vm.deviceuuid = "6f0ff48e1d965eec";
             //window.alert(vm.deviceuuid);
             vm.deviceReady = true;
+            //window.alert($cordovaTouchID);
             if (platform == "iOS") {
                 $cordovaTouchID.checkSupport().then(function () {
                     // success, TouchID supported
@@ -193,7 +195,7 @@ function AuthCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice, De
                 });
             }
 
-            //window.alert(FingerprintAuth);
+            window.alert(FingerprintAuth);
             if (platform == "Android") {
                 try {
                     var dt = new Date().getTime();
