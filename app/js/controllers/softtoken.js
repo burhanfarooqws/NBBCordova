@@ -16,9 +16,9 @@ function SoftTokenCtrl($state, $scope, $rootScope, $cordovaDevice, DeviceService
     });
 
     $scope.init = function () {
-        vm.deviceuuid = $cordovaDevice.getUUID();
+        /*vm.deviceuuid = $cordovaDevice.getUUID();
         window.alert(vm.deviceuuid);
-        $scope.$apply();
+        $scope.$apply();*/
         vm.showspinner = true;
         vm.regenerateSoftToken();
     };
@@ -83,13 +83,13 @@ function SoftTokenCtrl($state, $scope, $rootScope, $cordovaDevice, DeviceService
                     friendlyMessage = "you do not have any transaction which requires a security code, \n please initiate a transaction before generating a security code";
                 }
                 if (error.data.Message === 'ServerError') {
-                    friendlyMessage = "error sending OTP";
+                    friendlyMessage = "you do not have any transaction which requires a security code, \n please initiate a transaction before generating a security code";
                 }
                 $cordovaDialogs.alert(friendlyMessage, 'NBB').then(function () {
                     $state.go('auth');
                 });
             } else {
-                $cordovaDialogs.alert("error sending OTP", 'NBB').then(function () {
+                $cordovaDialogs.alert("you do not have any transaction which requires a security code, \n please initiate a transaction before generating a security code", 'NBB').then(function () {
                     $state.go('auth');
                 });
             }

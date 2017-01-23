@@ -11,6 +11,20 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
         tncchecked: false
     };
 
+    $scope.validateInvalid = function($event) {
+
+        alert('www');
+
+        var regex = new RegExp("[a-z]|[0-9][A-Z]");
+
+        var key = String.fromCharCode(!$event.charCode ? $event.which : $event.charCode);
+
+        if (!regex.test(key)) {
+            $event.preventDefault();
+            return false;
+        }
+    };
+
     vm.registrationFields = [
         {
             key: 'user_id',
@@ -18,14 +32,30 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
             templateOptions: {
                 type: 'text',
                 placeholder: 'User ID *',
+                onKeypress: function($viewValue, $modelValue, scope, $event) {
+                    console.log($event);
+                    var regex = new RegExp("[a-z]|[0-9][A-Z]");
+                    var key = String.fromCharCode(!$event.charCode ? $event.which : $event.charCode);
+
+                    if (!regex.test(key)) {
+                        $event.preventDefault();
+                        return false;
+                    }
+                },
                 required: true,
                 classicon: 'icon-append fa fa-user',
                 friendlyname: 'User Id'
+            },
+            ngModelElAttrs: {
+                'maxlength': '25'
             },
             validation: {
                 messages: {
                     required: function(viewValue, modelValue, scope) {
                         return scope.to.friendlyname +' is required'
+                    },
+                    maxlength: function (viewValue, modelValue, scope) {
+                        return scope.to.friendlyname + ' max 25 characters allowed'
                     }
                 }
             }
@@ -40,10 +70,16 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
                 classicon: 'icon-append fa fa-lock',
                 friendlyname: 'Password'
             },
+            ngModelElAttrs: {
+                'maxlength': '25'
+            },
             validation: {
                 messages: {
-                    required: function(viewValue, modelValue, scope) {
-                        return scope.to.friendlyname +' is required'
+                    required: function (viewValue, modelValue, scope) {
+                        return scope.to.friendlyname + ' is required'
+                    },
+                    maxlength: function (viewValue, modelValue, scope) {
+                        return scope.to.friendlyname + ' max 25 characters allowed'
                     }
                 }
             }
@@ -52,16 +88,29 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
             key: 'acctnumber',
             type: 'customInput',
             templateOptions: {
-                type: 'text',
+                type: 'number',
                 placeholder: 'Account Number *',
+                onBlur: function($viewValue, $modelValue, scope) {
+                    console.log($viewValue);
+                    console.log($modelValue);
+                    $viewValue = 12323; //$viewValue+$viewValue; //eval(("0000000000" + $viewValue).slice(-10));
+                },
                 required: true,
                 classicon: 'icon-append fa fa-briefcase',
                 friendlyname: 'Account Number'
+            },
+            ngModelElAttrs: {
+                'inputmode': 'numeric',
+                'maxlength': '10',
+                'limit-directive': '10'
             },
             validation: {
                 messages: {
                     required: function(viewValue, modelValue, scope) {
                         return scope.to.friendlyname +' is required'
+                    },
+                    maxlength: function (viewValue, modelValue, scope) {
+                        return scope.to.friendlyname + ' max 10 characters allowed'
                     }
                 }
             }
@@ -120,6 +169,7 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
                 'maxlength': '4',
                 'minlength': '4',
                 'limit-directive': '4',
+                'style': '-webkit-text-security: circle'
             },
             validators: {
                 onlyDigits: {
@@ -192,6 +242,16 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
             templateOptions: {
                 type: 'text',
                 placeholder: 'OTP *',
+                onKeypress: function($viewValue, $modelValue, scope, $event) {
+                    console.log($event);
+                    var regex = new RegExp("[a-z]|[0-9][A-Z]");
+                    var key = String.fromCharCode(!$event.charCode ? $event.which : $event.charCode);
+
+                    if (!regex.test(key)) {
+                        $event.preventDefault();
+                        return false;
+                    }
+                },
                 required: true,
                 classicon: 'icon-append fa fa-mobile',
                 classsection: 'col-xs-7 col-sm-7 col-md-7 col-lg-7',
@@ -201,6 +261,7 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
             ngModelElAttrs: {
                 'maxlength': '6',
                 'minlength': '6',
+                'ng-keypress': 'validate($event)'
             },
             validation: {
                 messages: {
@@ -442,17 +503,28 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
         event.preventDefault();
     });
 
+    /*function success(uuid) {
+        window.alert('UDID: ' + uuid);
+    }
+    function fail(error) {
+        window.alert('error: ' + error);
+    }*/
+
     $scope.$on('$viewContentLoaded', function(){
+        //alert('$viewContentLoaded');
         angular.isDefined($cordovaDevice.getDevice()); //unfortunately if the plugin is not installed calling this will cause fatal error
         vm.deviceInfo = $cordovaDevice.getDevice();
         vm.deviceuuid = $cordovaDevice.getUUID();
         var platform = $cordovaDevice.getPlatform();
-        $scope.$apply();
+        //$scope.$apply();
         /*if(vm.deviceuuid == null){
             vm.deviceuuid = '126d40b744785968';
             platform = "Android";
         }*/
-        window.alert(vm.deviceuuid);
+
+        /*alert('UUID: ' + vm.deviceuuid);
+        window.plugins.uniqueDeviceID.get(success, fail);*/
+
         //vm.showspinner = true;
         vm.IsFingerPrintSupport = false;
         if (platform == "iOS") {
