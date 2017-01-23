@@ -195,7 +195,7 @@ function AuthCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice, De
                 });
             }
 
-            window.alert(FingerprintAuth);
+            //window.alert(FingerprintAuth);
             if (platform == "Android") {
                 try {
                     var dt = new Date().getTime();
