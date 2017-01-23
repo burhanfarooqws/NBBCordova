@@ -168,7 +168,7 @@ function AuthCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice, De
                 platform = "Android";
             }*/
             //vm.deviceuuid = "6f0ff48e1d965eec";
-            window.alert(vm.deviceuuid);
+            //window.alert(vm.deviceuuid);
             vm.deviceReady = true;
             if (platform == "iOS") {
                 $cordovaTouchID.checkSupport().then(function () {
