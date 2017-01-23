@@ -92,11 +92,6 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
                 placeholder: 'Account Number *',
                 pattern: "[0-9]*",
                 inputmode: "numeric",
-                onBlur: function($viewValue, $modelValue, scope) {
-                    console.log($viewValue);
-                    console.log($modelValue);
-                    $viewValue = 12323; //$viewValue+$viewValue; //eval(("0000000000" + $viewValue).slice(-10));
-                },
                 required: true,
                 classicon: 'icon-append fa fa-briefcase',
                 friendlyname: 'Account Number'
