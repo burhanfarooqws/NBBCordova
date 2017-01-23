@@ -4,6 +4,7 @@ function DeviceService($http, $q) {
     const service = {};
     //const hostURL = 'http://192.168.5.33:8009/SharedAspectsService';
     const hostURL = 'http://77.69.146.146/MB';
+    //const hostURL = 'https://personal.nbbonline.com/SoftToken';
 
     //debugger;
     service.findDevice = function(deviceid) {

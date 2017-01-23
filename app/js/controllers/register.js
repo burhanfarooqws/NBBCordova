@@ -90,6 +90,8 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
             templateOptions: {
                 type: 'number',
                 placeholder: 'Account Number *',
+                pattern: "[0-9]*",
+                inputmode: "numeric",
                 onBlur: function($viewValue, $modelValue, scope) {
                     console.log($viewValue);
                     console.log($modelValue);
