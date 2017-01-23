@@ -90,6 +90,16 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
             templateOptions: {
                 type: 'number',
                 placeholder: 'Account Number *',
+                onKeypress: function($viewValue, $modelValue, scope, $event) {
+                    console.log($event);
+                    var regex = new RegExp("[0-9]");
+                    var key = String.fromCharCode(!$event.charCode ? $event.which : $event.charCode);
+
+                    if (!regex.test(key)) {
+                        $event.preventDefault();
+                        return false;
+                    }
+                },
                 pattern: "[0-9]*",
                 inputmode: "numeric",
                 required: true,
@@ -118,6 +128,16 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
             templateOptions: {
                 type: 'number',
                 placeholder: 'ATM Card Number *',
+                onKeypress: function($viewValue, $modelValue, scope, $event) {
+                    console.log($event);
+                    var regex = new RegExp("[0-9]");
+                    var key = String.fromCharCode(!$event.charCode ? $event.which : $event.charCode);
+
+                    if (!regex.test(key)) {
+                        $event.preventDefault();
+                        return false;
+                    }
+                },
                 required: true,
                 pattern: "[0-9]*",
                 inputmode: "numeric",
@@ -155,6 +175,16 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
             templateOptions: {
                 type: 'number',
                 placeholder: 'ATM PIN *',
+                onKeypress: function($viewValue, $modelValue, scope, $event) {
+                    console.log($event);
+                    var regex = new RegExp("[0-9]");
+                    var key = String.fromCharCode(!$event.charCode ? $event.which : $event.charCode);
+
+                    if (!regex.test(key)) {
+                        $event.preventDefault();
+                        return false;
+                    }
+                },
                 required: true,
                 pattern: "[0-9]*",
                 inputmode: "numeric",
@@ -197,6 +227,16 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
             templateOptions: {
                 type: 'number',
                 placeholder: 'Soft Token Password *',
+                onKeypress: function($viewValue, $modelValue, scope, $event) {
+                    console.log($event);
+                    var regex = new RegExp("[0-9]");
+                    var key = String.fromCharCode(!$event.charCode ? $event.which : $event.charCode);
+
+                    if (!regex.test(key)) {
+                        $event.preventDefault();
+                        return false;
+                    }
+                },
                 required: true,
                 pattern: "[0-9]*",
                 inputmode: "numeric",
