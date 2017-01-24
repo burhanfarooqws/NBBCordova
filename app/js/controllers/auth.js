@@ -39,16 +39,6 @@ function AuthCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice, De
             templateOptions: {
                 type: 'number',
                 placeholder: 'Soft Token Password *',
-                onKeypress: function($viewValue, $modelValue, scope, $event) {
-                    console.log($event);
-                    var regex = new RegExp("[0-9]");
-                    var key = String.fromCharCode(!$event.charCode ? $event.which : $event.charCode);
-
-                    if (!regex.test(key)) {
-                        $event.preventDefault();
-                        return false;
-                    }
-                },
                 required: true,
                 pattern: "[0-9]*",
                 inputmode: "numeric",
@@ -60,13 +50,14 @@ function AuthCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice, De
                 'maxlength': '6',
                 'minlength': '6',
                 'limit-directive': '6',
+                'phone-input': '',
                 'style': '-webkit-text-security: circle'
             },
             validators: {
                 onlyDigits: {
                     expression: function (viewValue, modelValue) {
                         var value = modelValue || viewValue;
-                        return /^\d+$/.test(value);
+                        return /[^0-9]/.test(value);
                     },
                     message: '"only digits allowed"'
                 }

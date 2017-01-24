@@ -90,16 +90,6 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
             templateOptions: {
                 type: 'number',
                 placeholder: 'Account Number *',
-                onKeypress: function($viewValue, $modelValue, scope, $event) {
-                    console.log($event);
-                    var regex = new RegExp("[0-9]");
-                    var key = String.fromCharCode(!$event.charCode ? $event.which : $event.charCode);
-
-                    if (!regex.test(key)) {
-                        $event.preventDefault();
-                        return false;
-                    }
-                },
                 pattern: "[0-9]*",
                 inputmode: "numeric",
                 required: true,
@@ -109,6 +99,7 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
             ngModelElAttrs: {
                 'inputmode': 'numeric',
                 'maxlength': '10',
+                'phone-input': '',
                 'limit-directive': '10'
             },
             validation: {
@@ -128,16 +119,6 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
             templateOptions: {
                 type: 'number',
                 placeholder: 'ATM Card Number *',
-                onKeypress: function($viewValue, $modelValue, scope, $event) {
-                    console.log($event);
-                    var regex = new RegExp("[0-9]");
-                    var key = String.fromCharCode(!$event.charCode ? $event.which : $event.charCode);
-
-                    if (!regex.test(key)) {
-                        $event.preventDefault();
-                        return false;
-                    }
-                },
                 required: true,
                 pattern: "[0-9]*",
                 inputmode: "numeric",
@@ -156,6 +137,7 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
             ngModelElAttrs: {
                 'inputmode': 'numeric',
                 'maxlength': '16',
+                'phone-input': '',
                 'limit-directive': '16'
             },
             validation: {
@@ -175,16 +157,6 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
             templateOptions: {
                 type: 'number',
                 placeholder: 'ATM PIN *',
-                onKeypress: function($viewValue, $modelValue, scope, $event) {
-                    console.log($event);
-                    var regex = new RegExp("[0-9]");
-                    var key = String.fromCharCode(!$event.charCode ? $event.which : $event.charCode);
-
-                    if (!regex.test(key)) {
-                        $event.preventDefault();
-                        return false;
-                    }
-                },
                 required: true,
                 pattern: "[0-9]*",
                 inputmode: "numeric",
@@ -196,6 +168,7 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
                 'maxlength': '4',
                 'minlength': '4',
                 'limit-directive': '4',
+                'phone-input': '',
                 'style': '-webkit-text-security: circle'
             },
             validators: {
@@ -227,16 +200,6 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
             templateOptions: {
                 type: 'number',
                 placeholder: 'Soft Token Password *',
-                onKeypress: function($viewValue, $modelValue, scope, $event) {
-                    console.log($event);
-                    var regex = new RegExp("[0-9]");
-                    var key = String.fromCharCode(!$event.charCode ? $event.which : $event.charCode);
-
-                    if (!regex.test(key)) {
-                        $event.preventDefault();
-                        return false;
-                    }
-                },
                 required: true,
                 pattern: "[0-9]*",
                 inputmode: "numeric",
@@ -248,6 +211,7 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
                 'maxlength': '6',
                 'minlength': '6',
                 'limit-directive': '6',
+                'phone-input': '',
                 'style': '-webkit-text-security: circle'
             },
             validators: {
@@ -297,8 +261,7 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
             },
             ngModelElAttrs: {
                 'maxlength': '6',
-                'minlength': '6',
-                'ng-keypress': 'validate($event)'
+                'minlength': '6'
             },
             validation: {
                 messages: {
