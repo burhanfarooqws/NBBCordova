@@ -6,6 +6,10 @@ function OnConfig($stateProvider, $locationProvider, $urlRouterProvider, $compil
 
     $stateProvider
         .state('home', {
+           /* url: '/',
+            controller: 'AuthCtrl as auth',
+            templateUrl: 'auth.html',
+            title: 'National Bank of Bahrain'*/
             url: '/',
             controller: 'DeviceCtrl as device',
             template: '<div></div>',

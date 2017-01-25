@@ -123,7 +123,7 @@
             -moz-text-security: disc;
         }
         .stp_btns button#submit {
-            float: right;
+            float: none;
         }
 
         .stp_btns .reregister_div {
@@ -146,6 +146,16 @@
             text-align: left;
             line-height: normal;
         }
+        .finger_print img {
+            width: 40%;
+        }
+        .fp_submit {
+            float: right;
+            width: 100px;
+        }
+        .fp_submit p {
+            margin: 10px 0;
+        }
 
     </style>
 </head>
@@ -162,7 +172,7 @@
         <div class="row" ng-init="init()">
             <div class="col-xs-11 col-sm-11 col-md-4 col-lg-4 col-centered">
                 <div class="well no-padding">
-                    <form class="smart-form client-form wizard" name="auth.form" novalidate ng-if="auth.stpasswordauthenticate">
+                    <form class="smart-form client-form wizard" name="auth.form" novalidate>
                         <header class="text-center">
                             <!--<h3>auth.deviceuuid</h3>-->
                             <h1>Software Token Password</h1>
@@ -178,9 +188,13 @@
                         </fieldset>
                         <footer class="text-center stp_btns">
                             <!--<spinner class="spinner" name="authSpinner" show="auth.showspinner" img-src="images/loading.gif"></spinner>-->
-                            <button id="submit" class="btn btn-primary" type="button" ng-click="generateSoftTokenWithSTPassword()">
-                                Submit
-                            </button>
+                            <div class="fp_submit">
+                                <button id="submit" class="btn btn-primary" type="button" ng-click="generateSoftTokenWithSTPassword()">
+                                    Submit
+                                </button>
+                                <p><b>OR</b></p>
+                                <a href class="finger_print" ng-click="showFingerPrint()"><img src="images/fp.png" /></a>
+                            </div>
                             <div class="reregister_div">
                                 <button id="reregister" class="btn btn-primary" type="button" ng-click="redirectRegister()">
                                     <i class="fa fa-fw fa-user-plus"></i>

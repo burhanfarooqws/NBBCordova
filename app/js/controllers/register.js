@@ -503,13 +503,6 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
         event.preventDefault();
     });
 
-    /*function success(uuid) {
-        window.alert('UDID: ' + uuid);
-    }
-    function fail(error) {
-        window.alert('error: ' + error);
-    }*/
-
     $scope.$on('$viewContentLoaded', function(){
         //alert('$viewContentLoaded');
         angular.isDefined($cordovaDevice.getDevice()); //unfortunately if the plugin is not installed calling this will cause fatal error
