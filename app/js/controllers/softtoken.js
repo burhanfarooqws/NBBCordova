@@ -52,6 +52,7 @@ function SoftTokenCtrl($state, $scope, $rootScope, $cordovaDevice, DeviceService
         function (event, notification, state) {
             if(notification.id == 1){
                 vm.generatedsofttoken = null;
+                $state.go('auth');
             }
         });
 
@@ -67,7 +68,7 @@ function SoftTokenCtrl($state, $scope, $rootScope, $cordovaDevice, DeviceService
                 vm.show = true;
                 vm.setCodeLocalNotification(vm.generatedsofttoken);
                 vm.setCodeExpireyLocalNotification();
-                $scope.$apply();
+                //$scope.$apply();
             }
             else {
                 vm.showspinner = false;
