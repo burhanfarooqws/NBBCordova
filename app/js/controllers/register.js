@@ -245,7 +245,7 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
                 placeholder: 'OTP *',
                 onKeypress: function($viewValue, $modelValue, scope, $event) {
                     console.log($event);
-                    var regex = new RegExp("[a-z]|[0-9][A-Z]");
+                    var regex = new RegExp("[a-zA-Z0-9]");
                     var key = String.fromCharCode(!$event.charCode ? $event.which : $event.charCode);
 
                     if (!regex.test(key)) {

@@ -45,7 +45,7 @@ function DeviceCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice, 
         navigator.splashscreen.hide();
 
         $state.go('start');
-        $scope.$apply();
+        //$scope.$apply();
     };
     CordovaService.ready.then( () => loadDeviceInfo() );
 }

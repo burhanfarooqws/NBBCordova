@@ -20,12 +20,12 @@ function StartCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice, D
 
     $scope.$on('$locationChangeStart', function(event, next, current){
         // Here you can take the control and call your own functions:
-        //alert('Sorry ! Back Button is disabled');
+        // alert('Sorry ! Back Button is disabled');
         // Prevent the browser default action (Going back):
         event.preventDefault();
     });
 
-    $scope.init = function ()    {
+    $scope.$on('$viewContentLoaded', function(){
         //window.alert("start");
         try {
             debugger;
@@ -33,8 +33,8 @@ function StartCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice, D
             vm.deviceInfo = $cordovaDevice.getDevice();
             vm.deviceuuid = $cordovaDevice.getUUID();
             /*if(vm.deviceuuid == null){
-                vm.deviceuuid = '126d40b744785968';
-            }*/
+             vm.deviceuuid = '126d40b744785968';
+             }*/
             //vm.deviceuuid = "6f0ff48e1d965eec";
             //window.alert(vm.deviceuuid);
             vm.deviceReady = true;
@@ -48,7 +48,7 @@ function StartCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice, D
                 debugger;
                 vm.showspinner = false;
                 $state.go('auth');
-                $scope.$apply();
+                //$scope.$apply();
                 debugger;
 
             }, function (error, status) {
@@ -57,7 +57,7 @@ function StartCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice, D
                 console.log('rejected');
                 vm.showspinner = false;
                 $state.go('register');
-                $scope.$apply();
+                //$scope.$apply();
             });
 
         }
@@ -67,6 +67,10 @@ function StartCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice, D
             $cordovaDialogs.alert(e, 'NBB');
             vm.deviceReadyStatus += ' - Plugin not installed, please run "cordova plugin add cordova-plugin-device"';
         }
+    });
+
+    $scope.init = function ()    {
+
     };
 }
 

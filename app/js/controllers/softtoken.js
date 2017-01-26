@@ -37,27 +37,35 @@ function SoftTokenCtrl($state, $scope, $rootScope, $cordovaDevice, DeviceService
         });
     };
 
+    vm.setCodeLocalNotification = function (code) {
+        $cordovaLocalNotification.clear(2, function () {
+            //alert("clear");
+        });
+        $cordovaLocalNotification.schedule({
+            id: 2,
+            title: 'NBB Soft Token',
+            text: 'Your soft token is: ' + code
+        });
+    };
+
     $rootScope.$on('$cordovaLocalNotification:trigger',
         function (event, notification, state) {
-            //alert("triggered: " + notification.id);
-            vm.generatedsofttoken = null;
+            if(notification.id == 1){
+                vm.generatedsofttoken = null;
+            }
         });
 
     vm.regenerateSoftToken = function () {
         var generatesofttoken = $rootScope.generateSoftToken;
         debugger;
-        //$rootScope.generateSoftToken = generatesofttoken;
-        //usSpinnerService.spin('spinner-1');
-        //window.alert("soft token "+ generatesofttoken);
         vm.showspinner = true;
         DeviceService.generateSoftToken(generatesofttoken).then(function (data) {
             debugger;
             if (data != null && data.data.OTP) {
-                //$cordovaDialogs.alert("generated soft token successful", "NBB");
-                //angularSpinner.stop('spinner-1');
                 vm.generatedsofttoken = data.data.OTP;
                 vm.showspinner = false;
                 vm.show = true;
+                vm.setCodeLocalNotification(vm.generatedsofttoken);
                 vm.setCodeExpireyLocalNotification();
                 $scope.$apply();
             }
@@ -115,6 +123,9 @@ function SoftTokenCtrl($state, $scope, $rootScope, $cordovaDevice, DeviceService
                             $cordovaDialogs.alert("Device deleted", "NBB").then(function () {
                                 vm.showspinner = false;
                                 $cordovaLocalNotification.clear(1, function () {
+                                    //alert("clear");
+                                });
+                                $cordovaLocalNotification.clear(2, function () {
                                     //alert("clear");
                                 });
                                 $state.go('home');
