@@ -1,0 +1,5 @@
+{
+    "AudioToolbox.framework": 1,
+    "LocalAuthentication.framework": 1,
+    "Security.framework": 1
+}
