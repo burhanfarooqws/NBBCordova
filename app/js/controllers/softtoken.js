@@ -8,7 +8,7 @@ function SoftTokenCtrl($state, $scope, $rootScope, $cordovaDevice, DeviceService
     vm.show = false;
     vm.showspinner = false;
 
-    $scope.$on('$locationChangeStart', function (event, next, current) {
+    $scope.$on('$locationChangeStart', function (event) {
         // Here you can take the control and call your own functions:
         //alert('Sorry ! Back Button is disabled');
         // Prevent the browser default action (Going back):
@@ -28,12 +28,12 @@ function SoftTokenCtrl($state, $scope, $rootScope, $cordovaDevice, DeviceService
             //alert("clear");
         });
         var now = new Date().getTime(),
-            _sec_from_now = new Date(now + 60 * 1000);
+            secFromNow = new Date(now + 60 * 1000);
         $cordovaLocalNotification.schedule({
             id: 1,
             title: 'NBB Soft Token',
             text: 'Your soft token has expired',
-            at: _sec_from_now
+            at: secFromNow
         });
     };
 
@@ -49,7 +49,7 @@ function SoftTokenCtrl($state, $scope, $rootScope, $cordovaDevice, DeviceService
     };
 
     $rootScope.$on('$cordovaLocalNotification:trigger',
-        function (event, notification, state) {
+        function (event, notification) {
             if(notification.id == 1){
                 vm.generatedsofttoken = null;
                 $state.go('auth');
@@ -72,7 +72,7 @@ function SoftTokenCtrl($state, $scope, $rootScope, $cordovaDevice, DeviceService
             }
             else {
                 vm.showspinner = false;
-                $cordovaDialogs.alert("you do not have any transaction which requires a security code, \n please initiate a transaction before generating a security code", "NBB").then(function () {
+                $cordovaDialogs.alert('you do not have any transaction which requires a security code, \nplease initiate a transaction before generating a security code', 'NBB').then(function () {
                     $state.go('auth');
                 });
             }
@@ -89,16 +89,16 @@ function SoftTokenCtrl($state, $scope, $rootScope, $cordovaDevice, DeviceService
                     friendlyMessage = 'Invalid soft token password';
                 }
                 if (error.data.Message === 'NoOTPAvailable') {
-                    friendlyMessage = "you do not have any transaction which requires a security code, \n please initiate a transaction before generating a security code";
+                    friendlyMessage = 'you do not have any transaction which requires a security code, \nplease initiate a transaction before generating a security code';
                 }
                 if (error.data.Message === 'ServerError') {
-                    friendlyMessage = "you do not have any transaction which requires a security code, \n please initiate a transaction before generating a security code";
+                    friendlyMessage = 'you do not have any transaction which requires a security code, \nplease initiate a transaction before generating a security code';
                 }
                 $cordovaDialogs.alert(friendlyMessage, 'NBB').then(function () {
                     $state.go('auth');
                 });
             } else {
-                $cordovaDialogs.alert("you do not have any transaction which requires a security code, \n please initiate a transaction before generating a security code", 'NBB').then(function () {
+                $cordovaDialogs.alert('you do not have any transaction which requires a security code, \nplease initiate a transaction before generating a security code', 'NBB').then(function () {
                     $state.go('auth');
                 });
             }
@@ -115,13 +115,10 @@ function SoftTokenCtrl($state, $scope, $rootScope, $cordovaDevice, DeviceService
                     vm.showspinner = true;
                     angular.isDefined($cordovaDevice.getDevice()); //unfortunately if the plugin is not installed calling this will cause fatal error
                     var deviceid = $cordovaDevice.getUUID();
-                    /*if (deviceid == null) {
-                        deviceid = '0123456789';
-                    }*/
                     DeviceService.deleteDevice(deviceid).then(function (data) {
                         debugger;
                         if (data != null && data.data.IsExisting && data.data.IsDeleted) {
-                            $cordovaDialogs.alert("Device deleted", "NBB").then(function () {
+                            $cordovaDialogs.alert('Device deleted', 'NBB').then(function () {
                                 vm.showspinner = false;
                                 $cordovaLocalNotification.clear(1, function () {
                                     //alert("clear");
@@ -134,15 +131,16 @@ function SoftTokenCtrl($state, $scope, $rootScope, $cordovaDevice, DeviceService
                         }
                         else {
                             vm.showspinner = false;
-                            $cordovaDialogs.alert("Delete failed", "NBB");
+                            $cordovaDialogs.alert('Delete failed', 'NBB');
                         }
                         $scope.$apply();
-                    }, function (error, status) {
+                    }, function (error) {
                         //vm.Isdevicefound = false;
                         debugger;
                         vm.showspinner = false;
-                        $cordovaDialogs.alert("Device not found", "NBB");
+                        $cordovaDialogs.alert('Device not found', 'NBB');
                         console.log('rejected');
+                        console.log(error);
                         $scope.$apply();
                     });
                 }

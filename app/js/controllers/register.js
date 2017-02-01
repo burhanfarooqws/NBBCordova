@@ -11,20 +11,6 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
         tncchecked: false
     };
 
-    $scope.validateInvalid = function($event) {
-
-        alert('www');
-
-        var regex = new RegExp("[a-z]|[0-9][A-Z]");
-
-        var key = String.fromCharCode(!$event.charCode ? $event.which : $event.charCode);
-
-        if (!regex.test(key)) {
-            $event.preventDefault();
-            return false;
-        }
-    };
-
     vm.registrationFields = [
         {
             key: 'user_id',
@@ -34,7 +20,7 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
                 placeholder: 'User ID *',
                 onKeypress: function($viewValue, $modelValue, scope, $event) {
                     console.log($event);
-                    var regex = new RegExp("[a-zA-Z0-9]");
+                    var regex = new RegExp('[a-zA-Z0-9]');
                     var key = String.fromCharCode(!$event.charCode ? $event.which : $event.charCode);
 
                     if (!regex.test(key)) {
@@ -90,8 +76,8 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
             templateOptions: {
                 type: 'number',
                 placeholder: 'Account Number *',
-                pattern: "[0-9]*",
-                inputmode: "numeric",
+                pattern: '[0-9]*',
+                inputmode: 'numeric',
                 required: true,
                 classicon: 'icon-append fa fa-briefcase',
                 friendlyname: 'Account Number'
@@ -120,8 +106,8 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
                 type: 'number',
                 placeholder: 'ATM Card Number *',
                 required: true,
-                pattern: "[0-9]*",
-                inputmode: "numeric",
+                pattern: '[0-9]*',
+                inputmode: 'numeric',
                 classicon: 'icon-append fa fa-credit-card',
                 friendlyname: 'ATM Card Number'
             },
@@ -131,7 +117,7 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
                         var value = modelValue || viewValue;
                         return /^\d+$/.test(value);
                     },
-                    message: '"only digits allowed"'
+                    message: 'only digits allowed'
                 }
             },
             ngModelElAttrs: {
@@ -158,8 +144,8 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
                 type: 'number',
                 placeholder: 'ATM PIN *',
                 required: true,
-                pattern: "[0-9]*",
-                inputmode: "numeric",
+                pattern: '[0-9]*',
+                inputmode: 'numeric',
                 classicon: 'icon-append fa fa-lock',
                 friendlyname: 'ATM PIN'
             },
@@ -177,7 +163,7 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
                         var value = modelValue || viewValue;
                         return /^\d+$/.test(value);
                     },
-                    message: '"only digits allowed"'
+                    message: 'only digits allowed'
                 }
             },
             validation: {
@@ -201,8 +187,8 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
                 type: 'number',
                 placeholder: 'Soft Token Password *',
                 required: true,
-                pattern: "[0-9]*",
-                inputmode: "numeric",
+                pattern: '[0-9]*',
+                inputmode: 'numeric',
                 classicon: 'icon-append fa fa-lock',
                 friendlyname: 'Soft Token Password'
             },
@@ -220,7 +206,7 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
                         var value = modelValue || viewValue;
                         return /^\d+$/.test(value);
                     },
-                    message: '"only digits allowed"'
+                    message: 'only digits allowed'
                 }
             },
             validation: {
@@ -245,7 +231,7 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
                 placeholder: 'OTP *',
                 onKeypress: function($viewValue, $modelValue, scope, $event) {
                     console.log($event);
-                    var regex = new RegExp("[a-zA-Z0-9]");
+                    var regex = new RegExp('[a-zA-Z0-9]');
                     var key = String.fromCharCode(!$event.charCode ? $event.which : $event.charCode);
 
                     if (!regex.test(key)) {
@@ -290,14 +276,6 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
         vm.deviceregister.OTP =  vm.registration.otp;
         vm.deviceregister.Password = vm.registration.password;
         vm.deviceregister.STPassword = vm.registration.stpassword;
-
-            /*vm.registration.user_id;
-            vm.registration.password;
-            vm.registration.acctnumber;
-            vm.registration.atmcardnumber;
-            vm.registration.atmpin;
-            vm.registration.stpassword;
-            vm.registration.otp;*/
     };
 
     function onSubmit() {
@@ -306,7 +284,6 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
         if (vm.form.$valid) {
             vm.setDeviceRegistrationObject();
             $scope.registerDeviceWithUser();
-            //alert('Form Submitted.');
         }
     }
 
@@ -317,7 +294,6 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
         if (vm.form.$valid) {
             vm.setDeviceRegistrationObject();
             $scope.sendOTP();
-            //alert('Form Submitted.');
         }
     }
 
@@ -333,37 +309,22 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
     vm.IsFingerPrintSupport = false;
     vm.IsAuthenticatedWithFingerPrint = false;
     vm.Isdevicefound = true;
-    vm.PubKeyB64 = "n3/kUYfBDZyks/16oZAvBD4lAVboluOiW2HW26n5GDPCaE48ErTyF1DsLx2jm9Y3clApuc0lsUgU96nu1rWdTtvDN6OnNDrJQP20Wd9rG+Z/luurReJT+H+HUD9nwDGKEeiz2EYXNgyylOCH89XNYk6U5V5GsSxXvRkadlnfjj0=";
-    vm.PubKeyExp = "AQAB";
+    vm.PubKeyB64 = 'n3/kUYfBDZyks/16oZAvBD4lAVboluOiW2HW26n5GDPCaE48ErTyF1DsLx2jm9Y3clApuc0lsUgU96nu1rWdTtvDN6OnNDrJQP20Wd9rG+Z/luurReJT+H+HUD9nwDGKEeiz2EYXNgyylOCH89XNYk6U5V5GsSxXvRkadlnfjj0=';
+    vm.PubKeyExp = 'AQAB';
     vm.deviceregister = {
-        "AccountNumber": null,
-        "AtmCardNumber": null,
-        "AtmPin": null,
-        "UserId": null,
-        "DeviceId": null,
-        "OTP": null,
-        "Password": null,
-        "STPassword": null,
-        "UseFingerPrint": null,
-        "SendOTP": null,
-        "EncryptedPassword": null
+        'AccountNumber': null,
+        'AtmCardNumber': null,
+        'AtmPin': null,
+        'UserId': null,
+        'DeviceId': null,
+        'OTP': null,
+        'Password': null,
+        'STPassword': null,
+        'UseFingerPrint': null,
+        'SendOTP': null,
+        'EncryptedPassword': null
     };
-    /*vm.deviceregister = {
-        "AccountNumber": "1111",
-        "AtmCardNumber": "1111",
-        "AtmPin": "1111",
-        "UserId": "sburhan",
-        "DeviceId": null,
-        "OTP": "988705",
-        "Password": "2wsx'WSX",
-        "STPassword": 123456,
-        "UseFingerPrint": null,
-        "SendOTP": null,
-        "EncryptedPassword": null
-    };*/
     vm.showspinner = false;
-    /*vm.tncchecked = false;
-    vm.sendOTPText = 'Send OTP';*/
     vm.clientEncrypt = function (value) {
         var key = CryptoJS.enc.Utf8.parse('8080808080808080');
         var iv = CryptoJS.enc.Utf8.parse('8080808080808080');
@@ -377,126 +338,106 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
         debugger;
         return _encrypted.toString();
     };
+    vm.serverEncrypt = function (value) {
+        var rsa = new RSAKey();
+        var k = Convert(vm.PubKeyB64);
+        //var m = Convert(vm.PubKeyExp);
+        rsa.setPublic(k, '10001');
+        var res = rsa.encrypt(value);
+        return hex2b64(res);
+    };
 
     $scope.sendOTP = function(){
         debugger;
-        //$scope.mainform.userid.$validate();
-        //alert("send OTP");
-        //vm.deviceregister.SendOTP = true;
         vm.sendOTPText = 'Resend OTP';
         vm.showspinner = true;
-        var rsa = new RSAKey();
-        var k = Convert(vm.PubKeyB64);
-        var m = Convert(vm.PubKeyExp);
-        rsa.setPublic(k, '10001');
-        var res = rsa.encrypt(vm.deviceregister.Password);
-        vm.deviceregister.EncryptedPassword = hex2b64(res);
 
         var deviceregister = {
-            "AccountNumber": vm.clientEncrypt(vm.deviceregister.AccountNumber),
-            "AtmCardNumber": vm.clientEncrypt(vm.deviceregister.AtmCardNumber),
-            "AtmPin": vm.clientEncrypt(vm.deviceregister.AtmPin),
-            "UserId": vm.deviceregister.UserId,
-            "DeviceId": vm.deviceuuid,
-            "OTP": null,
-            "Password": vm.deviceregister.EncryptedPassword,
-            "STPassword": vm.deviceregister.STPassword,
-            "SendOTP": true,
-            "UseFingerPrint": vm.IsFingerPrintSupport
+            'AccountNumber': vm.clientEncrypt(vm.deviceregister.AccountNumber),
+            'AtmCardNumber': vm.clientEncrypt(vm.deviceregister.AtmCardNumber),
+            'AtmPin': vm.serverEncrypt(vm.deviceregister.AtmPin),
+            'UserId': vm.deviceregister.UserId,
+            'DeviceId': vm.deviceuuid,
+            'OTP': null,
+            'Password': vm.serverEncrypt(vm.deviceregister.Password),
+            'STPassword': vm.deviceregister.STPassword,
+            'SendOTP': true,
+            'UseFingerPrint': vm.IsFingerPrintSupport
         };
 
         debugger;
-        //usSpinnerService.spin('spinner-1');
         DeviceService.registerDevice(deviceregister).then(
             function (data) {
                 debugger;
                 if (data != null && data.data.AuthenticationSuccess) {
-                    $cordovaDialogs.alert("OTP Send", 'NBB');
-
+                    $cordovaDialogs.alert('OTP Send', 'NBB');
                     vm.showspinner = false;
-                    //$state.go('auth');
-                    //vm.deviceregister.SendOTP = true;
-                    $scope.$apply();
-
                 }
                 else {
-                    $cordovaDialogs.alert("unable to send OTP", 'NBB');
-                    //vm.deviceregister.SendOTP = false;
+                    $cordovaDialogs.alert('unable to send OTP', 'NBB');
                 }
                 vm.showspinner = false;
-                $scope.$apply();
+                //$scope.$apply();
             }, function (error) {
                 debugger;
                 if (error.status == 400) {
                     $cordovaDialogs.alert(error.data.Message, 'NBB');
                 } else {
-                    $cordovaDialogs.alert("error sending OTP", 'NBB');
+                    $cordovaDialogs.alert('error sending OTP', 'NBB');
                 }
                 console.log('rejected');
                 vm.showspinner = false;
-                $scope.$apply();
+                //$scope.$apply();
             });
     };
 
     $scope.registerDeviceWithUser = function() {
         debugger;
-        /*if(!vm.tncchecked){
-            $cordovaDialogs.alert("please accept terms & condition.", 'NBB');
-            return;
-        }*/
         vm.showspinner = true;
-        var rsa = new RSAKey();
-        var k = Convert(vm.PubKeyB64);
-        var m = Convert(vm.PubKeyExp);
-        rsa.setPublic(k, '10001');
-        var res = rsa.encrypt(vm.deviceregister.Password);
-        vm.deviceregister.EncryptedPassword = hex2b64(res);
 
         var deviceregister = {
-            "AccountNumber": vm.clientEncrypt(vm.deviceregister.AccountNumber),
-            "AtmCardNumber": vm.clientEncrypt(vm.deviceregister.AtmCardNumber),
-            "AtmPin": vm.clientEncrypt(vm.deviceregister.AtmPin),
-            "UserId": vm.deviceregister.UserId,
-            "DeviceId": vm.deviceuuid,
-            "OTP": vm.deviceregister.OTP,
-            "Password": vm.deviceregister.EncryptedPassword,
-            "STPassword": vm.deviceregister.STPassword,
-            "SendOTP": null,
-            "UseFingerPrint": vm.IsFingerPrintSupport
+            'AccountNumber': vm.clientEncrypt(vm.deviceregister.AccountNumber),
+            'AtmCardNumber': vm.clientEncrypt(vm.deviceregister.AtmCardNumber),
+            'AtmPin': vm.serverEncrypt(vm.deviceregister.AtmPin),
+            'UserId': vm.deviceregister.UserId,
+            'DeviceId': vm.deviceuuid,
+            'OTP': vm.deviceregister.OTP,
+            'Password': vm.serverEncrypt(vm.deviceregister.Password),
+            'STPassword': vm.deviceregister.STPassword,
+            'SendOTP': null,
+            'UseFingerPrint': vm.IsFingerPrintSupport
         };
 
         debugger;
-        //usSpinnerService.spin('spinner-1');
         DeviceService.registerDevice(deviceregister).then(
             function (data) {
                 debugger;
                 if (data != null && data.data.AuthenticationSuccess) {
-                    $cordovaDialogs.alert("register user successful", 'NBB').then(function () {
+                    $cordovaDialogs.alert('register user successful', 'NBB').then(function () {
                         vm.showspinner = false;
                         $state.go('auth');
-                        $scope.$apply();
                     });
                 }
                 else {
-                    $cordovaDialogs.alert("unable to register device", 'NBB');
+                    $cordovaDialogs.alert('unable to register device', 'NBB');
                 }
                 vm.showspinner = false;
-                $scope.$apply();
+                //$scope.$apply();
             }, function (error) {
                 debugger;
                 if (error.status == 400) {
                     $cordovaDialogs.alert(error.data.Message, 'NBB');
                 } else {
-                    $cordovaDialogs.alert("unable to register device", 'NBB');
+                    $cordovaDialogs.alert('unable to register device', 'NBB');
                 }
                 console.log('rejected');
                 vm.showspinner = false;
-                $scope.$apply();
+                //$scope.$apply();
             });
 
     };
 
-    $scope.$on('$locationChangeStart', function(event, next, current){
+    $scope.$on('$locationChangeStart', function(event){
         // Here you can take the control and call your own functions:
         //alert('Sorry ! Back Button is disabled');
         // Prevent the browser default action (Going back):
@@ -504,34 +445,25 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
     });
 
     $scope.$on('$viewContentLoaded', function(){
-        //alert('$viewContentLoaded');
         angular.isDefined($cordovaDevice.getDevice()); //unfortunately if the plugin is not installed calling this will cause fatal error
         vm.deviceInfo = $cordovaDevice.getDevice();
         vm.deviceuuid = $cordovaDevice.getUUID();
         var platform = $cordovaDevice.getPlatform();
-        //$scope.$apply();
-        /*if(vm.deviceuuid == null){
-            vm.deviceuuid = '126d40b744785968';
-            platform = "Android";
-        }*/
 
-        /*alert('UUID: ' + vm.deviceuuid);
-        window.plugins.uniqueDeviceID.get(success, fail);*/
-
-        //vm.showspinner = true;
         vm.IsFingerPrintSupport = false;
-        if (platform == "iOS") {
+        if (platform == 'iOS') {
             $cordovaTouchID.checkSupport().then(function() {
                 // success, TouchID supported
                 vm.IsFingerPrintSupport = true;
             }, function (error) {
                 //alert(error); // TouchID not supported
+                console.log(error);
             });
         }
 
-        if (platform == "Android") {
-            var client_id = "Your client ID";
-            var client_secret = "A very secret client secret (once per device)";
+        if (platform == 'Android') {
+            //var client_id = 'Your client ID';
+            //var client_secret = 'A very secret client secret (once per device)';
 
             FingerprintAuth.isAvailable(function (result) {
                 if (result.isAvailable) {
@@ -542,12 +474,13 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
                 }
             }, function (message) {
                 vm.IsFingerPrintSupport = false;
-                //window.alert("Cannot detect fingerprint device : " + message);
+                console.log(message);
+                //window.alert('Cannot detect fingerprint device : ' + message);
             });
         }
 
 
-        $scope.$apply();
+        //$scope.$apply();
     });
 }
 

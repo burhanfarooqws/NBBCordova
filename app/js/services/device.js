@@ -9,7 +9,7 @@ function DeviceService($http, $q) {
     //debugger;
     service.findDevice = function(deviceid) {
         var deferred = $q.defer();
-        debugger;
+        debugger; // eslint-disable-line
         return $http({
             method: 'POST',
             data: {DeviceId: deviceid},
@@ -31,7 +31,7 @@ function DeviceService($http, $q) {
     //debugger;
     service.deleteDevice = function(deviceid) {
         var deferred = $q.defer();
-        debugger;
+        debugger; // eslint-disable-line
         return $http({
             method: 'POST',
             data: {DeviceId: deviceid},
@@ -39,13 +39,13 @@ function DeviceService($http, $q) {
             headers: { 'Content-Type': 'application/json' }
         }).then(function (response) {
             // promise is fulfilled
-            debugger;
+            debugger; // eslint-disable-line
             deferred.resolve(response);
             // promise is returned
             return deferred.promise;
         }, function (response) {
             // the following line rejects the promise
-            debugger;
+            debugger; // eslint-disable-line
             deferred.reject(response);
             // promise is returned
             return deferred.promise;
@@ -55,7 +55,7 @@ function DeviceService($http, $q) {
     //debugger;
     service.registerDevice = function(data) {
         var deferred = $q.defer();
-        debugger;
+        debugger; // eslint-disable-line
         return $http({
             method: 'POST',
             data: data,
@@ -63,13 +63,13 @@ function DeviceService($http, $q) {
             headers: { 'Content-Type': 'application/json' }
         }).then(function (response) {
             // promise is fulfilled
-            debugger;
+            debugger; // eslint-disable-line
             deferred.resolve(response);
             // promise is returned
             return deferred.promise;
         }, function (response) {
             // the following line rejects the promise
-            debugger;
+            debugger; // eslint-disable-line
             deferred.reject(response);
             // promise is returned
             return deferred.promise;
@@ -79,7 +79,7 @@ function DeviceService($http, $q) {
     //debugger;
     service.sendOTPDevice = function(data) {
         var deferred = $q.defer();
-        debugger;
+        debugger; // eslint-disable-line
         return $http({
             method: 'POST',
             data: data,
@@ -87,13 +87,13 @@ function DeviceService($http, $q) {
             headers: { 'Content-Type': 'application/json' }
         }).then(function (response) {
             // promise is fulfilled
-            debugger;
+            debugger; // eslint-disable-line
             deferred.resolve(response);
             // promise is returned
             return deferred.promise;
         }, function (response) {
             // the following line rejects the promise
-            debugger;
+            debugger; // eslint-disable-line
             deferred.reject(response);
             // promise is returned
             return deferred.promise;

@@ -1,4 +1,4 @@
-function OnRun($rootScope, AppSettings, formlyConfig, formlyValidationMessages) {
+function OnRun($rootScope, AppSettings, formlyConfig) {
     'ngInject';
 
     // change page title based on state
@@ -22,19 +22,19 @@ function OnRun($rootScope, AppSettings, formlyConfig, formlyValidationMessages) 
     formlyConfig.setWrapper({
         name: 'inputWrapper',
         types: ['customInput'],
-        template: "<section><label class='input'><i class='{{to.classicon}}'></i><formly-transclude></formly-transclude></label></section>",
+        template: '<section><label class="input"><i class="{{to.classicon}}"></i><formly-transclude></formly-transclude></label></section>',
     });
 
     formlyConfig.setWrapper({
             name: 'passwordWrapper',
             types: ['customPassword'],
-            template: "<section><label class='input'><i class='{{to.classicon}}'></i><formly-transclude></formly-transclude></label></section>",
+            template: '<section><label class="input"><i class="{{to.classicon}}"></i><formly-transclude></formly-transclude></label></section>',
         });
 
     formlyConfig.setWrapper({
         name: 'otpWrapper',
         types: ['customOTPInput'],
-        template: "<section><label class='input width_60perc'><i class='{{to.classicon}}'></i><formly-transclude></formly-transclude></label></section>",
+        template: '<section><label class="input width_60perc"><i class="{{to.classicon}}"></i><formly-transclude></formly-transclude></label></section>',
     });
 
     formlyConfig.setType({

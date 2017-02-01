@@ -1,7 +1,7 @@
 function PhoneInput($filter, $browser) {
     'ngInject';
     return {
-        restrict: "EA",
+        restrict: 'EA',
         require: 'ngModel',
         link: function($scope, $element, $attrs, ngModelCtrl) {
             var listener = function() {

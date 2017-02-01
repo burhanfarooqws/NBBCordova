@@ -15,8 +15,8 @@ function AuthCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice, De
                 type: 'number',
                 placeholder: 'Soft Token Password *',
                 required: true,
-                pattern: "[0-9]*",
-                inputmode: "numeric",
+                pattern: '[0-9]*',
+                inputmode: 'numeric',
                 classicon: 'icon-append fa fa-lock',
                 friendlyname: 'Soft Token Password'
             },
@@ -34,7 +34,7 @@ function AuthCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice, De
                         var value = modelValue || viewValue;
                         return /^\d+$/.test(value);
                     },
-                    message: '"only digits allowed"'
+                    message: 'only digits allowed'
                 }
             },
             validation: {
@@ -58,11 +58,11 @@ function AuthCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice, De
         if (IsFP) {
             var deviceuuid = $cordovaDevice.getUUID();
             $rootScope.generateSoftToken = {
-                "AutoPassword": deviceuuid + "true" + deviceuuid,
-                "DeviceId": deviceuuid,
-                "IsAuthenticatedWithFingerPrint": vm.IsAuthenticatedWithFingerPrint,
-                "IsFingerPrint": vm.IsFingerPrintSupport,
-                "Password": null
+                'AutoPassword': deviceuuid + 'true' + deviceuuid,
+                'DeviceId': deviceuuid,
+                'IsAuthenticatedWithFingerPrint': vm.IsAuthenticatedWithFingerPrint,
+                'IsFingerPrint': vm.IsFingerPrintSupport,
+                'Password': null
             };
         }
         else {
@@ -76,11 +76,11 @@ function AuthCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice, De
         if (vm.form.$valid) {
             var deviceuuid = $cordovaDevice.getUUID();
             $rootScope.generateSoftToken = {
-                "AutoPassword": null,
-                "DeviceId": deviceuuid,
-                "IsAuthenticatedWithFingerPrint": false,
-                "IsFingerPrint": false,
-                "Password": vm.stpassword
+                'AutoPassword': null,
+                'DeviceId': deviceuuid,
+                'IsAuthenticatedWithFingerPrint': false,
+                'IsFingerPrint': false,
+                'Password': vm.stpassword
             };
             $state.go('gen');
         }
@@ -98,7 +98,7 @@ function AuthCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice, De
             });
     };
 
-    $scope.$on('$locationChangeStart', function (event, next, current) {
+    $scope.$on('$locationChangeStart', function (event) {
         // Here you can take the control and call your own functions:
         //alert('Sorry ! Back Button is disabled');
         // Prevent the browser default action (Going back):
@@ -109,7 +109,7 @@ function AuthCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice, De
         try {
             debugger;
             var platform = $cordovaDevice.getPlatform();
-            if (platform == "iOS") {
+            if (platform == 'iOS') {
                 $cordovaTouchID.checkSupport().then(function () {
                     // success, TouchID supported
                     vm.IsAuthenticatedWithFingerPrint = true;
@@ -117,17 +117,18 @@ function AuthCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice, De
                 }, function (error) {
                     vm.IsFingerPrintSupport = false;
                     vm.IsAuthenticatedWithFingerPrint = false;
+                    console.log(error);
                 });
             }
 
-            if (platform == "Android") {
+            if (platform == 'Android') {
                 try {
-                    var dt = new Date().getTime();
+                    /*var dt = new Date().getTime();
                     var encryptConfig = {
-                        clientId: "myAppName" + dt.toString(),
-                        username: "currentUser" + dt.toString(),
-                        password: "currentUserPassword" + dt.toString()
-                    };
+                        clientId: 'myAppName' + dt.toString(),
+                        username: 'currentUser' + dt.toString(),
+                        password: 'currentUserPassword' + dt.toString()
+                    };*/
                     FingerprintAuth.isAvailable(function (result) {
                         if (result.isAvailable) {
                             if (result.hasEnrolledFingerprints) {
@@ -167,8 +168,8 @@ function AuthCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice, De
             try {
                 debugger;
                 var platform = $cordovaDevice.getPlatform();
-                if (platform == "iOS") {
-                    $cordovaTouchID.authenticate("NBB Mobile Authentication").then(function () {
+                if (platform == 'iOS') {
+                    $cordovaTouchID.authenticate('NBB Mobile Authentication').then(function () {
                         // success
                         vm.generateSoftToken(true);
                         $state.go('gen');
@@ -177,13 +178,13 @@ function AuthCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice, De
                         vm.IsAuthenticatedWithFingerPrint = false;
                     });
                 }
-                if (platform == "Android") {
+                if (platform == 'Android') {
                     try {
                         var dt = new Date().getTime();
                         var encryptConfig = {
-                            clientId: "myAppName" + dt.toString(),
-                            username: "currentUser" + dt.toString(),
-                            password: "currentUserPassword" + dt.toString()
+                            clientId: 'myAppName' + dt.toString(),
+                            username: 'currentUser' + dt.toString(),
+                            password: 'currentUserPassword' + dt.toString()
                         };
                         FingerprintAuth.encrypt(encryptConfig, function (result) {
                             if (result.withFingerprint) {
@@ -212,7 +213,7 @@ function AuthCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice, De
                 console.log(e);
             }
         } else {
-            $cordovaDialogs.alert("Finger print authentication not supported", 'NBB').then(function () {
+            $cordovaDialogs.alert('Finger print authentication not supported', 'NBB').then(function () {
 
             });
         }

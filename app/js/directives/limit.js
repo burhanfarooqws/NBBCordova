@@ -1,10 +1,10 @@
 function LimitDirective() {
 
     return {
-        restrict: "EA",
+        restrict: 'EA',
         link: function(scope, elem, attrs) {
             var limit = parseInt(attrs.limitDirective);
-            angular.element(elem).on("keypress", function(e) {
+            angular.element(elem).on('keypress', function(e) {
                 if (this.value.length == limit) e.preventDefault(); return false;
             });
         }

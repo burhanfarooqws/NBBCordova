@@ -18,7 +18,7 @@ function StartCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice, D
     vm.Isdevicefound = true;
     vm.showspinner = false;
 
-    $scope.$on('$locationChangeStart', function(event, next, current){
+    $scope.$on('$locationChangeStart', function(event){
         // Here you can take the control and call your own functions:
         // alert('Sorry ! Back Button is disabled');
         // Prevent the browser default action (Going back):
@@ -51,10 +51,11 @@ function StartCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice, D
                 //$scope.$apply();
                 debugger;
 
-            }, function (error, status) {
+            }, function (error) {
                 vm.Isdevicefound = false;
                 debugger;
                 console.log('rejected');
+                console.log(error);
                 vm.showspinner = false;
                 $state.go('register');
                 //$scope.$apply();

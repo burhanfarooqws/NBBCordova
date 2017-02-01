@@ -1,4 +1,4 @@
-function DeviceCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice, DeviceService, $cordovaDialogs) {
+function DeviceCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice) {
     'ngInject';
 
     // ViewModel
@@ -17,7 +17,7 @@ function DeviceCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice, 
     vm.IsAuthenticatedWithFingerPrint = false;
     vm.Isdevicefound = true;
 
-    $scope.$on('$locationChangeStart', function(event, next, current){
+    $scope.$on('$locationChangeStart', function(event){
         // Here you can take the control and call your own functions:
         //alert('Sorry ! Back Button is disabled');
         // Prevent the browser default action (Going back):
