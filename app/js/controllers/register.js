@@ -279,7 +279,7 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
     };
 
     function onSubmit() {
-        debugger;
+         debugger; // eslint-disable-line
         vm.form.$submitted = true;
         if (vm.form.$valid) {
             vm.setDeviceRegistrationObject();
@@ -288,7 +288,7 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
     }
 
     function onSendOTP() {
-        debugger;
+         debugger; // eslint-disable-line
         vm.registration.tncchecked = false;
         vm.form.$submitted = true;
         if (vm.form.$valid) {
@@ -335,7 +335,7 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
                 mode: CryptoJS.mode.CBC,
                 padding: CryptoJS.pad.Pkcs7
             });
-        debugger;
+         debugger; // eslint-disable-line
         return _encrypted.toString();
     };
     vm.serverEncrypt = function (value) {
@@ -348,7 +348,7 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
     };
 
     $scope.sendOTP = function(){
-        debugger;
+         debugger; // eslint-disable-line
         vm.sendOTPText = 'Resend OTP';
         vm.showspinner = true;
 
@@ -365,10 +365,10 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
             'UseFingerPrint': vm.IsFingerPrintSupport
         };
 
-        debugger;
+         debugger; // eslint-disable-line
         DeviceService.registerDevice(deviceregister).then(
             function (data) {
-                debugger;
+                 debugger; // eslint-disable-line
                 if (data != null && data.data.AuthenticationSuccess) {
                     $cordovaDialogs.alert('OTP Send', 'NBB');
                     vm.showspinner = false;
@@ -379,7 +379,7 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
                 vm.showspinner = false;
                 //$scope.$apply();
             }, function (error) {
-                debugger;
+                 debugger; // eslint-disable-line
                 if (error.status == 400) {
                     $cordovaDialogs.alert(error.data.Message, 'NBB');
                 } else {
@@ -392,7 +392,7 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
     };
 
     $scope.registerDeviceWithUser = function() {
-        debugger;
+         debugger; // eslint-disable-line
         vm.showspinner = true;
 
         var deviceregister = {
@@ -408,10 +408,10 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
             'UseFingerPrint': vm.IsFingerPrintSupport
         };
 
-        debugger;
+         debugger; // eslint-disable-line
         DeviceService.registerDevice(deviceregister).then(
             function (data) {
-                debugger;
+                 debugger; // eslint-disable-line
                 if (data != null && data.data.AuthenticationSuccess) {
                     $cordovaDialogs.alert('register user successful', 'NBB').then(function () {
                         vm.showspinner = false;
@@ -424,7 +424,7 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
                 vm.showspinner = false;
                 //$scope.$apply();
             }, function (error) {
-                debugger;
+                 debugger; // eslint-disable-line
                 if (error.status == 400) {
                     $cordovaDialogs.alert(error.data.Message, 'NBB');
                 } else {

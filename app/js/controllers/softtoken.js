@@ -58,10 +58,10 @@ function SoftTokenCtrl($state, $scope, $rootScope, $cordovaDevice, DeviceService
 
     vm.regenerateSoftToken = function () {
         var generatesofttoken = $rootScope.generateSoftToken;
-        debugger;
+         debugger; // eslint-disable-line
         vm.showspinner = true;
         DeviceService.generateSoftToken(generatesofttoken).then(function (data) {
-            debugger;
+             debugger; // eslint-disable-line
             if (data != null && data.data.OTP) {
                 vm.generatedsofttoken = data.data.OTP;
                 vm.showspinner = false;
@@ -78,7 +78,7 @@ function SoftTokenCtrl($state, $scope, $rootScope, $cordovaDevice, DeviceService
             }
             $scope.$apply();
         }, function (error) {
-            debugger;
+             debugger; // eslint-disable-line
             vm.showspinner = false;
             if (error.status == 400) {
                 var friendlyMessage = null;
@@ -110,13 +110,13 @@ function SoftTokenCtrl($state, $scope, $rootScope, $cordovaDevice, DeviceService
         $cordovaDialogs.confirm('Are you sure you want to delete?', 'NBB')
             .then(function (buttonIndex) {
                 // no button = 0, 'OK' = 1, 'Cancel' = 2
-                debugger;
+                 debugger; // eslint-disable-line
                 if (buttonIndex == 1) {
                     vm.showspinner = true;
                     angular.isDefined($cordovaDevice.getDevice()); //unfortunately if the plugin is not installed calling this will cause fatal error
                     var deviceid = $cordovaDevice.getUUID();
                     DeviceService.deleteDevice(deviceid).then(function (data) {
-                        debugger;
+                         debugger; // eslint-disable-line
                         if (data != null && data.data.IsExisting && data.data.IsDeleted) {
                             $cordovaDialogs.alert('Device deleted', 'NBB').then(function () {
                                 vm.showspinner = false;
@@ -136,7 +136,7 @@ function SoftTokenCtrl($state, $scope, $rootScope, $cordovaDevice, DeviceService
                         $scope.$apply();
                     }, function (error) {
                         //vm.Isdevicefound = false;
-                        debugger;
+                         debugger; // eslint-disable-line
                         vm.showspinner = false;
                         $cordovaDialogs.alert('Device not found', 'NBB');
                         console.log('rejected');

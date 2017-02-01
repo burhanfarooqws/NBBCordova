@@ -29,12 +29,12 @@ function DeviceCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice) 
     });
 
     let loadDeviceInfo = () => {
-        debugger;
+         debugger; // eslint-disable-line
         vm.deviceReady = true;
         vm.deviceReadyStatus = 'Device Ready';
         //window.alert(vm.deviceReadyStatus);
 
-        debugger;
+         debugger; // eslint-disable-line
         angular.isDefined($cordovaDevice.getDevice()); //unfortunately if the plugin is not installed calling this will cause fatal error
         vm.deviceInfo = $cordovaDevice.getDevice();
         vm.deviceuuid = $cordovaDevice.getUUID();
