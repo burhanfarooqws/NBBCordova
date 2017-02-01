@@ -18,7 +18,7 @@
 		</data>
 		<key>CDVLaunchScreen.storyboardc/01J-lp-oVM-view-Ze5-6b-2t3.nib</key>
 		<data>
-		dzgrYtM+2v5L0LjPBCa1f/TWkZo=
+		rXtudrllhUE8MTIOclbIUJ3UhRo=
 		</data>
 		<key>CDVLaunchScreen.storyboardc/Info.plist</key>
 		<data>
@@ -26,7 +26,7 @@
 		</data>
 		<key>CDVLaunchScreen.storyboardc/UIViewController-01J-lp-oVM.nib</key>
 		<data>
-		YaHLWdpBKy8h+AU4/3xct8b692E=
+		q8zCX7rM/5Qt33++Ex1zugyBv70=
 		</data>
 		<key>CDVNotification.bundle/beep.wav</key>
 		<data>
@@ -34,19 +34,15 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		s1hqmXKIgGe3BRR0IxWi3N3JFb8=
+		8rORRiu/c06rh90ArNUr+GJvbr8=
 		</data>
 		<key>LaunchImage-700-Landscape@2x~ipad.png</key>
 		<data>
 		eNI4KTOiEbs0+xG9iiRoQYUZQwI=
 		</data>
-		<key>LaunchImage-Portrait@2x~ipad.png</key>
-		<data>
-		611/NnlqLeR7yboDnOzGG6DPQ8Y=
-		</data>
 		<key>MainViewController.nib</key>
 		<data>
-		u2ZUwNnfAEEUfr2OZdTXlUT4ios=
+		Ubsng5zIdJUN5jrZiy9+3k4Iouk=
 		</data>
 		<key>PkgInfo</key>
 		<data>
@@ -58,11 +54,11 @@
 		</data>
 		<key>config.xml</key>
 		<data>
-		32+S3i0VtNRlPPVjEp9hTEcbKf0=
+		oH3CPWDAsVVcXJ8PTq2Mb0IlECs=
 		</data>
 		<key>embedded.mobileprovision</key>
 		<data>
-		0lT0IdCsxr1Uc2seq4OW2JzxALE=
+		oW/6LSzwMbnztXhkboaWmy6bUkk=
 		</data>
 		<key>www/cordova-js-src/exec.js</key>
 		<data>
@@ -78,7 +74,7 @@
 		</data>
 		<key>www/cordova_plugins.js</key>
 		<data>
-		lttA0Z/MnTS9ruiPLVOAYLFz74Y=
+		IrzAXsLHS4yqq3lI0VzMl4x6w/A=
 		</data>
 		<key>www/css/bootstrap.min.css</key>
 		<data>
@@ -207,6 +203,10 @@
 		<key>www/images/favicon/favicon.png</key>
 		<data>
 		7Dp7/TYdThQIhIkp2GqUZJjKyRk=
+		</data>
+		<key>www/images/fp.png</key>
+		<data>
+		B6Qx9kEuDiR6JAHrQNotAlSYiuc=
 		</data>
 		<key>www/images/gulp.png</key>
 		<data>
@@ -430,7 +430,7 @@
 		</data>
 		<key>www/js/main.js</key>
 		<data>
-		JqvkHa55EKIwU28ia0BhlyzqVK8=
+		Y46pCKpQl2kMO/f0O9DQvg7697I=
 		</data>
 		<key>www/plugins/cordova-plugin-android-fingerprint-auth/www/FingerprintAuth.js</key>
 		<data>
@@ -451,6 +451,18 @@
 		<key>www/plugins/cordova-plugin-touchid/www/touchid.js</key>
 		<data>
 		K9O/IKDMp88yjCsso0NBwMVr3ck=
+		</data>
+		<key>www/plugins/de.appplant.cordova.plugin.local-notification/www/local-notification-core.js</key>
+		<data>
+		cRFcWcECMtR8qsuib9mgBIQ6CNU=
+		</data>
+		<key>www/plugins/de.appplant.cordova.plugin.local-notification/www/local-notification-util.js</key>
+		<data>
+		Er6DYX2tNcpyrOYfskkTxMUy7aY=
+		</data>
+		<key>www/plugins/de.appplant.cordova.plugin.local-notification/www/local-notification.js</key>
+		<data>
+		FX902MpiVHKsfYcvj/8uRdRsCao=
 		</data>
 	</dict>
 	<key>files2</key>
@@ -492,11 +504,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			dzgrYtM+2v5L0LjPBCa1f/TWkZo=
+			rXtudrllhUE8MTIOclbIUJ3UhRo=
 			</data>
 			<key>hash2</key>
 			<data>
-			bLgSBTbAs25uKdKu3fjBhmUEuBY7N+rpUJZBJFRfIAQ=
+			mYtzKQwktqT2Ch/DFddO4hyAW3BB/ic2KF3vCGNbLiI=
 			</data>
 		</dict>
 		<key>CDVLaunchScreen.storyboardc/Info.plist</key>
@@ -514,11 +526,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			YaHLWdpBKy8h+AU4/3xct8b692E=
+			q8zCX7rM/5Qt33++Ex1zugyBv70=
 			</data>
 			<key>hash2</key>
 			<data>
-			hAvfdxU99nNHuv1oKmW2jlUHBHeO7c2+vJEMx0d1bBw=
+			Z87HZ1XaYkez+Uno4GXH0ZPh5vj29KMmI745E/qYEhM=
 			</data>
 		</dict>
 		<key>CDVNotification.bundle/beep.wav</key>
@@ -543,26 +555,15 @@
 			RAn0DTqD99zrWK1bJ91K/tky9vq+EswAxkY9xcPC/2U=
 			</data>
 		</dict>
-		<key>LaunchImage-Portrait@2x~ipad.png</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			611/NnlqLeR7yboDnOzGG6DPQ8Y=
-			</data>
-			<key>hash2</key>
-			<data>
-			Tqm/RNBLyzkTTQ4x0PrWHQP05q0TjwRztFa6AMB0DNk=
-			</data>
-		</dict>
 		<key>MainViewController.nib</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			u2ZUwNnfAEEUfr2OZdTXlUT4ios=
+			Ubsng5zIdJUN5jrZiy9+3k4Iouk=
 			</data>
 			<key>hash2</key>
 			<data>
-			4iQfieCqvpFoPJC2Nt/fhZbBtznxE8BLTAoYQe3KMfw=
+			KjHy3TquejTzkJRMOoRQoTpz9pVXkZOzchNdo53+blA=
 			</data>
 		</dict>
 		<key>archived-expanded-entitlements.xcent</key>
@@ -580,22 +581,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			32+S3i0VtNRlPPVjEp9hTEcbKf0=
+			oH3CPWDAsVVcXJ8PTq2Mb0IlECs=
 			</data>
 			<key>hash2</key>
 			<data>
-			upx9G75fnGGviUYRiHyyjMHEZfI3NqhqEg7L/pP4YVk=
+			uIr/85DW/1lt0h7ZUKVQpBEfi7bbhQfD4XmlhdX0TOc=
 			</data>
 		</dict>
 		<key>embedded.mobileprovision</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			0lT0IdCsxr1Uc2seq4OW2JzxALE=
+			oW/6LSzwMbnztXhkboaWmy6bUkk=
 			</data>
 			<key>hash2</key>
 			<data>
-			1pktfXJfPCt4yXptwEtw79KVP+/FAFwIsbSlajINJ6s=
+			gD3UzatX8EJ/IbhcasJTUx2YoVoGkK6K/K7mUfK4ZBM=
 			</data>
 		</dict>
 		<key>www/cordova-js-src/exec.js</key>
@@ -635,11 +636,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			lttA0Z/MnTS9ruiPLVOAYLFz74Y=
+			IrzAXsLHS4yqq3lI0VzMl4x6w/A=
 			</data>
 			<key>hash2</key>
 			<data>
-			/K8jUdWrUS1sxdn5yByjjdQ0X2LjVzlGm3T1UysETI8=
+			Jxlvk3sO1kYKNICcbeLUBumaWvX4NR8WtadFl3h3MkQ=
 			</data>
 		</dict>
 		<key>www/css/bootstrap.min.css</key>
@@ -992,6 +993,17 @@
 			<key>hash2</key>
 			<data>
 			zyZXZCO/rAKnGuauUfaUgXtj6IBgdKh5eME68aXefbo=
+			</data>
+		</dict>
+		<key>www/images/fp.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			B6Qx9kEuDiR6JAHrQNotAlSYiuc=
+			</data>
+			<key>hash2</key>
+			<data>
+			Qxo2yOQuOOp4MO699gdH5PdA3rqXgJMkZ4P8KXcglIo=
 			</data>
 		</dict>
 		<key>www/images/gulp.png</key>
@@ -1603,11 +1615,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			JqvkHa55EKIwU28ia0BhlyzqVK8=
+			Y46pCKpQl2kMO/f0O9DQvg7697I=
 			</data>
 			<key>hash2</key>
 			<data>
-			haKslstRizcnrkx1at/LsKfhIXLpmCBiXc00DsYWffU=
+			LlYJVULgdvkO6uhzuMbi/m6V9O5r2eyesQbH1fT8I0A=
 			</data>
 		</dict>
 		<key>www/plugins/cordova-plugin-android-fingerprint-auth/www/FingerprintAuth.js</key>
@@ -1663,6 +1675,39 @@
 			<key>hash2</key>
 			<data>
 			/NVIOkIzUGq2Z1yPwhvYnOfvrvDxQMlCp+IH/Gjb3M8=
+			</data>
+		</dict>
+		<key>www/plugins/de.appplant.cordova.plugin.local-notification/www/local-notification-core.js</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			cRFcWcECMtR8qsuib9mgBIQ6CNU=
+			</data>
+			<key>hash2</key>
+			<data>
+			qohtR9eLoaCzZScfTWKQkvIXymjLH93a2iFWjj7H+fA=
+			</data>
+		</dict>
+		<key>www/plugins/de.appplant.cordova.plugin.local-notification/www/local-notification-util.js</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			Er6DYX2tNcpyrOYfskkTxMUy7aY=
+			</data>
+			<key>hash2</key>
+			<data>
+			jQF1CkaubZ++m2pD3BoUFAId+lQU9QAJg8rtlfACMqc=
+			</data>
+		</dict>
+		<key>www/plugins/de.appplant.cordova.plugin.local-notification/www/local-notification.js</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			FX902MpiVHKsfYcvj/8uRdRsCao=
+			</data>
+			<key>hash2</key>
+			<data>
+			yabtb6PKf5bC2gaL7GD8yqEpEVzlrqv3zmfRFh8XrXU=
 			</data>
 		</dict>
 	</dict>
