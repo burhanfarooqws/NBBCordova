@@ -120,11 +120,8 @@ function SoftTokenCtrl($state, $scope, $rootScope, $cordovaDevice, DeviceService
                         if (data != null && data.data.IsExisting && data.data.IsDeleted) {
                             $cordovaDialogs.alert('Device deleted', 'NBB').then(function () {
                                 vm.showspinner = false;
-                                $cordovaLocalNotification.clear(1, function () {
-                                    //alert("clear");
-                                });
-                                $cordovaLocalNotification.clear(2, function () {
-                                    //alert("clear");
+                                $cordovaLocalNotification.cancel([1, 2], function() {
+                                    //alert("done");
                                 });
                                 $state.go('home');
                             });

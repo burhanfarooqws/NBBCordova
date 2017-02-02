@@ -93,6 +93,9 @@ function AuthCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice, De
                 // no button = 0, 'OK' = 1, 'Cancel' = 2
                  debugger; // eslint-disable-line
                 if (buttonIndex == 1) {
+                    $rootScope.registrationMode = {
+                        'again' : true
+                    };
                     $state.go('register');
                 }
             });

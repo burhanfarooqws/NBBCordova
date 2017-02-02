@@ -348,9 +348,16 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
     };
 
     $scope.sendOTP = function(){
-         debugger; // eslint-disable-line
+        debugger; // eslint-disable-line
         vm.sendOTPText = 'Resend OTP';
         vm.showspinner = true;
+
+        var registerAgain = false;
+        if (angular.isDefined($rootScope.registrationMode)){
+            if (angular.isDefined($rootScope.registrationMode.again)){
+                registerAgain = true;
+            }
+        }
 
         var deviceregister = {
             'AccountNumber': vm.clientEncrypt(vm.deviceregister.AccountNumber),
@@ -362,10 +369,11 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
             'Password': vm.serverEncrypt(vm.deviceregister.Password),
             'STPassword': vm.deviceregister.STPassword,
             'SendOTP': true,
-            'UseFingerPrint': vm.IsFingerPrintSupport
+            'UseFingerPrint': vm.IsFingerPrintSupport,
+            'RegisterAgain': registerAgain
         };
 
-         debugger; // eslint-disable-line
+        debugger; // eslint-disable-line
         DeviceService.registerDevice(deviceregister).then(
             function (data) {
                  debugger; // eslint-disable-line
@@ -392,8 +400,15 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
     };
 
     $scope.registerDeviceWithUser = function() {
-         debugger; // eslint-disable-line
+        debugger; // eslint-disable-line
         vm.showspinner = true;
+
+        var registerAgain = false;
+        if (angular.isDefined($rootScope.registrationMode)){
+            if (angular.isDefined($rootScope.registrationMode.again)){
+                registerAgain = true;
+            }
+        }
 
         var deviceregister = {
             'AccountNumber': vm.clientEncrypt(vm.deviceregister.AccountNumber),
@@ -405,10 +420,11 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
             'Password': vm.serverEncrypt(vm.deviceregister.Password),
             'STPassword': vm.deviceregister.STPassword,
             'SendOTP': null,
-            'UseFingerPrint': vm.IsFingerPrintSupport
+            'UseFingerPrint': vm.IsFingerPrintSupport,
+            'RegisterAgain': registerAgain
         };
 
-         debugger; // eslint-disable-line
+        debugger; // eslint-disable-line
         DeviceService.registerDevice(deviceregister).then(
             function (data) {
                  debugger; // eslint-disable-line
@@ -479,8 +495,15 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
             });
         }
 
+        // for testing purpose only comment on build
+        /*vm.registration.acctnumber = '0099446529';
+        vm.registration.atmcardnumber = '5274321118862000';
+        vm.registration.atmpin = '1111';
+        vm.registration.user_id = 'adurrani';
+        vm.registration.otp = '555555';
+        vm.registration.password = '1qaz!QAZ';
+        vm.registration.stpassword = '555555';*/
 
-        //$scope.$apply();
     });
 }
 
