@@ -1,4 +1,4 @@
-function SoftTokenCtrl($state, $scope, $rootScope, $cordovaDevice, DeviceService, $window, $cordovaDialogs, $cordovaLocalNotification) {
+function SoftTokenCtrl($state, $scope, $rootScope, $interval, $cordovaDevice, DeviceService, $window, $cordovaDialogs, $cordovaLocalNotification) {
     'ngInject';
 
     // ViewModel
@@ -48,13 +48,37 @@ function SoftTokenCtrl($state, $scope, $rootScope, $cordovaDevice, DeviceService
         });
     };
 
-    $rootScope.$on('$cordovaLocalNotification:trigger',
+    vm.IsTriggered = function() {
+        //alert('444');
+        /*$cordovaLocalNotification.isTriggered(1, function (present) {
+            // isScheduled() or isTriggered()
+            alert(present);
+        });*/
+        try {
+            $cordovaLocalNotification.isTriggered(1).then(function (isTriggered) {
+                //alert(isTriggered);
+                if(isTriggered == true){
+                    $interval.cancel(vm.IsTriggered);
+                    vm.generatedsofttoken = null;
+                    $state.go('auth');
+                }
+            });
+        }
+        catch(e){
+            //alert(e);
+        }
+    };
+
+    /*$rootScope.$on('$cordovaLocalNotification:trigger',
         function (event, notification) {
             if(notification.id == 1){
                 vm.generatedsofttoken = null;
                 $state.go('auth');
+                //$scope.$apply();
             }
-        });
+        });*/
+
+    $interval(vm.IsTriggered, 2000);
 
     vm.regenerateSoftToken = function () {
         var generatesofttoken = $rootScope.generateSoftToken;
@@ -68,11 +92,13 @@ function SoftTokenCtrl($state, $scope, $rootScope, $cordovaDevice, DeviceService
                 vm.show = true;
                 vm.setCodeLocalNotification(vm.generatedsofttoken);
                 vm.setCodeExpireyLocalNotification();
+
                 //$scope.$apply();
             }
             else {
                 vm.showspinner = false;
                 $cordovaDialogs.alert('you do not have any transaction which requires a security code, \nplease initiate a transaction before generating a security code', 'NBB').then(function () {
+                    $interval.cancel(vm.IsTriggered);
                     $state.go('auth');
                 });
             }
@@ -95,10 +121,12 @@ function SoftTokenCtrl($state, $scope, $rootScope, $cordovaDevice, DeviceService
                     friendlyMessage = 'you do not have any transaction which requires a security code, \nplease initiate a transaction before generating a security code';
                 }
                 $cordovaDialogs.alert(friendlyMessage, 'NBB').then(function () {
+                    $interval.cancel(vm.IsTriggered);
                     $state.go('auth');
                 });
             } else {
                 $cordovaDialogs.alert('you do not have any transaction which requires a security code, \nplease initiate a transaction before generating a security code', 'NBB').then(function () {
+                    $interval.cancel(vm.IsTriggered);
                     $state.go('auth');
                 });
             }
@@ -123,6 +151,7 @@ function SoftTokenCtrl($state, $scope, $rootScope, $cordovaDevice, DeviceService
                                 $cordovaLocalNotification.cancel([1, 2], function() {
                                     //alert("done");
                                 });
+                                $interval.cancel(vm.IsTriggered);
                                 $state.go('home');
                             });
                         }
