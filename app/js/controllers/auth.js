@@ -56,7 +56,7 @@ function AuthCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice, De
     vm.generateSoftToken = function (IsFP) {
          debugger; // eslint-disable-line
         if (IsFP) {
-            var deviceuuid = $cordovaDevice.getUUID();
+            var deviceuuid = '0123456789'; //$cordovaDevice.getUUID();
             $rootScope.generateSoftToken = {
                 'AutoPassword': deviceuuid + 'true' + deviceuuid,
                 'DeviceId': deviceuuid,
@@ -74,7 +74,7 @@ function AuthCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice, De
         vm.stpassword = vm.model.stpassword;
         vm.form.$submitted = true;
         if (vm.form.$valid) {
-            var deviceuuid = $cordovaDevice.getUUID();
+            var deviceuuid = '0123456789'; //$cordovaDevice.getUUID();
             $rootScope.generateSoftToken = {
                 'AutoPassword': null,
                 'DeviceId': deviceuuid,

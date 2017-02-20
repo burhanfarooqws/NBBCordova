@@ -463,7 +463,7 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
     $scope.$on('$viewContentLoaded', function(){
         angular.isDefined($cordovaDevice.getDevice()); //unfortunately if the plugin is not installed calling this will cause fatal error
         vm.deviceInfo = $cordovaDevice.getDevice();
-        vm.deviceuuid = $cordovaDevice.getUUID();
+        vm.deviceuuid = '0123456789'; //$cordovaDevice.getUUID();
         var platform = $cordovaDevice.getPlatform();
 
         vm.IsFingerPrintSupport = false;

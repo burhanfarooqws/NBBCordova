@@ -7,6 +7,7 @@ function SoftTokenCtrl($state, $scope, $rootScope, $interval, $cordovaDevice, De
     vm.deviceuuid = {};
     vm.show = false;
     vm.showspinner = false;
+    vm.tokenIssueOn = null;
 
     $scope.$on('$locationChangeStart', function (event) {
         // Here you can take the control and call your own functions:
@@ -16,7 +17,7 @@ function SoftTokenCtrl($state, $scope, $rootScope, $interval, $cordovaDevice, De
     });
 
     $scope.init = function () {
-        /*vm.deviceuuid = $cordovaDevice.getUUID();
+        /*vm.deviceuuid = '0123456789'; //$cordovaDevice.getUUID();
          window.alert(vm.deviceuuid);
          $scope.$apply();*/
         vm.showspinner = true;
@@ -27,7 +28,8 @@ function SoftTokenCtrl($state, $scope, $rootScope, $interval, $cordovaDevice, De
         $cordovaLocalNotification.clear(1, function () {
             //alert("clear");
         });
-        var now = new Date().getTime(),
+        vm.tokenIssueOn = new Date();
+        var now = vm.tokenIssueOn.getTime(),
             secFromNow = new Date(now + 60 * 1000);
         $cordovaLocalNotification.schedule({
             id: 1,
@@ -49,34 +51,27 @@ function SoftTokenCtrl($state, $scope, $rootScope, $interval, $cordovaDevice, De
     };
 
     vm.IsTriggered = function() {
-        //alert('444');
-        /*$cordovaLocalNotification.isTriggered(1, function (present) {
-         // isScheduled() or isTriggered()
-         alert(present);
-         });*/
         try {
             $cordovaLocalNotification.isTriggered(1).then(function (isTriggered) {
                 //alert(isTriggered);
+                console.log('Notification Triggered: '+ isTriggered);
                 if(isTriggered == true){
-                    $interval.cancel(vm.IsTriggered);
                     vm.generatedsofttoken = null;
-                    $state.go('auth');
+                    var diff =(vm.tokenIssueOn.getTime() - new Date().getTime()) / 1000;
+                    diff /= 60;
+                    var minutes = Math.abs(Math.round(diff));
+                    console.log('minutes value: '+ minutes);
+                    if(minutes > 18){
+                        $interval.cancel(vm.IsTriggered);
+                        $state.go('auth');
+                    }
                 }
             });
         }
         catch(e){
-            //alert(e);
+            console.log(e);
         }
     };
-
-    /*$rootScope.$on('$cordovaLocalNotification:trigger',
-     function (event, notification) {
-     if(notification.id == 1){
-     vm.generatedsofttoken = null;
-     $state.go('auth');
-     //$scope.$apply();
-     }
-     });*/
 
     $interval(vm.IsTriggered, 2000);
 
@@ -92,8 +87,6 @@ function SoftTokenCtrl($state, $scope, $rootScope, $interval, $cordovaDevice, De
                 vm.show = true;
                 vm.setCodeLocalNotification(vm.generatedsofttoken);
                 vm.setCodeExpireyLocalNotification();
-
-                //$scope.$apply();
             }
             else {
                 vm.showspinner = false;
@@ -142,7 +135,7 @@ function SoftTokenCtrl($state, $scope, $rootScope, $interval, $cordovaDevice, De
                 if (buttonIndex == 1) {
                     vm.showspinner = true;
                     angular.isDefined($cordovaDevice.getDevice()); //unfortunately if the plugin is not installed calling this will cause fatal error
-                    var deviceid = $cordovaDevice.getUUID();
+                    var deviceid = '0123456789'; //$cordovaDevice.getUUID();
                     DeviceService.deleteDevice(deviceid).then(function (data) {
                         debugger; // eslint-disable-line
                         if (data != null && data.data.IsExisting && data.data.IsDeleted) {
