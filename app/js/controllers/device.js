@@ -37,7 +37,7 @@ function DeviceCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice) 
          debugger; // eslint-disable-line
         angular.isDefined($cordovaDevice.getDevice()); //unfortunately if the plugin is not installed calling this will cause fatal error
         vm.deviceInfo = $cordovaDevice.getDevice();
-        vm.deviceuuid = '0123456789'; //$cordovaDevice.getUUID();
+        vm.deviceuuid = $cordovaDevice.getUUID();
         /*if(vm.deviceuuid == null){
             vm.deviceuuid = '126d40b744785968';
         }*/

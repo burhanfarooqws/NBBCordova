@@ -17,7 +17,7 @@ function SoftTokenCtrl($state, $scope, $rootScope, $interval, $cordovaDevice, De
     });
 
     $scope.init = function () {
-        /*vm.deviceuuid = '0123456789'; //$cordovaDevice.getUUID();
+        /*vm.deviceuuid = $cordovaDevice.getUUID();
          window.alert(vm.deviceuuid);
          $scope.$apply();*/
         vm.showspinner = true;
@@ -135,7 +135,7 @@ function SoftTokenCtrl($state, $scope, $rootScope, $interval, $cordovaDevice, De
                 if (buttonIndex == 1) {
                     vm.showspinner = true;
                     angular.isDefined($cordovaDevice.getDevice()); //unfortunately if the plugin is not installed calling this will cause fatal error
-                    var deviceid = '0123456789'; //$cordovaDevice.getUUID();
+                    var deviceid = $cordovaDevice.getUUID();
                     DeviceService.deleteDevice(deviceid).then(function (data) {
                         debugger; // eslint-disable-line
                         if (data != null && data.data.IsExisting && data.data.IsDeleted) {
