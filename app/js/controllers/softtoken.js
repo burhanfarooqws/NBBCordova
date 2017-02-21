@@ -1,4 +1,4 @@
-function SoftTokenCtrl($state, $scope, $rootScope, $interval, $cordovaDevice, DeviceService, $window, $cordovaDialogs, $cordovaLocalNotification) {
+function SoftTokenCtrl($state, $scope, $rootScope, $interval, $log, $cordovaDevice, DeviceService, $window, $cordovaDialogs, $cordovaLocalNotification) {
     'ngInject';
 
     // ViewModel
@@ -47,30 +47,65 @@ function SoftTokenCtrl($state, $scope, $rootScope, $interval, $cordovaDevice, De
         });
     };
 
-    vm.IsTriggered = function() {
+    function IsTriggered() {
         try {
             $cordovaLocalNotification.isTriggered(1).then(function (isTriggered) {
                 //alert(isTriggered);
-                console.log('Notification Triggered: '+ isTriggered);
+                $log.log('Notification Triggered: '+ isTriggered);
                 if(isTriggered == true){
                     vm.generatedsofttoken = null;
-                    var diff =(vm.tokenIssueOn.getTime() - new Date().getTime()) / 1000;
-                    diff /= 60;
-                    var minutes = Math.abs(Math.round(diff));
-                    console.log('minutes value: '+ minutes);
-                    if(minutes > 18){
-                        $interval.cancel(vm.IsTriggered);
-                        $state.go('auth');
-                    }
+                }
+                var diff =(vm.tokenIssueOn.getTime() - new Date().getTime()) / 1000;
+                diff /= 60;
+                var minutes = Math.abs(Math.round(diff));
+                $log.log('vm.tokenIssueOn value: '+ vm.tokenIssueOn);
+                $log.log('minutes value: '+ minutes);
+                if(minutes > 9){
+                    $scope.stop();
+                    $state.go('auth');
                 }
             });
         }
         catch(e){
-            console.log(e);
+            $log.log(e);
         }
+    }
+
+    // store the interval promise in this variable
+    var promise;
+
+    // simulated items array
+    $scope.items = [];
+
+    // starts the interval
+    $scope.start = function() {
+        // stops any running interval to avoid two intervals running at the same time
+        $scope.stop();
+
+        // store the interval promise
+        promise = $interval(IsTriggered, 2000);
     };
 
-    $interval(vm.IsTriggered, 2000);
+    // stops the interval
+    $scope.stop = function() {
+        $interval.cancel(promise);
+    };
+
+    // starting the interval by default
+    $scope.start();
+
+    // stops the interval when the scope is destroyed,
+    // this usually happens when a route is changed and
+    // the ItemsController $scope gets destroyed. The
+    // destruction of the ItemsController scope does not
+    // guarantee the stopping of any intervals, you must
+    // be responsible of stopping it when the scope is
+    // is destroyed.
+    $scope.$on('$destroy', function() {
+        $scope.stop();
+    });
+
+    //$interval(vm.IsTriggered, 2000);
 
     vm.regenerateSoftToken = function () {
         var generatesofttoken = $rootScope.generateSoftToken;
