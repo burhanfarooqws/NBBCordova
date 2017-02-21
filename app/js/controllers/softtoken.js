@@ -17,9 +17,6 @@ function SoftTokenCtrl($state, $scope, $rootScope, $interval, $cordovaDevice, De
     });
 
     $scope.init = function () {
-        /*vm.deviceuuid = $cordovaDevice.getUUID();
-         window.alert(vm.deviceuuid);
-         $scope.$apply();*/
         vm.showspinner = true;
         vm.regenerateSoftToken();
     };
@@ -167,6 +164,20 @@ function SoftTokenCtrl($state, $scope, $rootScope, $interval, $cordovaDevice, De
             });
     };
 
+    vm.logOut = function () {
+        $cordovaDialogs.confirm('Are you sure you want to logout?', 'NBB')
+            .then(function (buttonIndex) {
+                // no button = 0, 'OK' = 1, 'Cancel' = 2
+                debugger; // eslint-disable-line
+                if (buttonIndex == 1) {
+                    $cordovaLocalNotification.cancel([1, 2], function() {
+                        //alert("done");
+                    });
+                    $interval.cancel(vm.IsTriggered);
+                    $state.go('auth');
+                }
+            });
+    };
 }
 
 export default {

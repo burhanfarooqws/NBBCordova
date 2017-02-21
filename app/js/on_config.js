@@ -7,8 +7,8 @@ function OnConfig($stateProvider, $locationProvider, $urlRouterProvider, $compil
     $stateProvider
         .state('home', {
            /* url: '/',
-            controller: 'AuthCtrl as auth',
-            templateUrl: 'auth.html',
+            controller: 'SoftTokenCtrl as softtoken',
+            templateUrl: 'software-token-gen.html',
             title: 'National Bank of Bahrain'*/
             url: '/',
             controller: 'DeviceCtrl as device',
