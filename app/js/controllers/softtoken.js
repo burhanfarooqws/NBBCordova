@@ -123,7 +123,7 @@ function SoftTokenCtrl($state, $scope, $rootScope, $interval, $log, $cordovaDevi
             else {
                 vm.showspinner = false;
                 $cordovaDialogs.alert('you do not have any transaction which requires a security code, \nplease initiate a transaction before generating a security code', 'NBB').then(function () {
-                    $interval.cancel(vm.IsTriggered);
+                    $scope.stop();//$interval.cancel(vm.IsTriggered);
                     $state.go('auth');
                 });
             }
@@ -146,12 +146,12 @@ function SoftTokenCtrl($state, $scope, $rootScope, $interval, $log, $cordovaDevi
                     friendlyMessage = 'you do not have any transaction which requires a security code, \nplease initiate a transaction before generating a security code';
                 }
                 $cordovaDialogs.alert(friendlyMessage, 'NBB').then(function () {
-                    $interval.cancel(vm.IsTriggered);
+                    $scope.stop();//$interval.cancel(vm.IsTriggered);
                     $state.go('auth');
                 });
             } else {
                 $cordovaDialogs.alert('you do not have any transaction which requires a security code, \nplease initiate a transaction before generating a security code', 'NBB').then(function () {
-                    $interval.cancel(vm.IsTriggered);
+                    $scope.stop();//$interval.cancel(vm.IsTriggered);
                     $state.go('auth');
                 });
             }
@@ -176,7 +176,7 @@ function SoftTokenCtrl($state, $scope, $rootScope, $interval, $log, $cordovaDevi
                                 $cordovaLocalNotification.cancel([1, 2], function() {
                                     //alert("done");
                                 });
-                                $interval.cancel(vm.IsTriggered);
+                                $scope.stop();//$interval.cancel(vm.IsTriggered);
                                 $state.go('home');
                             });
                         }
@@ -190,8 +190,8 @@ function SoftTokenCtrl($state, $scope, $rootScope, $interval, $log, $cordovaDevi
                         debugger; // eslint-disable-line
                         vm.showspinner = false;
                         $cordovaDialogs.alert('Device not found', 'NBB');
-                        console.log('rejected');
-                        console.log(error);
+                        $log.log('rejected');
+                        $log.log(error);
                         $scope.$apply();
                     });
                 }
@@ -208,7 +208,7 @@ function SoftTokenCtrl($state, $scope, $rootScope, $interval, $log, $cordovaDevi
                     $cordovaLocalNotification.cancel([1, 2], function() {
                         //alert("done");
                     });
-                    $interval.cancel(vm.IsTriggered);
+                    $scope.stop();//$interval.cancel(vm.IsTriggered);
                     $state.go('auth');
                 }
             });
