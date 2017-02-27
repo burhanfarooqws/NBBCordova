@@ -34,17 +34,29 @@ function DeviceCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice, 
         //window.alert(vm.deviceReadyStatus);
 
         if ($cordovaDevice.getPlatform() == 'iOS') {
-            $rootScope.deviceuuid = $cordovaDevice.getUUID();
+            uniqueiosudid.getid(
+                function(id) {
+                    $rootScope.deviceuuid = id;
+                    navigator.splashscreen.hide();
+                    $cordovaDialogs.alert($rootScope.deviceuuid, 'NBB').then(function () {
+                        $state.go('start');
+                    });
+                },
+                function(err) {
+                    $rootScope.deviceuuid = err;
+                    navigator.splashscreen.hide();
+                }
+            );
         }
         if ($cordovaDevice.getPlatform() == 'Android') {
             $rootScope.deviceuuid = $cordovaDevice.getUUID();
+            navigator.splashscreen.hide();
+            $cordovaDialogs.alert($rootScope.deviceuuid, 'NBB').then(function () {
+                $state.go('start');
+            });
         }
 
-        navigator.splashscreen.hide();
 
-        $cordovaDialogs.alert($rootScope.deviceuuid, 'NBB').then(function () {
-            $state.go('start');
-        });
     };
     CordovaService.ready.then(() => loadDeviceInfo());
 }
