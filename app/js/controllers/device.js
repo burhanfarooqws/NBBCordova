@@ -38,9 +38,10 @@ function DeviceCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice, 
                 function(id) {
                     $rootScope.deviceuuid = id;
                     navigator.splashscreen.hide();
-                    $cordovaDialogs.alert($rootScope.deviceuuid, 'NBB').then(function () {
-                        $state.go('start');
-                    });
+                    $state.go('start');
+                    // $cordovaDialogs.alert($rootScope.deviceuuid, 'NBB').then(function () {
+                    //     $state.go('start');
+                    // });
                 },
                 function(err) {
                     $rootScope.deviceuuid = err;
@@ -51,9 +52,10 @@ function DeviceCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice, 
         if ($cordovaDevice.getPlatform() == 'Android') {
             $rootScope.deviceuuid = $cordovaDevice.getUUID();
             navigator.splashscreen.hide();
-            $cordovaDialogs.alert($rootScope.deviceuuid, 'NBB').then(function () {
-                $state.go('start');
-            });
+            $state.go('start');
+            // $cordovaDialogs.alert($rootScope.deviceuuid, 'NBB').then(function () {
+            //     $state.go('start');
+            // });
         }
 
 
