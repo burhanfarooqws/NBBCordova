@@ -18,7 +18,7 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
             templateOptions: {
                 type: 'text',
                 placeholder: 'User ID *',
-                onKeypress: function($viewValue, $modelValue, scope, $event) {
+                onKeypress: function ($viewValue, $modelValue, scope, $event) {
                     console.log($event);
                     var regex = new RegExp('[a-zA-Z0-9]');
                     var key = String.fromCharCode(!$event.charCode ? $event.which : $event.charCode);
@@ -37,8 +37,8 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
             },
             validation: {
                 messages: {
-                    required: function(viewValue, modelValue, scope) {
-                        return scope.to.friendlyname +' is required'
+                    required: function (viewValue, modelValue, scope) {
+                        return scope.to.friendlyname + ' is required'
                     },
                     maxlength: function (viewValue, modelValue, scope) {
                         return scope.to.friendlyname + ' max 25 characters allowed'
@@ -90,8 +90,8 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
             },
             validation: {
                 messages: {
-                    required: function(viewValue, modelValue, scope) {
-                        return scope.to.friendlyname +' is required'
+                    required: function (viewValue, modelValue, scope) {
+                        return scope.to.friendlyname + ' is required'
                     },
                     maxlength: function (viewValue, modelValue, scope) {
                         return scope.to.friendlyname + ' max 10 characters allowed'
@@ -128,8 +128,8 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
             },
             validation: {
                 messages: {
-                    required: function(viewValue, modelValue, scope) {
-                        return scope.to.friendlyname +' is required'
+                    required: function (viewValue, modelValue, scope) {
+                        return scope.to.friendlyname + ' is required'
                     },
                     maxlength: function (viewValue, modelValue, scope) {
                         return scope.to.friendlyname + ' should be 16 digits'
@@ -168,8 +168,8 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
             },
             validation: {
                 messages: {
-                    required: function(viewValue, modelValue, scope) {
-                        return scope.to.friendlyname +' is required'
+                    required: function (viewValue, modelValue, scope) {
+                        return scope.to.friendlyname + ' is required'
                     },
                     minlength: function (viewValue, modelValue, scope) {
                         return scope.to.friendlyname + ' should be 4 digits'
@@ -229,7 +229,7 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
             templateOptions: {
                 type: 'text',
                 placeholder: 'OTP *',
-                onKeypress: function($viewValue, $modelValue, scope, $event) {
+                onKeypress: function ($viewValue, $modelValue, scope, $event) {
                     console.log($event);
                     var regex = new RegExp('[a-zA-Z0-9]');
                     var key = String.fromCharCode(!$event.charCode ? $event.which : $event.charCode);
@@ -251,14 +251,14 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
             },
             validation: {
                 messages: {
-                    required: function(viewValue, modelValue, scope) {
-                        return scope.to.friendlyname +' is required'
+                    required: function (viewValue, modelValue, scope) {
+                        return scope.to.friendlyname + ' is required'
                     },
-                    minlength: function(viewValue, modelValue, scope){
-                        return scope.to.friendlyname +' should be 6 characters'
+                    minlength: function (viewValue, modelValue, scope) {
+                        return scope.to.friendlyname + ' should be 6 characters'
                     },
-                    maxlength: function(viewValue, modelValue, scope){
-                        return scope.to.friendlyname +' should be 6 characters'
+                    maxlength: function (viewValue, modelValue, scope) {
+                        return scope.to.friendlyname + ' should be 6 characters'
                     }
                 }
             },
@@ -268,18 +268,18 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
         }
     ];
 
-    vm.setDeviceRegistrationObject= function () {
+    vm.setDeviceRegistrationObject = function () {
         vm.deviceregister.AccountNumber = vm.registration.acctnumber;
         vm.deviceregister.AtmCardNumber = vm.registration.atmcardnumber;
         vm.deviceregister.AtmPin = vm.registration.atmpin;
         vm.deviceregister.UserId = vm.registration.user_id;
-        vm.deviceregister.OTP =  vm.registration.otp;
+        vm.deviceregister.OTP = vm.registration.otp;
         vm.deviceregister.Password = vm.registration.password;
         vm.deviceregister.STPassword = vm.registration.stpassword;
     };
 
     function onSubmit() {
-         debugger; // eslint-disable-line
+        debugger; // eslint-disable-line
         vm.form.$submitted = true;
         if (vm.form.$valid) {
             vm.setDeviceRegistrationObject();
@@ -288,7 +288,7 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
     }
 
     function onSendOTP() {
-         debugger; // eslint-disable-line
+        debugger; // eslint-disable-line
         vm.registration.tncchecked = false;
         vm.form.$submitted = true;
         if (vm.form.$valid) {
@@ -300,9 +300,8 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
     vm.title = 'AngularJS, Cordova, Gulp, and Browserify! Written with keyboards and love!';
     vm.number = 1234;
     vm.deviceReady = false;
-    vm.deviceReadyStatus  ='Cordova not loaded';
+    vm.deviceReadyStatus = 'Cordova not loaded';
     vm.deviceInfo = {};
-    vm.deviceuuid = {};
     vm.fingerprint = {};
     vm.registrationId = {};
     vm.devicefound = {};
@@ -335,7 +334,7 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
                 mode: CryptoJS.mode.CBC,
                 padding: CryptoJS.pad.Pkcs7
             });
-         debugger; // eslint-disable-line
+        debugger; // eslint-disable-line
         return _encrypted.toString();
     };
     vm.serverEncrypt = function (value) {
@@ -347,14 +346,14 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
         return hex2b64(res);
     };
 
-    $scope.sendOTP = function(){
+    $scope.sendOTP = function () {
         debugger; // eslint-disable-line
         vm.sendOTPText = 'Resend OTP';
         vm.showspinner = true;
 
         var registerAgain = false;
-        if (angular.isDefined($rootScope.registrationMode)){
-            if (angular.isDefined($rootScope.registrationMode.again)){
+        if (angular.isDefined($rootScope.registrationMode)) {
+            if (angular.isDefined($rootScope.registrationMode.again)) {
                 registerAgain = true;
             }
         }
@@ -364,7 +363,7 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
             'AtmCardNumber': vm.clientEncrypt(vm.deviceregister.AtmCardNumber),
             'AtmPin': vm.serverEncrypt(vm.deviceregister.AtmPin),
             'UserId': vm.deviceregister.UserId,
-            'DeviceId': vm.deviceuuid,
+            'DeviceId': $rootScope.deviceuuid,
             'OTP': null,
             'Password': vm.serverEncrypt(vm.deviceregister.Password),
             'STPassword': vm.deviceregister.STPassword,
@@ -376,7 +375,7 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
         debugger; // eslint-disable-line
         DeviceService.registerDevice(deviceregister).then(
             function (data) {
-                 debugger; // eslint-disable-line
+                debugger; // eslint-disable-line
                 if (data != null && data.data.AuthenticationSuccess) {
                     $cordovaDialogs.alert('OTP Send', 'NBB');
                     vm.showspinner = false;
@@ -387,7 +386,7 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
                 vm.showspinner = false;
                 //$scope.$apply();
             }, function (error) {
-                 debugger; // eslint-disable-line
+                debugger; // eslint-disable-line
                 if (error.status == 400) {
                     $cordovaDialogs.alert(error.data.Message, 'NBB');
                 } else {
@@ -399,13 +398,13 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
             });
     };
 
-    $scope.registerDeviceWithUser = function() {
+    $scope.registerDeviceWithUser = function () {
         debugger; // eslint-disable-line
         vm.showspinner = true;
 
         var registerAgain = false;
-        if (angular.isDefined($rootScope.registrationMode)){
-            if (angular.isDefined($rootScope.registrationMode.again)){
+        if (angular.isDefined($rootScope.registrationMode)) {
+            if (angular.isDefined($rootScope.registrationMode.again)) {
                 registerAgain = true;
             }
         }
@@ -415,7 +414,7 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
             'AtmCardNumber': vm.clientEncrypt(vm.deviceregister.AtmCardNumber),
             'AtmPin': vm.serverEncrypt(vm.deviceregister.AtmPin),
             'UserId': vm.deviceregister.UserId,
-            'DeviceId': vm.deviceuuid,
+            'DeviceId': $rootScope.deviceuuid,
             'OTP': vm.deviceregister.OTP,
             'Password': vm.serverEncrypt(vm.deviceregister.Password),
             'STPassword': vm.deviceregister.STPassword,
@@ -427,7 +426,7 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
         debugger; // eslint-disable-line
         DeviceService.registerDevice(deviceregister).then(
             function (data) {
-                 debugger; // eslint-disable-line
+                debugger; // eslint-disable-line
                 if (data != null && data.data.AuthenticationSuccess) {
                     $cordovaDialogs.alert('register user successful', 'NBB').then(function () {
                         vm.showspinner = false;
@@ -440,7 +439,7 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
                 vm.showspinner = false;
                 //$scope.$apply();
             }, function (error) {
-                 debugger; // eslint-disable-line
+                debugger; // eslint-disable-line
                 if (error.status == 400) {
                     $cordovaDialogs.alert(error.data.Message, 'NBB');
                 } else {
@@ -453,22 +452,19 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
 
     };
 
-    $scope.$on('$locationChangeStart', function(event){
+    $scope.$on('$locationChangeStart', function (event) {
         // Here you can take the control and call your own functions:
         //alert('Sorry ! Back Button is disabled');
         // Prevent the browser default action (Going back):
         event.preventDefault();
     });
 
-    $scope.$on('$viewContentLoaded', function(){
-        angular.isDefined($cordovaDevice.getDevice()); //unfortunately if the plugin is not installed calling this will cause fatal error
-        vm.deviceInfo = $cordovaDevice.getDevice();
-        vm.deviceuuid = $cordovaDevice.getUUID();
+    $scope.$on('$viewContentLoaded', function () {
         var platform = $cordovaDevice.getPlatform();
 
         vm.IsFingerPrintSupport = false;
         if (platform == 'iOS') {
-            $cordovaTouchID.checkSupport().then(function() {
+            $cordovaTouchID.checkSupport().then(function () {
                 // success, TouchID supported
                 vm.IsFingerPrintSupport = true;
             }, function (error) {
@@ -497,12 +493,12 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
 
         // for testing purpose only comment on build
         /*vm.registration.acctnumber = '0099446529';
-        vm.registration.atmcardnumber = '5274321118862000';
-        vm.registration.atmpin = '1111';
-        vm.registration.user_id = 'adurrani';
-        vm.registration.otp = '555555';
-        vm.registration.password = '1qaz!QAZ';
-        vm.registration.stpassword = '555555';*/
+         vm.registration.atmcardnumber = '5274321118862000';
+         vm.registration.atmpin = '1111';
+         vm.registration.user_id = 'adurrani';
+         vm.registration.otp = '555555';
+         vm.registration.password = '1qaz!QAZ';
+         vm.registration.stpassword = '555555';*/
 
     });
 }

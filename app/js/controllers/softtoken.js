@@ -4,7 +4,6 @@ function SoftTokenCtrl($state, $scope, $rootScope, $interval, $log, $cordovaDevi
     // ViewModel
     var vm = this;
     vm.generatedsofttoken = null;
-    vm.deviceuuid = {};
     vm.show = false;
     vm.showspinner = false;
     vm.tokenIssueOn = null;
@@ -51,22 +50,22 @@ function SoftTokenCtrl($state, $scope, $rootScope, $interval, $log, $cordovaDevi
         try {
             $cordovaLocalNotification.isTriggered(1).then(function (isTriggered) {
                 //alert(isTriggered);
-                $log.log('Notification Triggered: '+ isTriggered);
-                if(isTriggered == true){
+                $log.log('Notification Triggered: ' + isTriggered);
+                if (isTriggered == true) {
                     vm.generatedsofttoken = null;
                 }
-                var diff =(vm.tokenIssueOn.getTime() - new Date().getTime()) / 1000;
+                var diff = (vm.tokenIssueOn.getTime() - new Date().getTime()) / 1000;
                 diff /= 60;
                 var minutes = Math.abs(Math.round(diff));
-                $log.log('vm.tokenIssueOn value: '+ vm.tokenIssueOn);
-                $log.log('minutes value: '+ minutes);
-                if(minutes > 9){
+                $log.log('vm.tokenIssueOn value: ' + vm.tokenIssueOn);
+                $log.log('minutes value: ' + minutes);
+                if (minutes > 9) {
                     $scope.stop();
                     $state.go('auth');
                 }
             });
         }
-        catch(e){
+        catch (e) {
             $log.log(e);
         }
     }
@@ -78,7 +77,7 @@ function SoftTokenCtrl($state, $scope, $rootScope, $interval, $log, $cordovaDevi
     $scope.items = [];
 
     // starts the interval
-    $scope.start = function() {
+    $scope.start = function () {
         // stops any running interval to avoid two intervals running at the same time
         $scope.stop();
 
@@ -87,7 +86,7 @@ function SoftTokenCtrl($state, $scope, $rootScope, $interval, $log, $cordovaDevi
     };
 
     // stops the interval
-    $scope.stop = function() {
+    $scope.stop = function () {
         $interval.cancel(promise);
     };
 
@@ -101,7 +100,7 @@ function SoftTokenCtrl($state, $scope, $rootScope, $interval, $log, $cordovaDevi
     // guarantee the stopping of any intervals, you must
     // be responsible of stopping it when the scope is
     // is destroyed.
-    $scope.$on('$destroy', function() {
+    $scope.$on('$destroy', function () {
         $scope.stop();
     });
 
@@ -166,14 +165,12 @@ function SoftTokenCtrl($state, $scope, $rootScope, $interval, $log, $cordovaDevi
                 debugger; // eslint-disable-line
                 if (buttonIndex == 1) {
                     vm.showspinner = true;
-                    angular.isDefined($cordovaDevice.getDevice()); //unfortunately if the plugin is not installed calling this will cause fatal error
-                    var deviceid = $cordovaDevice.getUUID();
-                    DeviceService.deleteDevice(deviceid).then(function (data) {
+                    DeviceService.deleteDevice($rootScope.deviceuuid).then(function (data) {
                         debugger; // eslint-disable-line
                         if (data != null && data.data.IsExisting && data.data.IsDeleted) {
                             $cordovaDialogs.alert('Device deleted', 'NBB').then(function () {
                                 vm.showspinner = false;
-                                $cordovaLocalNotification.cancel([1, 2], function() {
+                                $cordovaLocalNotification.cancel([1, 2], function () {
                                     //alert("done");
                                 });
                                 $scope.stop();//$interval.cancel(vm.IsTriggered);
@@ -205,7 +202,7 @@ function SoftTokenCtrl($state, $scope, $rootScope, $interval, $log, $cordovaDevi
                 // no button = 0, 'OK' = 1, 'Cancel' = 2
                 debugger; // eslint-disable-line
                 if (buttonIndex == 1) {
-                    $cordovaLocalNotification.cancel([1, 2], function() {
+                    $cordovaLocalNotification.cancel([1, 2], function () {
                         //alert("done");
                     });
                     $scope.stop();//$interval.cancel(vm.IsTriggered);

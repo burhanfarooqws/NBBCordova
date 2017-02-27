@@ -1,4 +1,4 @@
-function DeviceCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice) {
+function DeviceCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice, $cordovaDialogs) {
     'ngInject';
 
     // ViewModel
@@ -7,9 +7,8 @@ function DeviceCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice) 
     vm.title = 'AngularJS, Cordova, Gulp, and Browserify! Written with keyboards and love!';
     vm.number = 1234;
     vm.deviceReady = false;
-    vm.deviceReadyStatus  ='Cordova not loaded';
+    vm.deviceReadyStatus = 'Cordova not loaded';
     vm.deviceInfo = {};
-    vm.deviceuuid = {};
     vm.fingerprint = {};
     vm.registrationId = {};
     vm.devicefound = {};
@@ -17,37 +16,37 @@ function DeviceCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice) 
     vm.IsAuthenticatedWithFingerPrint = false;
     vm.Isdevicefound = true;
 
-    $scope.$on('$locationChangeStart', function(event){
+    $scope.$on('$locationChangeStart', function (event) {
         // Here you can take the control and call your own functions:
         //alert('Sorry ! Back Button is disabled');
         // Prevent the browser default action (Going back):
         event.preventDefault();
     });
 
-    $scope.$on('$viewContentLoaded', function(){
+    $scope.$on('$viewContentLoaded', function () {
         //window.alert(vm.deviceReadyStatus);
     });
 
     let loadDeviceInfo = () => {
-         debugger; // eslint-disable-line
+        debugger; // eslint-disable-line
         vm.deviceReady = true;
         vm.deviceReadyStatus = 'Device Ready';
         //window.alert(vm.deviceReadyStatus);
 
-         debugger; // eslint-disable-line
-        angular.isDefined($cordovaDevice.getDevice()); //unfortunately if the plugin is not installed calling this will cause fatal error
-        vm.deviceInfo = $cordovaDevice.getDevice();
-        vm.deviceuuid = $cordovaDevice.getUUID();
-        /*if(vm.deviceuuid == null){
-            vm.deviceuuid = '126d40b744785968';
-        }*/
-        //window.alert(vm.deviceuuid);
+        if ($cordovaDevice.getPlatform() == 'iOS') {
+            $rootScope.deviceuuid = $cordovaDevice.getUUID();
+        }
+        if ($cordovaDevice.getPlatform() == 'Android') {
+            $rootScope.deviceuuid = $cordovaDevice.getUUID();
+        }
+
         navigator.splashscreen.hide();
 
-        $state.go('start');
-        //$scope.$apply();
+        $cordovaDialogs.alert($rootScope.deviceuuid, 'NBB').then(function () {
+            $state.go('start');
+        });
     };
-    CordovaService.ready.then( () => loadDeviceInfo() );
+    CordovaService.ready.then(() => loadDeviceInfo());
 }
 
 export default {

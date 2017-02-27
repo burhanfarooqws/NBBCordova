@@ -54,12 +54,11 @@ function AuthCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice, De
     ];
 
     vm.generateSoftToken = function (IsFP) {
-         debugger; // eslint-disable-line
+        debugger; // eslint-disable-line
         if (IsFP) {
-            var deviceuuid = $cordovaDevice.getUUID();
             $rootScope.generateSoftToken = {
-                'AutoPassword': deviceuuid + 'true' + deviceuuid,
-                'DeviceId': deviceuuid,
+                'AutoPassword': $rootScope.deviceuuid + 'true' + $rootScope.deviceuuid,
+                'DeviceId': $rootScope.deviceuuid,
                 'IsAuthenticatedWithFingerPrint': vm.IsAuthenticatedWithFingerPrint,
                 'IsFingerPrint': vm.IsFingerPrintSupport,
                 'Password': null
@@ -70,14 +69,13 @@ function AuthCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice, De
     };
 
     $scope.generateSoftTokenWithSTPassword = function () {
-         debugger; // eslint-disable-line
+        debugger; // eslint-disable-line
         vm.stpassword = vm.model.stpassword;
         vm.form.$submitted = true;
         if (vm.form.$valid) {
-            var deviceuuid = $cordovaDevice.getUUID();
             $rootScope.generateSoftToken = {
                 'AutoPassword': null,
-                'DeviceId': deviceuuid,
+                'DeviceId': $rootScope.deviceuuid,
                 'IsAuthenticatedWithFingerPrint': false,
                 'IsFingerPrint': false,
                 'Password': vm.stpassword
@@ -87,14 +85,14 @@ function AuthCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice, De
     };
 
     $scope.redirectRegister = function () {
-         debugger; // eslint-disable-line
+        debugger; // eslint-disable-line
         $cordovaDialogs.confirm('Are you sure you want to register again?', 'NBB')
             .then(function (buttonIndex) {
                 // no button = 0, 'OK' = 1, 'Cancel' = 2
-                 debugger; // eslint-disable-line
+                debugger; // eslint-disable-line
                 if (buttonIndex == 1) {
                     $rootScope.registrationMode = {
-                        'again' : true
+                        'again': true
                     };
                     $state.go('register');
                 }
@@ -110,7 +108,7 @@ function AuthCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice, De
 
     $scope.init = function () {
         try {
-             debugger; // eslint-disable-line
+            debugger; // eslint-disable-line
             var platform = $cordovaDevice.getPlatform();
             if (platform == 'iOS') {
                 $cordovaTouchID.checkSupport().then(function () {
@@ -127,11 +125,11 @@ function AuthCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice, De
             if (platform == 'Android') {
                 try {
                     /*var dt = new Date().getTime();
-                    var encryptConfig = {
-                        clientId: 'myAppName' + dt.toString(),
-                        username: 'currentUser' + dt.toString(),
-                        password: 'currentUserPassword' + dt.toString()
-                    };*/
+                     var encryptConfig = {
+                     clientId: 'myAppName' + dt.toString(),
+                     username: 'currentUser' + dt.toString(),
+                     password: 'currentUserPassword' + dt.toString()
+                     };*/
                     FingerprintAuth.isAvailable(function (result) {
                         if (result.isAvailable) {
                             if (result.hasEnrolledFingerprints) {
@@ -169,7 +167,7 @@ function AuthCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice, De
     $scope.showFingerPrint = function () {
         if (vm.IsFingerPrintSupport == true) {
             try {
-                 debugger; // eslint-disable-line
+                debugger; // eslint-disable-line
                 var platform = $cordovaDevice.getPlatform();
                 if (platform == 'iOS') {
                     $cordovaTouchID.authenticate('NBB Mobile Authentication').then(function () {
