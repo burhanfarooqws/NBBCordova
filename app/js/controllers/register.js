@@ -360,7 +360,7 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
 
         var deviceregister = {
             'AccountNumber': vm.clientEncrypt(vm.deviceregister.AccountNumber),
-            'AtmCardNumber': vm.clientEncrypt(vm.deviceregister.AtmCardNumber),
+            'AtmCardNumber': vm.deviceregister.AtmCardNumber,
             'AtmPin': vm.serverEncrypt(vm.deviceregister.AtmPin),
             'UserId': vm.deviceregister.UserId,
             'DeviceId': $rootScope.deviceuuid,
@@ -411,7 +411,7 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
 
         var deviceregister = {
             'AccountNumber': vm.clientEncrypt(vm.deviceregister.AccountNumber),
-            'AtmCardNumber': vm.clientEncrypt(vm.deviceregister.AtmCardNumber),
+            'AtmCardNumber': vm.deviceregister.AtmCardNumber,
             'AtmPin': vm.serverEncrypt(vm.deviceregister.AtmPin),
             'UserId': vm.deviceregister.UserId,
             'DeviceId': $rootScope.deviceuuid,
