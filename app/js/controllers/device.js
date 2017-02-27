@@ -1,4 +1,4 @@
-function DeviceCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice, $cordovaDialogs) {
+function DeviceCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice) {
     'ngInject';
 
     // ViewModel
@@ -34,28 +34,24 @@ function DeviceCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice, 
         //window.alert(vm.deviceReadyStatus);
 
         if ($cordovaDevice.getPlatform() == 'iOS') {
-            uniqueiosudid.getid(
-                function(id) {
-                    $rootScope.deviceuuid = id;
-                    navigator.splashscreen.hide();
-                    $state.go('start');
-                    // $cordovaDialogs.alert($rootScope.deviceuuid, 'NBB').then(function () {
-                    //     $state.go('start');
-                    // });
-                },
-                function(err) {
-                    $rootScope.deviceuuid = err;
-                    navigator.splashscreen.hide();
-                }
-            );
+            // $rootScope.deviceuuid = $cordovaDevice.getUUID();
+            // navigator.splashscreen.hide();
+            // $state.go('start');
+
+            uniqueiosudid.getid(function (msg) {
+                $rootScope.deviceuuid = msg;
+                navigator.splashscreen.hide();
+                $state.go('start');
+            }, function (error) {
+                $rootScope.deviceuuid = error;
+                navigator.splashscreen.hide();
+            });
+
         }
         if ($cordovaDevice.getPlatform() == 'Android') {
             $rootScope.deviceuuid = $cordovaDevice.getUUID();
             navigator.splashscreen.hide();
             $state.go('start');
-            // $cordovaDialogs.alert($rootScope.deviceuuid, 'NBB').then(function () {
-            //     $state.go('start');
-            // });
         }
 
 
