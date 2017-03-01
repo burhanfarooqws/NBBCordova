@@ -123,7 +123,6 @@ function RegisterCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice
             ngModelElAttrs: {
                 'inputmode': 'numeric',
                 'maxlength': '16',
-                'phone-input': '',
                 'limit-directive': '16'
             },
             validation: {

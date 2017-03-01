@@ -46,14 +46,19 @@ function DeviceCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice) 
                 $rootScope.deviceuuid = error;
                 navigator.splashscreen.hide();
             });
-
         }
+
         if ($cordovaDevice.getPlatform() == 'Android') {
             $rootScope.deviceuuid = $cordovaDevice.getUUID();
             navigator.splashscreen.hide();
             $state.go('start');
         }
 
+        if($cordovaDevice.getPlatform()== 'browser'){
+            $rootScope.deviceuuid = '0123456789';
+            navigator.splashscreen.hide();
+            $state.go('start');
+        }
 
     };
     CordovaService.ready.then(() => loadDeviceInfo());
