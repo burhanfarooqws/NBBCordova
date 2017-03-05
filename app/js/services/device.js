@@ -4,8 +4,8 @@ function DeviceService($http, $q) {
     const service = {};
     //const hostURL = 'http://localhost:3039/SharedAspectsService';
     //const hostURL = 'http://77.69.146.146/MB';
-    //const hostURL = 'https://personal.nbbonline.com/SoftToken';
-    const hostURL = 'http://private-5ae12-lead1.apiary-proxy.com';
+    const hostURL = 'https://personal.nbbonline.com/SoftToken';
+    //const hostURL = 'http://private-5ae12-lead1.apiary-proxy.com';
 
     //debugger;
     service.findDevice = function(deviceid) {
