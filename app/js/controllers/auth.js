@@ -195,7 +195,7 @@ function AuthCtrl($state, $scope, $rootScope, CordovaService, $cordovaDevice, De
                                 $state.go('gen');
 
                             } else if (result.withBackup) {
-                                vm.IsAuthenticatedWithFingerPrint = false;
+                                vm.IsAuthenticatedWithFingerPrint = true;
                                 vm.generateSoftToken(true);
                                 $state.go('gen');
                             }
